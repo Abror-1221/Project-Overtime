@@ -2,10 +2,12 @@ using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
+using Overtime_Project.Context;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -26,6 +28,8 @@ namespace Overtime_Project
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddControllers();
+            services.AddDbContext<OvertimeContext>(options =>
+           options.UseLazyLoadingProxies().UseSqlServer(Configuration.GetConnectionString("MyConnection")));
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

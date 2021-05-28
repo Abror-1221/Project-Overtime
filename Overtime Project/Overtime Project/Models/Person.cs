@@ -1,12 +1,16 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Threading.Tasks;
 
 namespace Overtime_Project.Models
 {
+    [Table("TB_M_Person")]
     public class Person
     {
+        [Key]
         public string NIK { get; set; } 
         public string FirstName { get; set; }
         public string LastName { get; set; }
@@ -14,5 +18,10 @@ namespace Overtime_Project.Models
         public string Phone { get; set; }
         public DateTime BirthDate { get; set; }
         public int Salary { get; set; }
+
+        public Person() { }
+
+        public virtual ICollection<Overtime> Overtime { get; set; }
+        public virtual Account Account { get; set; }
     }
 }
