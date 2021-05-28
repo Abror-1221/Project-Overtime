@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\M.ABROR KHAIRUL\\source\\repos\\Overtime Project\\Overtime Project\\Overtime Project.csproj": {}
+    "C:\\Users\\M.ABROR KHAIRUL\\OneDrive\\Documents\\GitHub\\Project-Overtime\\Overtime Project\\Overtime Project\\Overtime Project.csproj": {}
   },
   "projects": {
-    "C:\\Users\\M.ABROR KHAIRUL\\source\\repos\\Overtime Project\\Overtime Project\\Overtime Project.csproj": {
+    "C:\\Users\\M.ABROR KHAIRUL\\OneDrive\\Documents\\GitHub\\Project-Overtime\\Overtime Project\\Overtime Project\\Overtime Project.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\M.ABROR KHAIRUL\\source\\repos\\Overtime Project\\Overtime Project\\Overtime Project.csproj",
+        "projectUniqueName": "C:\\Users\\M.ABROR KHAIRUL\\OneDrive\\Documents\\GitHub\\Project-Overtime\\Overtime Project\\Overtime Project\\Overtime Project.csproj",
         "projectName": "Overtime Project",
-        "projectPath": "C:\\Users\\M.ABROR KHAIRUL\\source\\repos\\Overtime Project\\Overtime Project\\Overtime Project.csproj",
+        "projectPath": "C:\\Users\\M.ABROR KHAIRUL\\OneDrive\\Documents\\GitHub\\Project-Overtime\\Overtime Project\\Overtime Project\\Overtime Project.csproj",
         "packagesPath": "C:\\Users\\M.ABROR KHAIRUL\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\M.ABROR KHAIRUL\\source\\repos\\Overtime Project\\Overtime Project\\obj\\",
+        "outputPath": "C:\\Users\\M.ABROR KHAIRUL\\OneDrive\\Documents\\GitHub\\Project-Overtime\\Overtime Project\\Overtime Project\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages",
@@ -63,7 +63,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\5.0.203\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\5.0.300\\RuntimeIdentifierGraph.json"
         }
       }
     }
