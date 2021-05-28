@@ -5,5 +5,16 @@
     <RootNamespace>Overtime_Project</RootNamespace>
   </PropertyGroup>
 
+  <ItemGroup>
+    <Folder Include="Base\" />
+    <Folder Include="HashingPassword\" />
+    <Folder Include="ViewModels\" />
+    <Folder Include="Repository\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.EntityFrameworkCore" Version="5.0.6" />
+  </ItemGroup>
+
 
 </Project>
