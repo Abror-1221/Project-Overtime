@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Newtonsoft.Json;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
@@ -22,6 +23,7 @@ namespace Overtime_Project.Models
         public Person() { }
 
         public virtual ICollection<Overtime> Overtime { get; set; }
+        [JsonIgnore]
         public virtual Account Account { get; set; }
     }
 }
