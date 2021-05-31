@@ -29,9 +29,6 @@ namespace Overtime_Project.Controllers
             this._configuration = configuration;
         }
        
-        //wadaw1
-        // wadawwww
-        //wadaww 3
         [HttpGet("UserData")]
         public async Task<ActionResult> ViewDataAll()
         {
