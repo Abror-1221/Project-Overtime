@@ -6,10 +6,8 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Folder Include="Base\" />
     <Folder Include="HashingPassword\" />
     <Folder Include="ViewModels\" />
-    <Folder Include="Repository\" />
   </ItemGroup>
 
   <ItemGroup>
