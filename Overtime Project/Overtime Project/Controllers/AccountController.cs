@@ -35,9 +35,6 @@ namespace Overtime_Project.Controllers
                        join a in overtimeContext.Account on p.NIK equals a.NIK
                        join ar in overtimeContext.RoleAccount on a.NIK equals ar.NIK
                        join r in overtimeContext.Role on ar.RoleId equals r.Id
-                       join o in overtimeContext.Overtime on p.NIK equals o.NIK
-                       join s in overtimeContext.Status on o.StatusId equals s.Id
-                       join k in overtimeContext.Kind on o.TypeId equals k.Id
                        select new
                        {
                            NIK = p.NIK,
@@ -51,6 +48,7 @@ namespace Overtime_Project.Controllers
                            Email = p.Email,
                            Password = a.Password
                        };
+
             return Ok(await data.ToListAsync());
         }
         [HttpPost("Register")] //BELUM ADA METHOD ROLLBACK DATABASE KETIKA ADA PENGISIAN TABLE YANG GAGAL!!!!!!!!! -Rangga
@@ -88,9 +86,6 @@ namespace Overtime_Project.Controllers
                 };
                 overtimeContext.RoleAccount.Add(accountRole);
                 var addAccountRole = overtimeContext.SaveChanges();
-
-
-
 
                 return Ok();
             }
