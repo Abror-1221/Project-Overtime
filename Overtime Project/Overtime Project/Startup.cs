@@ -8,6 +8,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using Overtime_Project.Context;
+using Overtime_Project.Repository.Data;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -28,6 +29,15 @@ namespace Overtime_Project
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddControllers();
+
+            services.AddScoped<PersonRepository>();
+            services.AddScoped<OvertimeRepository>();
+            services.AddScoped<StatusRepository>();
+            services.AddScoped<KindRepository>();
+            services.AddScoped<AccountRepository>();
+            services.AddScoped<RoleAccountRepository>();
+            services.AddScoped<RoleRepository>();
+
             services.AddDbContext<OvertimeContext>(options =>
            options.UseLazyLoadingProxies().UseSqlServer(Configuration.GetConnectionString("MyConnection")));
         }
