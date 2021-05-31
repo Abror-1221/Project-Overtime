@@ -5,6 +5,8 @@ using Overtime_Project.Base;
 using Overtime_Project.Context;
 using Overtime_Project.Models;
 using Overtime_Project.Repository.Data;
+using Overtime_Project.ViewModels;
+
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -25,7 +27,50 @@ namespace Overtime_Project.Controllers
             this.overtimeContext = overtimeContext;
             this._configuration = configuration;
         }
-        //Http
+        [HttpPost("Register")] //BELUM ADA METHOD ROLLBACK DATABASE KETIKA ADA PENGISIAN TABLE YANG GAGAL!!!!!!!!! -Rangga
+        public ActionResult Register(RegisterVM registerVM)
+        {
+            var checkNIKTerdaftar = overtimeContext.Person.Where(p => p.NIK == registerVM.NIK);
+            if (checkNIKTerdaftar.Count() == 0)
+            {
+
+                var person = new Person
+                {
+                    NIK = registerVM.NIK,
+                    FirstName = registerVM.FirstName,
+                    LastName = registerVM.Email,
+                    Phone = registerVM.Phone,
+                    BirthDate = registerVM.BirthDate,
+                    Salary = registerVM.Salary,
+                    Email = registerVM.Email
+                };
+                overtimeContext.Person.Add(person);
+                var addPerson = overtimeContext.SaveChanges();
+
+                var account = new Account
+                {
+                    NIK = person.NIK,
+                    Password = registerVM.Password
+                };
+                overtimeContext.Account.Add(account);
+                var addAccount = overtimeContext.SaveChanges();
+
+                var accountRole = new RoleAccount
+                {
+                    NIK = person.NIK,
+                    RoleId = 1// default menjadi user saat pegawai baru didaftarkan
+                };
+                overtimeContext.RoleAccount.Add(accountRole);
+                var addAccountRole = overtimeContext.SaveChanges();
+
+                
+
+
+                return Ok();
+            }
+            return NotFound();
+
+        }
 
 
     }
