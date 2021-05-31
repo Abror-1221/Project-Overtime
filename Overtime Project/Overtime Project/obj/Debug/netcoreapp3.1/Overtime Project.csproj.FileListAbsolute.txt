@@ -128,3 +128,12 @@ C:\Users\M.ABROR KHAIRUL\OneDrive\Documents\GitHub\Project-Overtime\Overtime Pro
 C:\Users\M.ABROR KHAIRUL\OneDrive\Documents\GitHub\Project-Overtime\Overtime Project\Overtime Project\obj\Debug\netcoreapp3.1\Overtime Project.dll
 C:\Users\M.ABROR KHAIRUL\OneDrive\Documents\GitHub\Project-Overtime\Overtime Project\Overtime Project\obj\Debug\netcoreapp3.1\Overtime Project.pdb
 C:\Users\M.ABROR KHAIRUL\OneDrive\Documents\GitHub\Project-Overtime\Overtime Project\Overtime Project\obj\Debug\netcoreapp3.1\Overtime Project.genruntimeconfig.cache
+C:\Users\sendus-pc\source\repos\Project-Overtime\Overtime Project\Overtime Project\bin\Debug\netcoreapp3.1\EntityFramework.SqlServer.dll
+C:\Users\sendus-pc\source\repos\Project-Overtime\Overtime Project\Overtime Project\bin\Debug\netcoreapp3.1\EntityFramework.dll
+C:\Users\sendus-pc\source\repos\Project-Overtime\Overtime Project\Overtime Project\bin\Debug\netcoreapp3.1\System.CodeDom.dll
+C:\Users\sendus-pc\source\repos\Project-Overtime\Overtime Project\Overtime Project\bin\Debug\netcoreapp3.1\System.Data.SqlClient.dll
+C:\Users\sendus-pc\source\repos\Project-Overtime\Overtime Project\Overtime Project\bin\Debug\netcoreapp3.1\runtimes\win-arm64\native\sni.dll
+C:\Users\sendus-pc\source\repos\Project-Overtime\Overtime Project\Overtime Project\bin\Debug\netcoreapp3.1\runtimes\win-x64\native\sni.dll
+C:\Users\sendus-pc\source\repos\Project-Overtime\Overtime Project\Overtime Project\bin\Debug\netcoreapp3.1\runtimes\win-x86\native\sni.dll
+C:\Users\sendus-pc\source\repos\Project-Overtime\Overtime Project\Overtime Project\bin\Debug\netcoreapp3.1\runtimes\unix\lib\netcoreapp2.1\System.Data.SqlClient.dll
+C:\Users\sendus-pc\source\repos\Project-Overtime\Overtime Project\Overtime Project\bin\Debug\netcoreapp3.1\runtimes\win\lib\netcoreapp2.1\System.Data.SqlClient.dll
