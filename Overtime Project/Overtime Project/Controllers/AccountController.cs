@@ -1,7 +1,9 @@
-﻿using Microsoft.AspNetCore.Http;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
+using Microsoft.IdentityModel.Tokens;
 using Overtime_Project.Base;
 using Overtime_Project.Context;
 using Overtime_Project.HashingPassword;
@@ -10,9 +12,11 @@ using Overtime_Project.Repository.Data;
 using Overtime_Project.ViewModels;
 using System;
 using System.Collections.Generic;
+using System.IdentityModel.Tokens.Jwt;
 using System.Linq;
 using System.Net;
 using System.Net.Mail;
+using System.Security.Claims;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -56,7 +60,7 @@ namespace Overtime_Project.Controllers
 
             return Ok(data);
         }
-
+        [Authorize]
         [HttpGet("UserData")]
         public async Task<ActionResult> ViewDataAll()
         {
@@ -92,7 +96,7 @@ namespace Overtime_Project.Controllers
                 {
                     NIK = registerVM.NIK,
                     FirstName = registerVM.FirstName,
-                    LastName = registerVM.Email,
+                    LastName = registerVM.LastName,
                     Phone = registerVM.Phone,
                     BirthDate = registerVM.BirthDate,
                     Salary = registerVM.Salary,
@@ -104,7 +108,7 @@ namespace Overtime_Project.Controllers
                 var account = new Account
                 {
                     NIK = person.NIK,
-                    Password = registerVM.Password
+                    Password = Hashing.HashPassword(registerVM.Password)
                 };
                 overtimeContext.Account.Add(account);
                 var addAccount = overtimeContext.SaveChanges();
@@ -184,6 +188,70 @@ namespace Overtime_Project.Controllers
             {
                 return StatusCode(400, new { status = HttpStatusCode.Forbidden, message = "Error : No Email input..." });
             }
+        }
+
+        [HttpPost("Login")]
+        public ActionResult Index(LogInVM logInVM)
+        {
+            var myPerson = overtimeContext.Person.FirstOrDefault(u => u.Email == logInVM.Email);
+
+            if (myPerson != null)
+            {
+                var myAccount = overtimeContext.Account.FirstOrDefault(u => u.NIK == myPerson.NIK);
+                var accountRole = overtimeContext.RoleAccount.Where(ar => ar.NIK == myAccount.NIK).ToList();
+
+                if (myAccount != null && Hashing.ValidatePassword(logInVM.Password, myAccount.Password))    //User was found
+                {
+                    List<Claim> claims = new List<Claim>();
+                    foreach (var item in accountRole.Where(n => n.NIK == myAccount.NIK))
+                    {
+                        claims.Add(new Claim(ClaimTypes.Role, item.Role.Name));
+                    }
+
+                    claims.Add(new Claim(JwtRegisteredClaimNames.Iat, DateTime.UtcNow.ToString()));
+                    claims.Add(new Claim("Id", myPerson.NIK));
+                    claims.Add(new Claim("First Name", myPerson.FirstName));
+                    claims.Add(new Claim("Last Name", myPerson.LastName));
+                    claims.Add(new Claim("Email", logInVM.Email));
+
+                    var key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_configuration["Jwt:Key"]));
+
+                    var signIn = new SigningCredentials(key, SecurityAlgorithms.HmacSha256);
+
+                    var token = new JwtSecurityToken(_configuration["Jwt:Issuer"], _configuration["Jwt:Audience"], claims, expires: DateTime.UtcNow.AddMinutes(10), signingCredentials: signIn);
+
+                    return Ok(new JwtSecurityTokenHandler().WriteToken(token));
+                }
+                else return NotFound("Wrong EMAIL or Password!");
+            }
+            else return NotFound("Wrong EMAIL or Password!");
+        }
+
+        [Authorize]
+        [HttpPost("Changepass")]
+        public ActionResult Updatepassword(ChangePasswordVM changePasswordVM)
+        {
+            var person = overtimeContext.Person.FirstOrDefault(p => p.Email == changePasswordVM.Email);
+            if (person != null)
+            {
+
+
+                var tesNIK = overtimeContext.Account.FirstOrDefault(u => u.NIK == person.NIK);
+
+                if (tesNIK != null && Hashing.ValidatePassword(changePasswordVM.Password, tesNIK.Password))
+                {
+
+                    tesNIK.Password = Hashing.HashPassword(changePasswordVM.NewPassword);
+                    overtimeContext.Entry(tesNIK).State = EntityState.Modified;
+                    overtimeContext.SaveChanges();
+                    return Ok();
+
+                }
+                else return NotFound();
+
+            }
+            else return NotFound("Email Tidak Terdaftar!");
+
         }
 
         public string RandomString()
