@@ -4,12 +4,16 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Overtime_Project.Base;
 using Overtime_Project.Context;
+using Overtime_Project.HashingPassword;
 using Overtime_Project.Models;
 using Overtime_Project.Repository.Data;
 using Overtime_Project.ViewModels;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net;
+using System.Net.Mail;
+using System.Text;
 using System.Threading.Tasks;
 
 namespace Overtime_Project.Controllers
@@ -118,5 +122,86 @@ namespace Overtime_Project.Controllers
             return NotFound();
 
         }
+
+        [HttpPost("ForgotPassword")]
+        public ActionResult SendMail(ChangePasswordVM change)
+        {
+            if (change.Email != null)
+            {
+                if(change.Email != "")
+                {
+                    string nik = null;
+                    IEnumerable<Person> person = overtimeContext.Person.ToList();
+                    foreach (Person p in person)
+                    {
+                        if (p.Email == change.Email)
+                        {
+                            nik = p.NIK;
+                            break;
+                        }
+                        else
+                        {
+                            continue;
+                        }
+                    }
+
+                    if (nik != null)
+                    {
+                        var cekPerson = overtimeContext.Person.Find(nik);
+                        var cekAccount2 = overtimeContext.Account.Find(nik);
+                        string password = RandomString();
+                        cekAccount2.Password = Hashing.HashPassword(password);
+                        overtimeContext.Entry(cekAccount2).State = EntityState.Modified;
+                        overtimeContext.SaveChanges();
+
+                        DateTime d = DateTime.Now;
+                        MailMessage mm = new MailMessage();
+                        mm.From = new MailAddress("developit9@gmail.com");
+                        mm.To.Add(new MailAddress(change.Email));
+                        mm.Subject = $"[RESET PASSWORD REQUEST] {d.ToString("dd-MM-yyyy")}";
+                        mm.Body = $"Hello {cekPerson.FirstName} {cekPerson.LastName}.\nYour new password is {password}\nHave a nice day...";
+                        mm.IsBodyHtml = false;
+                        SmtpClient smtp = new SmtpClient("smtp.gmail.com");
+                        smtp.Port = 587;
+                        smtp.EnableSsl = true;
+                        smtp.UseDefaultCredentials = false;
+                        smtp.Credentials = new NetworkCredential("developit9@gmail.com", "Sembilan!@9");
+                        smtp.DeliveryMethod = SmtpDeliveryMethod.Network;
+                        smtp.Send(mm);
+                        return Ok("Email sent...");
+                    }
+                    else
+                    {
+                        return StatusCode(400, new { status = HttpStatusCode.Forbidden, message = "Error : Email is not registered..." });
+                    }
+                }
+                else
+                {
+                    return StatusCode(400, new { status = HttpStatusCode.Forbidden, message = "Error : No Email input..." });
+                }
+            }
+            else
+            {
+                return StatusCode(400, new { status = HttpStatusCode.Forbidden, message = "Error : No Email input..." });
+            }
+        }
+
+        public string RandomString()
+        {
+            int length = 7;
+            StringBuilder str_build = new StringBuilder();
+            Random random = new Random();
+            char letter;
+            for (int i = 0; i < length; i++)
+            {
+                double flt = random.NextDouble();
+                int shift = Convert.ToInt32(Math.Floor(25 * flt));
+                letter = Convert.ToChar(shift + 65);
+                str_build.Append(letter);
+            }
+            return str_build.ToString();
+        }
+
+
     }
 }
