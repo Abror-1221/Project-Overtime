@@ -27,7 +27,32 @@ namespace Overtime_Project.Controllers
             this.overtimeContext = overtimeContext;
             this._configuration = configuration;
         }
-       
+
+        [HttpGet("Profile/{NIK}")]
+        public ActionResult ViewData(string NIK)
+        {
+            var data = from p in overtimeContext.Person
+                       join a in overtimeContext.Account on p.NIK equals a.NIK
+                       join ar in overtimeContext.RoleAccount on a.NIK equals ar.NIK
+                       join r in overtimeContext.Role on ar.RoleId equals r.Id
+                       where p.NIK == NIK
+                       select new
+                       {
+                           NIK = p.NIK,
+                           FirstName = p.FirstName,
+                           LastName = p.LastName,
+                           Role = r.Name,
+                           RoleId = r.Id,
+                           Phone = p.Phone,
+                           BirthDate = p.BirthDate,
+                           Salary = p.Salary,
+                           Email = p.Email,
+                           Password = a.Password
+                       };
+
+            return Ok(data);
+        }
+
         [HttpGet("UserData")]
         public async Task<ActionResult> ViewDataAll()
         {
@@ -51,6 +76,7 @@ namespace Overtime_Project.Controllers
 
             return Ok(await data.ToListAsync());
         }
+
         [HttpPost("Register")] //BELUM ADA METHOD ROLLBACK DATABASE KETIKA ADA PENGISIAN TABLE YANG GAGAL!!!!!!!!! -Rangga
         public ActionResult Register(RegisterVM registerVM)
         {
