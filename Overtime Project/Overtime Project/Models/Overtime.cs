@@ -15,7 +15,8 @@ namespace Overtime_Project.Models
         public DateTime Date { get; set; }
         public int StartTime { get; set; }
         public int EndTime { get; set; }
-        public string Description { get; set; }
+        public string DescEmp { get; set; }
+        public string DescHead { get; set; }
         public int TotalReimburse { get; set; }
         public int TypeId { get; set; }
         public int StatusId { get; set; }
