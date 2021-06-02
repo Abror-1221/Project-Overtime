@@ -7,9 +7,9 @@ using System.Threading.Tasks;
 
 namespace Overtime_Project.Repository.Data
 {
-    public class KindRepository : GeneralRepository<OvertimeContext, Kind, int>
+    public class DayTypeRepository : GeneralRepository<OvertimeContext, DayType, int>
     {
-        public KindRepository(OvertimeContext conn) : base(conn)
+        public DayTypeRepository(OvertimeContext conn) : base(conn)
         {
 
         }

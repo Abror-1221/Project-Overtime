@@ -24,7 +24,7 @@ namespace Overtime_Project.Context
         public DbSet<RoleAccount> RoleAccount { get; set; }
         public DbSet<Role> Role { get; set; }
         public DbSet<Overtime> Overtime { get; set; }
-        public DbSet<Kind> Kind { get; set; }
+        public DbSet<DayType> DayType { get; set; }
         public DbSet<Status> Status { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)

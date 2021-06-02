@@ -39,7 +39,7 @@ namespace Overtime_Project.Controllers
                        join r in overtimeContext.Role on ar.RoleId equals r.Id
                        join o in overtimeContext.Overtime on p.NIK equals o.NIK
                        join s in overtimeContext.Status on o.StatusId equals s.Id
-                       join k in overtimeContext.Kind on o.KindId equals k.Id
+                       join k in overtimeContext.DayType on o.DayTypeId equals k.Id
                        where o.NIK == NIK
                        select new
                        {
@@ -50,7 +50,7 @@ namespace Overtime_Project.Controllers
                            EndTime = o.EndTime,
                            DescEmp = o.DescEmp,
                            TotalReimburse = o.TotalReimburse,
-                           TypeId = o.KindId,
+                           DayTypeId = o.DayTypeId,
                            TypeName = k.Name,
                            StatusId = o.StatusId,
                            StatusName = s.Name,
@@ -67,7 +67,7 @@ namespace Overtime_Project.Controllers
                        join r in overtimeContext.Role on ar.RoleId equals r.Id
                        join o in overtimeContext.Overtime on p.NIK equals o.NIK
                        join s in overtimeContext.Status on o.StatusId equals s.Id
-                       join k in overtimeContext.Kind on o.KindId equals k.Id
+                       join k in overtimeContext.DayType on o.DayTypeId equals k.Id
                        select new
                        {
                            Id = o.Id,
@@ -77,8 +77,8 @@ namespace Overtime_Project.Controllers
                            EndTime = o.EndTime,
                            DescEmp = o.DescEmp,
                            TotalReimburse = o.TotalReimburse,
-                           TypeId = o.KindId,
-                           TypeName = k.Name,
+                           DayTypeId = o.DayTypeId,
+                           DayTypeName = k.Name,
                            StatusId = o.StatusId,
                            StatusName = s.Name,
                        };
@@ -102,7 +102,7 @@ namespace Overtime_Project.Controllers
                     DescEmp = reqOvertimeVM.DescEmp,
                     DescHead = reqOvertimeVM.DescHead,
                     TotalReimburse = ((reqOvertimeVM.EndTime - reqOvertimeVM.StartTime)*myPerson.Salary),
-                    KindId = reqOvertimeVM.KindId,
+                    DayTypeId = reqOvertimeVM.DayTypeId,
                     StatusId = reqOvertimeVM.StatusId
 
                 };

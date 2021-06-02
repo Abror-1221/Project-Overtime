@@ -12,9 +12,9 @@ namespace Overtime_Project.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class KindController : BaseController<Kind, KindRepository, int>
+    public class DayTypeController : BaseController<DayType, DayTypeRepository, int>
     {
-        public KindController(KindRepository kindRepository) : base(kindRepository)
+        public DayTypeController(DayTypeRepository daytypeRepository) : base(daytypeRepository)
         {
 
         }

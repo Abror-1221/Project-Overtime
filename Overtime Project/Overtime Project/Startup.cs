@@ -37,7 +37,7 @@ namespace Overtime_Project
             services.AddScoped<PersonRepository>();
             services.AddScoped<OvertimeRepository>();
             services.AddScoped<StatusRepository>();
-            services.AddScoped<KindRepository>();
+            services.AddScoped<DayTypeRepository>();
             services.AddScoped<AccountRepository>();
             services.AddScoped<RoleAccountRepository>();
             services.AddScoped<RoleRepository>();

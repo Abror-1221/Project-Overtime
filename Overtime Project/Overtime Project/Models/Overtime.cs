@@ -19,7 +19,7 @@ namespace Overtime_Project.Models
         public string DescEmp { get; set; }
         public string DescHead { get; set; }
         public int TotalReimburse { get; set; }
-        public int KindId { get; set; }
+        public int DayTypeId { get; set; }
         public int StatusId { get; set; }
 
         [JsonIgnore]

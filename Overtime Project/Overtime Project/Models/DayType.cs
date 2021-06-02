@@ -7,8 +7,8 @@ using System.Threading.Tasks;
 
 namespace Overtime_Project.Models
 {
-    [Table("TB_M_Kind")]
-    public class Kind
+    [Table("TB_M_DayType")]
+    public class DayType
     {
         public int Id { get; set; }
         public string Name { get; set; }
