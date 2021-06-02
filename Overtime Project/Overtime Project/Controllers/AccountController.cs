@@ -235,8 +235,8 @@ namespace Overtime_Project.Controllers
             else return NotFound("Wrong EMAIL or Password!");
         }
 
-        [Authorize]
         [HttpPost("Changepass")]
+        [Authorize(Roles = "Employee")]
         public ActionResult Updatepassword(ChangePasswordVM changePasswordVM)
         {
             var person = overtimeContext.Person.FirstOrDefault(p => p.Email == changePasswordVM.Email);

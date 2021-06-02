@@ -14,8 +14,8 @@ namespace Overtime_Project.Models
         [ForeignKey("Person")]
         public string NIK { get; set; }
         public DateTime Date { get; set; }
-        public int StartTime { get; set; }
-        public int EndTime { get; set; }
+        public DateTime StartTime { get; set; }
+        public DateTime EndTime { get; set; }
         public string DescEmp { get; set; }
         public string DescHead { get; set; }
         public int TotalReimburse { get; set; }

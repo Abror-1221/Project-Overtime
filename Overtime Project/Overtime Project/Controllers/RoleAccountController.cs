@@ -13,7 +13,7 @@ namespace Overtime_Project.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    [Authorize(Roles = "Admin")]
+    //[Authorize(Roles = "Admin")]
     public class RoleAccountController : BaseController<RoleAccount, RoleAccountRepository, string>
     {
         public RoleAccountController(RoleAccountRepository roleAccountRepository) : base(roleAccountRepository)

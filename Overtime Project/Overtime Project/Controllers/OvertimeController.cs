@@ -11,6 +11,7 @@ using Overtime_Project.ViewModels;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net;
 using System.Threading.Tasks;
 
 namespace Overtime_Project.Controllers
@@ -86,13 +87,12 @@ namespace Overtime_Project.Controllers
         }
 
         [HttpPost("ReqOvertime/{NIK}")]
-        //[Authorize(Roles = "Admin")]
+        [Authorize(Roles = "Employee")]
         public ActionResult RequestOvertime(string NIK,ReqOvertimeVM reqOvertimeVM)
         {
             var myPerson = overtimeContext.Person.FirstOrDefault(u => u.NIK == NIK);
             if (myPerson != null)
             {
-
                 var reqOvertime = new Overtime
                 {
                     NIK = NIK,
@@ -101,15 +101,21 @@ namespace Overtime_Project.Controllers
                     EndTime = reqOvertimeVM.EndTime,
                     DescEmp = reqOvertimeVM.DescEmp,
                     DescHead = reqOvertimeVM.DescHead,
-                    TotalReimburse = ((reqOvertimeVM.EndTime - reqOvertimeVM.StartTime)*myPerson.Salary),
+                    TotalReimburse = (int) Math.Ceiling(Convert.ToDouble((reqOvertimeVM.EndTime - reqOvertimeVM.StartTime).TotalHours)* (double) myPerson.Salary),
                     DayTypeId = reqOvertimeVM.DayTypeId,
                     StatusId = reqOvertimeVM.StatusId
-
+                    
                 };
-                overtimeContext.Overtime.Add(reqOvertime);
-                var addReq = overtimeContext.SaveChanges();
-
-                return Ok();
+                if (reqOvertime.TotalReimburse < 0)
+                {
+                    return StatusCode(403, new { status = HttpStatusCode.Forbidden, message = "Error : Invalid StartTime and EndTime Invalid..." });
+                }
+                else
+                {
+                    overtimeContext.Overtime.Add(reqOvertime);
+                    var addReq = overtimeContext.SaveChanges();
+                    return Ok();
+                }
             }
             return NotFound();
         }
