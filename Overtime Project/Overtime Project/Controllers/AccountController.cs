@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Cors;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
@@ -24,6 +25,7 @@ namespace Overtime_Project.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
+    [EnableCors("AllowOrigin")]
     public class AccountController : BaseController<Account, AccountRepository, string>
     {
         private readonly AccountRepository accountRepository;
@@ -85,7 +87,7 @@ namespace Overtime_Project.Controllers
         }
 
         [HttpPost("Register")] //BELUM ADA METHOD ROLLBACK DATABASE KETIKA ADA PENGISIAN TABLE YANG GAGAL!!!!!!!!! -Rangga
-        [Authorize(Roles = "Admin")]
+       // [Authorize(Roles = "Admin")]
         public ActionResult Register(RegisterVM registerVM)
         {
             var checkNIKTerdaftar = overtimeContext.Person.Where(p => p.NIK == registerVM.NIK);
