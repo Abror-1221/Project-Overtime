@@ -59,7 +59,6 @@ namespace Overtime_Project.Controllers
             return Ok(data);
         }
 
-        [Authorize]
         [HttpGet("UserData")]
         [Authorize(Roles = "Admin,Head")]
         public async Task<ActionResult> ViewDataAll()
@@ -218,7 +217,7 @@ namespace Overtime_Project.Controllers
                     }
 
                     claims.Add(new Claim(JwtRegisteredClaimNames.Iat, DateTime.UtcNow.ToString()));
-                    claims.Add(new Claim("Id", myPerson.NIK));
+                    claims.Add(new Claim("NIK", myPerson.NIK));
                     claims.Add(new Claim("First Name", myPerson.FirstName));
                     claims.Add(new Claim("Last Name", myPerson.LastName));
                     claims.Add(new Claim("Email", logInVM.Email));
