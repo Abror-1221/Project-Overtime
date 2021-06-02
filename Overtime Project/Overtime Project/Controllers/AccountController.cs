@@ -69,6 +69,7 @@ namespace Overtime_Project.Controllers
                        join a in overtimeContext.Account on p.NIK equals a.NIK
                        join ar in overtimeContext.RoleAccount on a.NIK equals ar.NIK
                        join r in overtimeContext.Role on ar.RoleId equals r.Id
+                       where r.Name == "Employee"
                        select new
                        {
                            NIK = p.NIK,

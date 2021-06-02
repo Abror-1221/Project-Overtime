@@ -1,0 +1,5 @@
+C:\Users\M.ABROR KHAIRUL\OneDrive\Documents\GitHub\Project-Overtime\Overtime Project\WebApplicationOvertime\obj\Debug\netcoreapp3.1\WebApplicationOvertime.csproj.AssemblyReference.cache
+C:\Users\M.ABROR KHAIRUL\OneDrive\Documents\GitHub\Project-Overtime\Overtime Project\WebApplicationOvertime\obj\Debug\netcoreapp3.1\WebApplicationOvertime.AssemblyInfoInputs.cache
+C:\Users\M.ABROR KHAIRUL\OneDrive\Documents\GitHub\Project-Overtime\Overtime Project\WebApplicationOvertime\obj\Debug\netcoreapp3.1\WebApplicationOvertime.AssemblyInfo.cs
+C:\Users\M.ABROR KHAIRUL\OneDrive\Documents\GitHub\Project-Overtime\Overtime Project\WebApplicationOvertime\obj\Debug\netcoreapp3.1\WebApplicationOvertime.csproj.CoreCompileInputs.cache
+C:\Users\M.ABROR KHAIRUL\OneDrive\Documents\GitHub\Project-Overtime\Overtime Project\WebApplicationOvertime\obj\Debug\netcoreapp3.1\WebApplicationOvertime.MvcApplicationPartsAssemblyInfo.cache

@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Overtime_Project.Base;
 using Overtime_Project.Context;
@@ -30,7 +31,7 @@ namespace Overtime_Project.Controllers
 
 
         [HttpGet("OvertimeData/{NIK}")]
-        public ActionResult ViewData(string NIK)
+        public ActionResult ViewDataOvertime(string NIK)
         {
             var data = from p in overtimeContext.Person
                        join a in overtimeContext.Account on p.NIK equals a.NIK
@@ -55,6 +56,33 @@ namespace Overtime_Project.Controllers
                            StatusName = s.Name,
                        };
             return Ok(data.ToList());
+        }
+
+        [HttpGet("OvertimeDataAll")]
+        public async Task<ActionResult> ViewDataOvertimeAll()
+        {
+            var data = from p in overtimeContext.Person
+                       join a in overtimeContext.Account on p.NIK equals a.NIK
+                       join ar in overtimeContext.RoleAccount on a.NIK equals ar.NIK
+                       join r in overtimeContext.Role on ar.RoleId equals r.Id
+                       join o in overtimeContext.Overtime on p.NIK equals o.NIK
+                       join s in overtimeContext.Status on o.StatusId equals s.Id
+                       join k in overtimeContext.Kind on o.KindId equals k.Id
+                       select new
+                       {
+                           Id = o.Id,
+                           NIK = o.NIK,
+                           Date = o.Date,
+                           StartTime = o.StartTime,
+                           EndTime = o.EndTime,
+                           DescEmp = o.DescEmp,
+                           TotalReimburse = o.TotalReimburse,
+                           TypeId = o.KindId,
+                           TypeName = k.Name,
+                           StatusId = o.StatusId,
+                           StatusName = s.Name,
+                       };
+            return Ok(await data.ToListAsync());
         }
 
         [HttpPost("ReqOvertime/{NIK}")]
