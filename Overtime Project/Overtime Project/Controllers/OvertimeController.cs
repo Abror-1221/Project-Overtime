@@ -27,7 +27,7 @@ namespace Overtime_Project.Controllers
             this.overtimeContext = overtimeContext;
             this._configuration = configuration;
         }
-<<<<<<< Updated upstream
+
 
         [HttpGet("OvertimeData/{NIK}")]
         public ActionResult ViewData(string NIK)
@@ -55,7 +55,7 @@ namespace Overtime_Project.Controllers
                            StatusName = s.Name,
                        };
             return Ok(data.ToList());
-=======
+        }
 
         [HttpPost("ReqOvertime/{NIK}")]
         //[Authorize(Roles = "Admin")]
@@ -84,7 +84,6 @@ namespace Overtime_Project.Controllers
                 return Ok();
             }
             return NotFound();
->>>>>>> Stashed changes
         }
     }
 }
