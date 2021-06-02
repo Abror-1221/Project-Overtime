@@ -62,6 +62,7 @@ namespace Overtime_Project.Controllers
 
         [Authorize]
         [HttpGet("UserData")]
+        [Authorize(Roles = "Admin,Head")]
         public async Task<ActionResult> ViewDataAll()
         {
             var data = from p in overtimeContext.Person
@@ -86,6 +87,7 @@ namespace Overtime_Project.Controllers
         }
 
         [HttpPost("Register")] //BELUM ADA METHOD ROLLBACK DATABASE KETIKA ADA PENGISIAN TABLE YANG GAGAL!!!!!!!!! -Rangga
+        [Authorize(Roles = "Admin")]
         public ActionResult Register(RegisterVM registerVM)
         {
             var checkNIKTerdaftar = overtimeContext.Person.Where(p => p.NIK == registerVM.NIK);

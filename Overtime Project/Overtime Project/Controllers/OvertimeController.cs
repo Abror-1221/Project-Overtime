@@ -1,10 +1,12 @@
-﻿using Microsoft.AspNetCore.Http;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using Overtime_Project.Base;
 using Overtime_Project.Context;
 using Overtime_Project.Models;
 using Overtime_Project.Repository.Data;
+using Overtime_Project.ViewModels;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -25,6 +27,7 @@ namespace Overtime_Project.Controllers
             this.overtimeContext = overtimeContext;
             this._configuration = configuration;
         }
+<<<<<<< Updated upstream
 
         [HttpGet("OvertimeData/{NIK}")]
         public ActionResult ViewData(string NIK)
@@ -52,6 +55,36 @@ namespace Overtime_Project.Controllers
                            StatusName = s.Name,
                        };
             return Ok(data.ToList());
+=======
+
+        [HttpPost("ReqOvertime/{NIK}")]
+        //[Authorize(Roles = "Admin")]
+        public ActionResult RequestOvertime(string NIK,ReqOvertimeVM reqOvertimeVM)
+        {
+            var myPerson = overtimeContext.Person.FirstOrDefault(u => u.NIK == NIK);
+            if (myPerson != null)
+            {
+
+                var reqOvertime = new Overtime
+                {
+                    NIK = NIK,
+                    Date = reqOvertimeVM.Date,
+                    StartTime = reqOvertimeVM.StartTime,
+                    EndTime = reqOvertimeVM.EndTime,
+                    DescEmp = reqOvertimeVM.DescEmp,
+                    DescHead = reqOvertimeVM.DescHead,
+                    TotalReimburse = ((reqOvertimeVM.EndTime - reqOvertimeVM.StartTime)*myPerson.Salary),
+                    KindId = reqOvertimeVM.KindId,
+                    StatusId = reqOvertimeVM.StatusId
+
+                };
+                overtimeContext.Overtime.Add(reqOvertime);
+                var addReq = overtimeContext.SaveChanges();
+
+                return Ok();
+            }
+            return NotFound();
+>>>>>>> Stashed changes
         }
     }
 }
