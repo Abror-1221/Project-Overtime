@@ -57,9 +57,9 @@ namespace Overtime_Project.Controllers
                            Email = p.Email,
                            Password = a.Password
                        };
-
             return Ok(data);
         }
+
         [Authorize]
         [HttpGet("UserData")]
         public async Task<ActionResult> ViewDataAll()
@@ -91,40 +91,48 @@ namespace Overtime_Project.Controllers
             var checkNIKTerdaftar = overtimeContext.Person.Where(p => p.NIK == registerVM.NIK);
             if (checkNIKTerdaftar.Count() == 0)
             {
-
-                var person = new Person
+                var checkEmailTerdaftar = overtimeContext.Person.Where(p => p.Email == registerVM.Email);
+                if (checkEmailTerdaftar.Count() == 0)
                 {
-                    NIK = registerVM.NIK,
-                    FirstName = registerVM.FirstName,
-                    LastName = registerVM.LastName,
-                    Phone = registerVM.Phone,
-                    BirthDate = registerVM.BirthDate,
-                    Salary = registerVM.Salary,
-                    Email = registerVM.Email
-                };
-                overtimeContext.Person.Add(person);
-                var addPerson = overtimeContext.SaveChanges();
-
-                var account = new Account
+                    return StatusCode(403, new {status = HttpStatusCode.Forbidden, message = "Error : Email is already registered..." });
+                }
+                else
                 {
-                    NIK = person.NIK,
-                    Password = Hashing.HashPassword(registerVM.Password)
-                };
-                overtimeContext.Account.Add(account);
-                var addAccount = overtimeContext.SaveChanges();
+                    var person = new Person
+                    {
+                        NIK = registerVM.NIK,
+                        FirstName = registerVM.FirstName,
+                        LastName = registerVM.LastName,
+                        Phone = registerVM.Phone,
+                        BirthDate = registerVM.BirthDate,
+                        Salary = registerVM.Salary,
+                        Email = registerVM.Email
+                    };
+                    overtimeContext.Person.Add(person);
+                    var addPerson = overtimeContext.SaveChanges();
 
-                var accountRole = new RoleAccount
-                {
-                    NIK = person.NIK,
-                    RoleId = 3// default menjadi user saat pegawai baru didaftarkan
-                };
-                overtimeContext.RoleAccount.Add(accountRole);
-                var addAccountRole = overtimeContext.SaveChanges();
+                    var account = new Account
+                    {
+                        NIK = person.NIK,
+                        Password = Hashing.HashPassword(registerVM.Password)
+                    };
+                    overtimeContext.Account.Add(account);
+                    var addAccount = overtimeContext.SaveChanges();
 
-                return Ok();
+                    var accountRole = new RoleAccount
+                    {
+                        NIK = person.NIK,
+                        RoleId = 3// default menjadi user saat pegawai baru didaftarkan
+                    };
+                    overtimeContext.RoleAccount.Add(accountRole);
+                    var addAccountRole = overtimeContext.SaveChanges();
+                    return Ok();
+                }
             }
-            return NotFound();
-
+            else
+            {
+                return StatusCode(403, new {status = HttpStatusCode.Forbidden, message = "Error : NIK is already registered..." });
+            }
         }
 
         [HttpPost("ForgotPassword")]
