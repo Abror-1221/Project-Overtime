@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Newtonsoft.Json;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
@@ -21,7 +22,7 @@ namespace Overtime_Project.Models
         public int KindId { get; set; }
         public int StatusId { get; set; }
 
-      
+        [JsonIgnore]
         public virtual Person Person { get; set; }
     }
 }

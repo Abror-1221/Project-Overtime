@@ -54,8 +54,7 @@ namespace Overtime_Project.Controllers
                            Phone = p.Phone,
                            BirthDate = p.BirthDate,
                            Salary = p.Salary,
-                           Email = p.Email,
-                           Password = a.Password
+                           Email = p.Email
                        };
             return Ok(data);
         }
@@ -80,8 +79,7 @@ namespace Overtime_Project.Controllers
                            Phone = p.Phone,
                            BirthDate = p.BirthDate,
                            Salary = p.Salary,
-                           Email = p.Email,
-                           Password = a.Password
+                           Email = p.Email
                        };
 
             return Ok(await data.ToListAsync());
@@ -96,10 +94,6 @@ namespace Overtime_Project.Controllers
             {
                 var checkEmailTerdaftar = overtimeContext.Person.Where(p => p.Email == registerVM.Email);
                 if (checkEmailTerdaftar.Count() == 0)
-                {
-                    return StatusCode(403, new {status = HttpStatusCode.Forbidden, message = "Error : Email is already registered..." });
-                }
-                else
                 {
                     var person = new Person
                     {
@@ -129,7 +123,11 @@ namespace Overtime_Project.Controllers
                     };
                     overtimeContext.RoleAccount.Add(accountRole);
                     var addAccountRole = overtimeContext.SaveChanges();
-                    return Ok();
+                    return Ok(); 
+                }
+                else
+                {
+                    return StatusCode(403, new { status = HttpStatusCode.Forbidden, message = "Error : Email is already registered..." });
                 }
             }
             else

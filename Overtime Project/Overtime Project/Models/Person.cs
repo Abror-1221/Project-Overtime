@@ -21,7 +21,7 @@ namespace Overtime_Project.Models
         public int Salary { get; set; }
 
         public Person() { }
-
+        [JsonIgnore]
         public virtual ICollection<Overtime> Overtime { get; set; }
         [JsonIgnore]
         public virtual Account Account { get; set; }

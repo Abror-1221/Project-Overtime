@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Newtonsoft.Json;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
@@ -10,9 +11,10 @@ namespace Overtime_Project.Models
     public class RoleAccount
     {
         public string NIK { get; set; }
+        [JsonIgnore]
         public virtual Account Account { get; set; }
         public int RoleId { get; set; }
-
+        [JsonIgnore]
         public virtual Role Role { get; set; }
     }
 }
