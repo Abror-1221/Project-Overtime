@@ -6,8 +6,16 @@
      }
      })
      </script>*@
-<h1>Star Wars Person</h1>
-<button type="button" name="age" id="age" data-toggle="modal" data-target="#add_data_Modal" class="btn btn-warning">Add</button>
+@{
+    ViewData["Title"] = "Home Page";
+    Layout = "~/Views/Shared/DashboardLayout.cshtml";
+}
+
+<h1>Employee</h1>
+@*<button type="button" name="age" id="age" data-toggle="modal" data-target="#add_data_Modal" class="btn btn-warning">Add</button>*@
+<button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
+    Add
+</button>
 <table class="table" id="myTable">
     <thead>
         <tr>
@@ -19,25 +27,14 @@
             <th>Action</th>
         </tr>
     </thead>
-    <tfoot>
-        <tr>
-            <th>Nomor</th>
-            <th>NIK</th>
-            <th>FirstName</th>
-            <th>LastName</th>
-            <th>phone</th>
-            <th>Action</th>
-        </tr>
-    </tfoot>
-
-
 </table>
-<div id="add_data_Modal" class="modal fade">
+
+<!--<div id="add_data_Modal" class="modal fade">
     <div class="modal-dialog">
         <div class="modal-content">
-            <div class="modal-header">
+            <div class="modal-header">-->
                 @*<button type="button" class="close" data-dismiss="modal">&times;</button>*@
-                <h4 class="modal-title">Register User</h4>
+                <!--<h4 class="modal-title">Register User</h4>
             </div>
             <div class="modal-body">
                 <form class="row 3" role="form" method="post" id="insert_form">
@@ -72,18 +69,97 @@
                     <br />
                     <label>Enter Password</label>
                     <textarea name="password" id="password" class="form-control" required></textarea>
-                    <br />
-                    
-                    
+                    <br />-->
+
+
                     @*<input type="text" class="form-control" data-toggle="datepicker">*@
 
-                    <input type="submit" value="insert" name="insert" id="insert" class="btn btn-success" />
+                    <!--<input type="submit" value="insert" name="insert" id="insert" class="btn btn-success" />
                     <input type="button" onclick="Update()" value="Update" name="insert" id="btnUpdate" class="btn btn-success" />
 
                 </form>
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
+</div>-->
+
+<div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="staticBackdropLabel">Modal title</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <form class="row g-3 needs-validation" method="post" id="insert_form" novalidate>
+                    <div class="col-md-4">
+                        <label for="nik" class="form-label">NIK</label>
+                        <input type="text" class="form-control" id="nik" required>
+                        <div class="invalid-feedback">
+                            Required!
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <label for="firstName" class="form-label">First name</label>
+                        <input type="text" class="form-control" id="firstName" required>
+                        <div class="invalid-feedback">
+                            Required!
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <label for="lastName" class="form-label">Last name</label>
+                        <input type="text" class="form-control" id="lastName" required>
+                        <div class="invalid-feedback">
+                            Required!
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <label for="phone" class="form-label">Phone number</label>
+                        <input type="text" class="form-control" id="phone" required>
+                        <div class="invalid-feedback">
+                            Please provide a valid phone number.
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <label for="bdate" class="form-label">Birth date</label>
+                        <input type="date" class="form-control" id="bdate" required>
+                        <div class="invalid-feedback">
+                            Please provide a valid date.
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <label for="salary" class="form-label">Salary</label>
+                        <input type="text" class="form-control" id="salary" required>
+                        <div class="invalid-feedback">
+                            Please provide a valid salary.
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <label for="email" class="form-label">Email</label>
+                        <input type="email" class="form-control" id="email" required>
+                        <div class="invalid-feedback">
+                            Please provide a valid email.
+                        </div>
+                    </div>
+                    <div class="col-12">
+                        <label for="password" class="form-label">Password</label>
+                        <input type="text" class="form-control" id="password" required>
+                        <div class="invalid-feedback">
+                            Please provide a valid pass.
+                        </div>
+                    </div>
+                    <div class="col-12">
+                        @*<button class="btn btn-primary" type="submit">Submit form</button>*@
+                        <input type="submit" value="insert" name="insert" id="insert" class="btn btn-success" />
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-primary">Understood</button>
             </div>
         </div>
     </div>

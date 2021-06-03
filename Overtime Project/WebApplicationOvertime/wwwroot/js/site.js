@@ -3,6 +3,26 @@
 
 // Write your JavaScript code.
 
+//validation bootstrap
+(function () {
+    'use strict'
+
+    // Fetch all the forms we want to apply custom Bootstrap validation styles to
+    var forms = document.querySelectorAll('.needs-validation')
+
+    // Loop over them and prevent submission
+    Array.prototype.slice.call(forms)
+        .forEach(function (form) {
+            form.addEventListener('submit', function (event) {
+                if (!form.checkValidity()) {
+                    event.preventDefault()
+                    event.stopPropagation()
+                }
+
+                form.classList.add('was-validated')
+            }, false)
+        })
+})()
 
 $(document).ready(function () {
 
@@ -55,10 +75,10 @@ $(document).ready(function () {
                 "data": null,
                 //"wrap": true,educationID
                 "render": function (data, type, row, item, column) {
-                    return '<button type="button" class="btn btn-primary" data-toggle="modal"' +
-                        'data-id="' + row.nik + '" data-target="#exampleModal" > Detail</button ></br>' +
-                        '<button type="button" onclick="Delete(' + "'" + row.nik + "'" + ',' + "'" + row.overtimeId + "'" + ')" class="btn btn-primary" > Delete</button > ' +
-                        '<button type="button" onclick="Update()" class="btn btn-primary" > update</button > '
+                    return '<button type="button" class="btn btn-secondary" data-toggle="modal"' +
+                        'data-id="' + row.nik + '" data-target="#exampleModal"> Detail </button > ' +
+                        '<button type="button" class="btn btn-danger" onclick="Delete(' + "'" + row.nik + "'" + ',' + "'" + row.overtimeId + "'" + ')"> Delete </button > ' +
+                        '<button type="button" class="btn btn-primary" onclick="Update()"> Update </button > '
                 }
             }
         ]
@@ -75,6 +95,7 @@ function Update() {
     alert("done");
 
 }
+
 $('#insert_form').on("submit", function (event) {
     event.preventDefault();
 
@@ -101,7 +122,7 @@ $('#insert_form').on("submit", function (event) {
             $('#insert_form')[0].reset();
             $('#insert').val("Insert");
             $('#add_data_Modal').modal('hide');
-            //$("#myTable").DataTable().ajax.reload();
+            $("#myTable").DataTable().ajax.reload();
         }
     })
 });

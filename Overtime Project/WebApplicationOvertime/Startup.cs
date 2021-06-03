@@ -50,7 +50,7 @@ namespace WebApplicationOvertime
             {
                 endpoints.MapControllerRoute(
                     name: "default",
-                    pattern: "{controller=Home}/{action=Index}/{id?}");
+                    pattern: "{controller=TestCORS}/{action=Index}/{id?}");
             });
         }
     }
