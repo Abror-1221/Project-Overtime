@@ -87,7 +87,7 @@ namespace Overtime_Project.Controllers
         }
         
         [HttpPost("ReqOvertime/{NIK}")]
-        [Authorize(Roles = "Employee")]
+      //  [Authorize(Roles = "Employee")]
         public ActionResult RequestOvertime(string NIK,ReqOvertimeVM reqOvertimeVM)
         {
             var totalReimburse = 0;
