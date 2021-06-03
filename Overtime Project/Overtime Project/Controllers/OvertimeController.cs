@@ -85,23 +85,72 @@ namespace Overtime_Project.Controllers
                        };
             return Ok(await data.ToListAsync());
         }
-
+        
         [HttpPost("ReqOvertime/{NIK}")]
         [Authorize(Roles = "Employee")]
         public ActionResult RequestOvertime(string NIK,ReqOvertimeVM reqOvertimeVM)
         {
+            var totalReimburse = 0;
+            var hour = 0;
             var myPerson = overtimeContext.Person.FirstOrDefault(u => u.NIK == NIK);
             if (myPerson != null)
             {
+
+                hour = (int)Math.Ceiling(Convert.ToDouble((reqOvertimeVM.EndTime - reqOvertimeVM.StartTime).TotalHours));
+                if (reqOvertimeVM.DayTypeId == 1)
+                {
+                    if (hour <= 8)
+                    {
+                        totalReimburse += (int)Math.Ceiling((double)hour * 2 / 173 * myPerson.Salary);
+                    }
+                    else
+                    {
+                        totalReimburse += (int)Math.Ceiling(8.0 * 2 / 173 * (double)myPerson.Salary);
+                        totalReimburse += (int)Math.Ceiling(3.0 / 173 * (double)myPerson.Salary);
+                        for (int i=2 ; i <= hour-8 ; i++)
+                        {
+                            totalReimburse += (int)Math.Ceiling(4.0 / 173 * (double)myPerson.Salary);
+                        }
+                    }
+                }
+                else if (reqOvertimeVM.DayTypeId == 2)
+                {
+                    totalReimburse = (int)Math.Ceiling(1.5 / 173 * myPerson.Salary);
+                    for (int i = 1; i <= hour - 1; i++)
+                    {
+                        totalReimburse += (int)Math.Ceiling(2.0 / 173 * myPerson.Salary); ;
+                    }
+                }
+                else if (reqOvertimeVM.DayTypeId == 3)
+                {
+                    if (hour <= 5)
+                    {
+                        totalReimburse += (int)Math.Ceiling((double)hour * 2 / 173 * (double)myPerson.Salary);
+                    }
+                    else
+                    {
+                        totalReimburse += (int)Math.Ceiling(5.0 * 2 / 173 * (double)myPerson.Salary);
+                        totalReimburse += (int)Math.Ceiling(3.0 / 173 * (double)myPerson.Salary);
+                        for (int i = 2; i <= hour - 5; i++)
+                        {
+                            totalReimburse += (int)Math.Ceiling(4.0 / 173 * (double)myPerson.Salary);
+                        }
+                    }
+                }
+                else
+                {
+                    return StatusCode(403, new { status = HttpStatusCode.Forbidden, message = "Error : Invalid input DayType..." });
+                }
                 var reqOvertime = new Overtime
                 {
+
                     NIK = NIK,
                     Date = reqOvertimeVM.Date,
                     StartTime = reqOvertimeVM.StartTime,
                     EndTime = reqOvertimeVM.EndTime,
                     DescEmp = reqOvertimeVM.DescEmp,
                     DescHead = reqOvertimeVM.DescHead,
-                    TotalReimburse = (int) Math.Ceiling(Convert.ToDouble((reqOvertimeVM.EndTime - reqOvertimeVM.StartTime).TotalHours)* (double) myPerson.Salary),
+                    TotalReimburse = totalReimburse,
                     DayTypeId = reqOvertimeVM.DayTypeId,
                     StatusId = reqOvertimeVM.StatusId
                     
