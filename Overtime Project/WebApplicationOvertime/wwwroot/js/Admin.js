@@ -135,8 +135,7 @@ $('#insert_form').on("submit", function (event) {
         }
     })
 });
-<<<<<<< Updated upstream
-=======
+
 
 
 $("#myTable").on('click', '#btnDel', function () {
@@ -169,7 +168,7 @@ $("#myTable").on('click', '#btnDel', function () {
                 data: JSON.stringify(obj1),
                 contentType: "application/json; charset=utf-8",
                 datatype: "json"
->>>>>>> Stashed changes
+
 
             }).done((result) => {
                 $("#myTable").DataTable().ajax.reload();
