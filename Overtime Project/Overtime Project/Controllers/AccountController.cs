@@ -62,14 +62,14 @@ namespace Overtime_Project.Controllers
         }
 
         [HttpGet("UserData")]
-        //[Authorize(Roles = "Admin,Head")]
+       // [Authorize(Roles = "Admin,Head")]
         public async Task<ActionResult> ViewDataAll()
         {
             var data = from p in overtimeContext.Person
                        join a in overtimeContext.Account on p.NIK equals a.NIK
                        join ar in overtimeContext.RoleAccount on a.NIK equals ar.NIK
                        join r in overtimeContext.Role on ar.RoleId equals r.Id
-                       where r.Name == "Employee"
+                       where r.Name == "Employee" && p.IsDeleted == 0
                        select new
                        {
                            NIK = p.NIK,
@@ -104,7 +104,8 @@ namespace Overtime_Project.Controllers
                         Phone = registerVM.Phone,
                         BirthDate = registerVM.BirthDate,
                         Salary = registerVM.Salary,
-                        Email = registerVM.Email
+                        Email = registerVM.Email,
+                        IsDeleted = 0
                     };
                     overtimeContext.Person.Add(person);
                     var addPerson = overtimeContext.SaveChanges();

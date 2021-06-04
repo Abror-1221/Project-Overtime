@@ -19,6 +19,7 @@ namespace Overtime_Project.Models
         public string Phone { get; set; }
         public DateTime BirthDate { get; set; }
         public int Salary { get; set; }
+        public int IsDeleted { get; set; }
 
         public Person() { }
         [JsonIgnore]

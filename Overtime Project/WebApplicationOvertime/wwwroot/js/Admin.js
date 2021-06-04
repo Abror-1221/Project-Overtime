@@ -126,9 +126,20 @@ $('#insert_form').on("submit", function (event) {
         }
     })
 });
-function Delete(nik, eduid) {
+function Delete(nik) {
     console.log(nik)
-    console.log(eduid)
+    //console.log(eduid)
+    $.ajax({
+
+        url: "https://localhost:44324/API/account/profile/" + nik + "/",
+        type: "GET",
+    }).done((result) => {
+        
+        
+
+    }).fail((error) => {
+        alert("erorr");
+    });
 
     //$.ajax({
     //    url: "https://localhost:44324/API/overtime/" + nik + "/",
@@ -137,16 +148,16 @@ function Delete(nik, eduid) {
     //}).done((result) => {
     //    //  alert("done");
     //    // $("#myTable").DataTable().ajax.reload();
-    //    $.ajax({
+        ////$.ajax({
 
-    //        url: "https://localhost:44324/API/person/" + eduid + "/",
-    //        type: "DELETE",
-    //    }).done((result) => {
-    //        alert("done");
-    //        $("#myTable").DataTable().ajax.reload();
+        ////    url: "https://localhost:44324/API/person/" + eduid + "/",
+        ////    type: "DELETE",
+        ////}).done((result) => {
+        ////    alert("done");
+        ////    $("#myTable").DataTable().ajax.reload();
 
-    //    }).fail((error) => {
-    //        alert("erorr");
+        ////}).fail((error) => {
+        ////    alert("erorr");
     //    });
     //}).fail((error) => {
     //    alert("erorr");

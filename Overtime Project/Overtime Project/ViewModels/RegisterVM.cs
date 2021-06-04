@@ -15,6 +15,7 @@ namespace Overtime_Project.ViewModels
         public int Salary { get; set; }
         public string Email { get; set; }
         public string Password { get; set; }
+        public int IsDeleted { get; set; }
 
     }
 }
