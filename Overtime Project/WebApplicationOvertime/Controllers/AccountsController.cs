@@ -22,5 +22,10 @@ namespace WebApplicationOvertime.Controllers
         {
             return View();
         }
+        public async Task<JsonResult> GetUserData()
+        {
+            var result = await repository.GetUserData();
+            return Json(result);
+        }
     }
 }

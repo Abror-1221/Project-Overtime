@@ -29,7 +29,7 @@ $(document).ready(function () {
     var t = $('#myTable').DataTable({
 
         "ajax": {
-            "url": "https://localhost:44324/API/account/userdata",
+            "url": "/Accounts/GetUserData",
 
             "datatype": "json",
             "dataSrc": "",
