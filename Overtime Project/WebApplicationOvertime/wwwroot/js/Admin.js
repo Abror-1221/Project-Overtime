@@ -73,11 +73,12 @@ $(document).ready(function () {
             },
             {
                 "data": null,
-                //"wrap": true,educationID
+                //"wrap": true,educationID 
+                //onclick="Delete(' + "'" + row.nik + "'" + ',' + "'" + row.overtimeId + "'" + ')"
                 "render": function (data, type, row, item, column) {
                     return '<button type="button" class="btn btn-secondary" data-toggle="modal"' +
                         'data-id="' + row.nik + '" data-target="#exampleModal"> Detail </button > ' +
-                        '<button type="button" class="btn btn-danger" onclick="Delete(' + "'" + row.nik + "'" + ',' + "'" + row.overtimeId + "'" + ')"> Delete </button > ' +
+                        '<button type="button" id="btnDel" class="btn btn-danger"> Delete </button > ' +
                         '<button type="button" class="btn btn-primary" onclick="Update()"> Update </button > '
                 }
             }
@@ -88,7 +89,17 @@ $(document).ready(function () {
             cell.innerHTML = i + 1;
         });
     }).draw();
+
+    //$("#myTable tbody").on('click', '#btnDel', function () {
+    //    alert("hello");
+
+    //  })
 });
+
+//$("#myTable").on('click', '#btnDel', function () {
+//    alert("hello");
+
+//})
 
 function Update() {
 
@@ -115,13 +126,11 @@ $('#insert_form').on("submit", function (event) {
         data: JSON.stringify(obj),
         headers: {
             "content-type": "application/json;charset=UTF-8" // Or add this line
-        }, beforeSend: function () {
-            $('#insert').val("Inserting");
-        }, success: function (data) {
+      }, success: function (data) {
             alert("done");
             $('#insert_form')[0].reset();
             $('#insert').val("Insert");
-            $('#add_data_Modal').modal('hide');
+            $('#staticBackdrop').modal('hide');
             $("#myTable").DataTable().ajax.reload();
         }
     })
@@ -163,3 +172,40 @@ function Delete(nik) {
     //    alert("erorr");
     //});
 }
+
+$("#myTable").on('click', '#btnDel', function () {
+
+    var data = $("#myTable").DataTable().row($(this).parents('tr')).data();
+   // console.log(data.IsDeleted);
+        var obj1 = new Object(); //sesuaikan sendiri nama objectnya dan beserta isinya
+        obj1.NIK = data.nik;
+        obj1.FirstName = data.firstname;
+        obj1.LastName = data.lastname;
+        obj1.Phone = data.phone;
+        obj1.BirthDate = data.birthdate;
+        obj1.Salary = data.salary;
+        obj1.Email = data.email;
+        obj1.IsDeleted = 1;
+        
+        $.ajax({
+            type: "PUT",
+            url: "https://localhost:44324/API/person",
+            data: JSON.stringify(obj1),
+            contentType: "application/json; charset=utf-8",
+            datatype: "json"
+            //beforeSend: function () {
+            //    $("#edit").val("Saving...");
+            //},
+            //success: function (data) {
+            //    //$('#insert').val("Insert");
+            //    //t.ajax.reload();
+            //    alert("Success submit");
+            //}
+        }).done((result) => {
+            $("#myTable").DataTable().ajax.reload();
+            //$("myTable").DataTable().ajax.reload();
+        }).fail((error) => {
+            alert("Delete Error");
+        })
+   
+})
