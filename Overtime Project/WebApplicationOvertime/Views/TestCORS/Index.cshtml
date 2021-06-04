@@ -29,6 +29,157 @@
     </thead>
 </table>
 
+<<<<<<< Updated upstream
+=======
+<!--Modal DATA TABLES DETAILS-->
+<div class="modal fade" id="modalDetail" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="staticBackdropLabel">Modal title</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                ...
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-primary">Save changes</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!--<div id="add_data_Modal" class="modal fade">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">-->
+@*<button type="button" class="close" data-dismiss="modal">&times;</button>*@
+<!--<h4 class="modal-title">Register User</h4>
+</div>
+<div class="modal-body">
+    <form class="row 3" role="form" method="post" id="insert_form">
+        <label>Enter Employee NIK</label>
+        <input type="text" name="nik" id="nik" class="form-control" required />
+        <br />
+        <div class="col-md-4">
+            <label>Enter First Name</label>
+            <input name="firstName" id="firstName" class="form-control" required />
+
+        </div>
+        <div class="col-md-4">
+
+            <label>Enter Last Name</label>
+            <input name="lastName" id="lastName" class="form-control" required />
+
+        </div>
+        <div class="col-md-4">
+
+            <label>Enter Phone Number</label>
+            <input name="phone" id="phone" class="form-control" required />
+        </div>
+
+        <label>Enter Birth Date</label>
+        <input type="date" name="bdate" id="bdate" class="form-control" required />
+        <br />
+        <label>Enter Salary</label>
+        <textarea name="salary" id="salary" class="form-control" required></textarea>
+        <br />
+        <label>Enter Email</label>
+        <input type="email" name="email" id="email" class="form-control" required />
+        <br />
+        <label>Enter Password</label>
+        <textarea name="password" id="password" class="form-control" required></textarea>
+        <br />-->
+@*<input type="text" class="form-control" data-toggle="datepicker">*@
+
+<!--<input type="submit" value="insert" name="insert" id="insert" class="btn btn-success" />
+                    <input type="button" onclick="Update()" value="Update" name="insert" id="btnUpdate" class="btn btn-success" />
+
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
+</div>-->
+<!--Modal DATA TABLES EDIT-->
+<div class="modal fade" id="editModal" tabindex="-1" data-bs-backdrop="static" data-bs-keyboard="false" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleInsertModalLabel">Update Data</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <form method="post" id="editForm" class="row needs-validation" novalidate>
+                    <div class="col-md-4 ">
+                        <label for="nikE" class="form-label">NIK :</label>
+                        <input type="text" name="nikE" class="form-control" id="nikE" pattern="[0-9]+" required readonly />
+                        <div class="invalid-feedback">
+                            Please provide a NIK (only number character)
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <label for="firstNameE" class="form-label">First Name :</label>
+                        <input type="text" name="firstNameE" id="firstNameE" class="form-control" pattern="[a-zA-Z]+" required />
+                        <div class="invalid-feedback">
+                            Please provide a first name (only uppercase and lowercase letter)
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <label for="lastNameE" class="form-label">Last Name :</label>
+                        <input type="text" name="lastNameE" id="lastNameE" class="form-control" pattern="[a-zA-Z]+" required />
+                        <div class="invalid-feedback">
+                            Please provide a last name (only uppercase and lowercase letter)
+                        </div>
+                    </div>
+                    <div class="col-md-6 mt-2">
+                        <label for="phoneE" class="form-label">Phone :</label>
+                        <input type="text" name="phoneE" id="phoneE" class="form-control" pattern="[0-9]+" required />
+                        <div class="invalid-feedback">
+                            Please provide a phone number (only number character)
+                        </div>
+                    </div>
+                    <div class="col-md-6 mt-2">
+                        <label for="birthDateE" class="form-label">Birth Date :</label>
+                        <input type="date" name="birthDateE" id="birthDateE" class="form-control" required />
+                        <div class="invalid-feedback">
+                            Required
+                        </div>
+                    </div>
+                    <div class="col-md-6 mt-2">
+                        <label for="salaryE" class="form-label">Salary :</label>
+                        <input type="number" name="salaryE" id="salaryE" class="form-control" pattern="[0-9]+" required />
+                        <div class="invalid-feedback">
+                            Required (only number character)
+                        </div>
+                    </div>
+                    <div class="col-md-6 mt-2">
+                        <label for="emailE" class="form-label">Email :</label>
+                        <input type="email" name="emailE" id="emailE" class="form-control" required placeholder="email@example.com" />
+                        <div class="invalid-feedback">
+                            Required
+                        </div>
+                    </div>
+                    
+                    
+                    <button type="submit" id="edit" class="btn btn-success">Save changes</button>
+                </form>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+
+
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@*MODAL INSERT================*@
+>>>>>>> Stashed changes
 <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
     <div class="modal-dialog">
         <div class="modal-content">

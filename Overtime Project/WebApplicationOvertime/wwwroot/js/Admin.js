@@ -76,10 +76,10 @@ $(document).ready(function () {
                 //"wrap": true,educationID 
                 //onclick="Delete(' + "'" + row.nik + "'" + ',' + "'" + row.overtimeId + "'" + ')"
                 "render": function (data, type, row, item, column) {
-                    return '<button type="button" class="btn btn-secondary" data-toggle="modal"' +
-                        'data-id="' + row.nik + '" data-target="#exampleModal"> Detail </button > ' +
+                    return '<button id="btnDetail" type="button" class="btn btn-secondary" data-bs-toggle="modal"' +
+                        'data-bs-target="#modalDetail"> Detail </button > ' +
                         '<button type="button" id="btnDel" class="btn btn-danger"> Delete </button > ' +
-                        '<button type="button" class="btn btn-primary" onclick="Update()"> Update </button > '
+                        '<button type="button" id="btnEdit" class="btn btn-primary"> Update </button > '
                 }
             }
         ]
@@ -135,20 +135,119 @@ $('#insert_form').on("submit", function (event) {
         }
     })
 });
+<<<<<<< Updated upstream
+=======
+
 
 $("#myTable").on('click', '#btnDel', function () {
+    Swal.fire({
+        title: 'Are you sure?',
+        text: "You won't be able to revert this!",
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonColor: '#3085d6',
+        cancelButtonColor: '#d33',
+        confirmButtonText: 'Yes, delete it!'
+    }).then((result) => {
+        if (result.isConfirmed) {
+            var data = $("#myTable").DataTable().row($(this).parents('tr')).data();
+            console.log(data.nik);
+            console.log(data.firstName);
+            var obj1 = new Object(); //sesuaikan sendiri nama objectnya dan beserta isinya
+            obj1.NIK = data.nik;
+            obj1.FirstName = data.firstName;
+            obj1.LastName = data.lastName;
+            obj1.Phone = data.phone;
+            obj1.BirthDate = data.birthDate;
+            obj1.Salary = data.salary;
+            obj1.Email = data.email;
+            obj1.IsDeleted = 1;
 
+            $.ajax({
+                type: "PUT",
+                url: "https://localhost:44324/API/person",
+                data: JSON.stringify(obj1),
+                contentType: "application/json; charset=utf-8",
+                datatype: "json"
+>>>>>>> Stashed changes
+
+            }).done((result) => {
+                $("#myTable").DataTable().ajax.reload();
+            })
+            Swal.fire(
+                'Deleted!',
+                'Your file has been deleted.',
+                'success'
+            )
+        }
+    })
+    //var data = $("#myTable").DataTable().row($(this).parents('tr')).data();
+    //console.log(data.nik);
+    //console.log(data.firstName);
+    //    var obj1 = new Object(); //sesuaikan sendiri nama objectnya dan beserta isinya
+    //    obj1.NIK = data.nik;
+    //    obj1.FirstName = data.firstName;
+    //    obj1.LastName = data.lastName;
+    //    obj1.Phone = data.phone;
+    //    obj1.BirthDate = data.birthDate;
+    //    obj1.Salary = data.salary;
+    //    obj1.Email = data.email;
+    //    obj1.IsDeleted = 1;
+        
+    //    $.ajax({
+    //        type: "PUT",
+    //        url: "https://localhost:44324/API/person",
+    //        data: JSON.stringify(obj1),
+    //        contentType: "application/json; charset=utf-8",
+    //        datatype: "json"
+          
+    //    }).done((result) => {
+    //        $("#myTable").DataTable().ajax.reload();
+    //    }).fail((error) => {
+    //        alert("Delete Error");
+    //    })
+   
+})
+
+//detail
+$("#myTable").on('click','#btnDetail', function () {
     var data = $("#myTable").DataTable().row($(this).parents('tr')).data();
-   // console.log(data.IsDeleted);
-        var obj1 = new Object(); //sesuaikan sendiri nama objectnya dan beserta isinya
-        obj1.NIK = data.nik;
-        obj1.FirstName = data.firstname;
-        obj1.LastName = data.lastname;
-        obj1.Phone = data.phone;
-        obj1.BirthDate = data.birthdate;
-        obj1.Salary = data.salary;
-        obj1.Email = data.email;
-        obj1.IsDeleted = 1;
+    //alert("tes aaaaaa dong bro");
+    $("#staticBackdropLabel").text(data.firstName + " " + data.lastName);
+    $('#modalDetail').find(".modal-body").html("<p>NIK : " + data.nik
+        + "</p> <p>First Name : " + data.firstName
+        + "</p> <p>Last Name  : " + data.lastName
+        + "</p> <p>Role       : " + data.role
+        + "</p> <p>Phone      : " + data.phone
+        + "</p> <p>Birth Date : " + data.birthDate
+        + "</p> <p>Salary     : " + data.salary
+        + "</p> <p>Email      : " + data.email + "</p>");
+});
+
+//UPDATE
+$("#myTable").on('click', '#btnEdit', function () {
+    var data = $("#myTable").DataTable().row($(this).parents('tr')).data();
+    //alert(data.nik);
+    $("#nikE").val(data.nik);
+    $("#firstNameE").val(data.firstName);
+    $("#lastNameE").val(data.lastName);
+    $("#phoneE").val(data.phone);
+    $("#birthDateE").val(data.birthDate);
+    $("#salaryE").val(data.salary);
+    $("#emailE").val(data.email);
+   
+    $("#editModal").modal("show");
+    $("#editModal").on('click', '#edit', function () {
+
+        var obj1 = new Object(); 
+        obj1.NIK = $("#nikE").val();
+        obj1.FirstName = $("#firstNameE").val();
+        obj1.LastName = $("#lastNameE").val();
+        obj1.Phone = $("#phoneE").val();
+        obj1.BirthDate = $("#birthDateE").val();
+        obj1.Salary = $("#salaryE").val();
+        obj1.Email = $("#emailE").val();
+        obj1.IsDeleted = 0;
         
         $.ajax({
             type: "PUT",
@@ -156,19 +255,13 @@ $("#myTable").on('click', '#btnDel', function () {
             data: JSON.stringify(obj1),
             contentType: "application/json; charset=utf-8",
             datatype: "json"
-            //beforeSend: function () {
-            //    $("#edit").val("Saving...");
-            //},
-            //success: function (data) {
-            //    //$('#insert').val("Insert");
-            //    //t.ajax.reload();
-            //    alert("Success submit");
-            //}
+            
         }).done((result) => {
-            $("#myTable").DataTable().ajax.reload();
-            //$("myTable").DataTable().ajax.reload();
-        }).fail((error) => {
-            alert("Delete Error");
+                alert("Update Success");
+                $("#myTable").DataTable().ajax.reload();
+            }).fail((error) => {
+                alert("Update Error");
+           
         })
-   
+    })
 })
