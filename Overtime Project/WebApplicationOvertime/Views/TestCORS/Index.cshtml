@@ -8,14 +8,14 @@
      </script>*@
 @{
     ViewData["Title"] = "Home Page";
-    Layout = "~/Views/Shared/DashboardLayout.cshtml";
+    Layout = "~/Views/Layout/DashboardLayout.cshtml";
 }
 
-<h1>Employee</h1>
-@*<button type="button" name="age" id="age" data-toggle="modal" data-target="#add_data_Modal" class="btn btn-warning">Add</button>*@
+<h3>Employee</h3>
 <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
     Add
 </button>
+
 <table class="table" id="myTable">
     <thead>
         <tr>
@@ -28,63 +28,6 @@
         </tr>
     </thead>
 </table>
-
-<!--<div id="add_data_Modal" class="modal fade">
-    <div class="modal-dialog">
-        <div class="modal-content">
-            <div class="modal-header">-->
-                @*<button type="button" class="close" data-dismiss="modal">&times;</button>*@
-                <!--<h4 class="modal-title">Register User</h4>
-            </div>
-            <div class="modal-body">
-                <form class="row 3" role="form" method="post" id="insert_form">
-                    <label>Enter Employee NIK</label>
-                    <input type="text" name="nik" id="nik" class="form-control" required />
-                    <br />
-                    <div class="col-md-4">
-                        <label>Enter First Name</label>
-                        <input name="firstName" id="firstName" class="form-control" required />
-
-                    </div>
-                    <div class="col-md-4">
-
-                        <label>Enter Last Name</label>
-                        <input name="lastName" id="lastName" class="form-control" required />
-
-                    </div>
-                    <div class="col-md-4">
-
-                        <label>Enter Phone Number</label>
-                        <input name="phone" id="phone" class="form-control" required />
-                    </div>
-
-                    <label>Enter Birth Date</label>
-                    <input type="date" name="bdate" id="bdate" class="form-control" required />
-                    <br />
-                    <label>Enter Salary</label>
-                    <textarea name="salary" id="salary" class="form-control" required></textarea>
-                    <br />
-                    <label>Enter Email</label>
-                    <input type="email" name="email" id="email" class="form-control" required />
-                    <br />
-                    <label>Enter Password</label>
-                    <textarea name="password" id="password" class="form-control" required></textarea>
-                    <br />-->
-
-
-                    @*<input type="text" class="form-control" data-toggle="datepicker">*@
-
-                    <!--<input type="submit" value="insert" name="insert" id="insert" class="btn btn-success" />
-                    <input type="button" onclick="Update()" value="Update" name="insert" id="btnUpdate" class="btn btn-success" />
-
-                </form>
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-            </div>
-        </div>
-    </div>
-</div>-->
 
 <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
     <div class="modal-dialog">
@@ -151,16 +94,16 @@
                             Please provide a valid pass.
                         </div>
                     </div>
-                    <div class="col-12">
-                        @*<button class="btn btn-primary" type="submit">Submit form</button>*@
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
                         <input type="submit" value="insert" name="insert" id="insert" class="btn btn-success" />
                     </div>
+                        @*<button class="btn btn-primary" type="submit">Submit form</button>*@
+                        @*<input type="submit" value="insert" name="insert" id="insert" class="btn btn-success" />*@
+                    
                 </form>
             </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                <button type="button" class="btn btn-primary">Understood</button>
-            </div>
+            
         </div>
     </div>
 </div>

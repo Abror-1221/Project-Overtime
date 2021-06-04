@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Http;
+﻿using Microsoft.AspNetCore.Cors;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Overtime_Project.Repository.Interface;
 using System;
@@ -11,6 +12,8 @@ namespace Overtime_Project.Base
 {
     [Route("api/[controller]")]
     [ApiController]
+    [EnableCors("AllowOrigin")]
+
     public class BaseController<Entity, Repository, Key> : ControllerBase
         where Entity : class
         where Repository : IRepository<Entity, Key>

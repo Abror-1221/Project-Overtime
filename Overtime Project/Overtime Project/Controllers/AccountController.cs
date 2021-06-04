@@ -61,8 +61,8 @@ namespace Overtime_Project.Controllers
             return Ok(data);
         }
 
+        // [Authorize(Roles = "Admin,Head")]
         [HttpGet("UserData")]
-       // [Authorize(Roles = "Admin,Head")]
         public async Task<ActionResult> ViewDataAll()
         {
             var data = from p in overtimeContext.Person
