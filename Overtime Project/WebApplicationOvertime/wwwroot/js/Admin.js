@@ -211,6 +211,7 @@ $("#myTable").on('click', '#btnDel', function () {
 //detail
 $("#myTable").on('click','#btnDetail', function () {
     var data = $("#myTable").DataTable().row($(this).parents('tr')).data();
+    console.log(data);
     //alert("tes aaaaaa dong bro");
     $("#staticBackdropLabel").text(data.firstName + " " + data.lastName);
     $('#modalDetail').find(".modal-body").html("<p>NIK : " + data.nik
