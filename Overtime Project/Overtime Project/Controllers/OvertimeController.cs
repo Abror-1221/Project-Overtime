@@ -73,6 +73,8 @@ namespace Overtime_Project.Controllers
                        {
                            Id = o.Id,
                            NIK = o.NIK,
+                           FirstName = p.FirstName,
+                           LastName = p.LastName,
                            Date = o.Date,
                            StartTime = o.StartTime,
                            EndTime = o.EndTime,

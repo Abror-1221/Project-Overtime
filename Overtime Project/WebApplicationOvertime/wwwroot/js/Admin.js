@@ -89,11 +89,6 @@ $(document).ready(function () {
             cell.innerHTML = i + 1;
         });
     }).draw();
-
-    //$("#myTable tbody").on('click', '#btnDel', function () {
-    //    alert("hello");
-
-    //  })
 });
 
 //$("#myTable").on('click', '#btnDel', function () {

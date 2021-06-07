@@ -27,5 +27,10 @@ namespace WebApplicationOvertime.Controllers
             var result = await repository.GetUserData();
             return Json(result);
         }
+
+        public IActionResult Head()
+        {
+            return View("/Views/TestCORS/Head.cshtml");
+        }
     }
 }
