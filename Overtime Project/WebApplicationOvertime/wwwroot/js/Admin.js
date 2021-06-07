@@ -96,11 +96,7 @@ $(document).ready(function () {
 
 //})
 
-function Update() {
-
-    alert("done");
-
-}
+//insert
 
 $('#insert_form').on("submit", function (event) {
     event.preventDefault();
@@ -132,7 +128,7 @@ $('#insert_form').on("submit", function (event) {
 });
 
 
-
+//deleye
 $("#myTable").on('click', '#btnDel', function () {
     Swal.fire({
         title: 'Are you sure?',
@@ -174,33 +170,7 @@ $("#myTable").on('click', '#btnDel', function () {
                 'success'
             )
         }
-    })
-    //var data = $("#myTable").DataTable().row($(this).parents('tr')).data();
-    //console.log(data.nik);
-    //console.log(data.firstName);
-    //    var obj1 = new Object(); //sesuaikan sendiri nama objectnya dan beserta isinya
-    //    obj1.NIK = data.nik;
-    //    obj1.FirstName = data.firstName;
-    //    obj1.LastName = data.lastName;
-    //    obj1.Phone = data.phone;
-    //    obj1.BirthDate = data.birthDate;
-    //    obj1.Salary = data.salary;
-    //    obj1.Email = data.email;
-    //    obj1.IsDeleted = 1;
-        
-    //    $.ajax({
-    //        type: "PUT",
-    //        url: "https://localhost:44324/API/person",
-    //        data: JSON.stringify(obj1),
-    //        contentType: "application/json; charset=utf-8",
-    //        datatype: "json"
-          
-    //    }).done((result) => {
-    //        $("#myTable").DataTable().ajax.reload();
-    //    }).fail((error) => {
-    //        alert("Delete Error");
-    //    })
-   
+    }) 
 })
 
 //detail
