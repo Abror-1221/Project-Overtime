@@ -12,22 +12,28 @@
 }
 
 <h3>Employee</h3>
-<button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
-    Add
-</button>
-
-<table class="table" id="myTable">
-    <thead>
-        <tr>
-            <th>Nomor</th>
-            <th>NIK</th>
-            <th>FirstName</th>
-            <th>LastName</th>
-            <th>phone</th>
-            <th>Action</th>
-        </tr>
-    </thead>
-</table>
+<div class="row">
+    <div class="user">
+        <div class="d-grid gap-2 col-2">
+            <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
+                Add
+            </button>
+        </div>
+        <hr />
+        <table class="table" id="myTable">
+            <thead>
+                <tr>
+                    <th>Nomor</th>
+                    <th>NIK</th>
+                    <th>FirstName</th>
+                    <th>LastName</th>
+                    <th>phone</th>
+                    <th>Action</th>
+                </tr>
+            </thead>
+        </table>
+    </div>
+</div>
 
 
 <!--Modal DATA TABLES DETAILS-->
@@ -108,16 +114,13 @@
                             Required
                         </div>
                     </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                        <input type="submit" id="edit" class="btn btn-success" name="Save Changes" value="Save Changes" />
+                        @*<input type="submit" value="insert" name="insert" id="insert" class="btn btn-success" />*@
 
-
-                    <button type="submit" id="edit" class="btn btn-success">Save changes</button>
+                    </div>
                 </form>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-
-
-
-                </div>
             </div>
         </div>
     </div>

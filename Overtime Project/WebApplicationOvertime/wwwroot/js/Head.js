@@ -52,9 +52,9 @@ $(document).ready(function () {
                 //"wrap": true,educationID 
                 //onclick="Delete(' + "'" + row.nik + "'" + ',' + "'" + row.overtimeId + "'" + ')"
                 "render": function (data, type, row, item, column) {
-                    return '<button id="btnDetailOvertime" type="button" class="btn btn-secondary" data-bs-toggle="modal"' +
+                    return '<button id="btnDetailOvertimeHead" type="button" class="btn btn-secondary" data-bs-toggle="modal"' +
                         'data-bs-target="#modalDetail"> Detail </button > ' +
-                        '<button type="button" id="btnAcc" class="btn btn-danger"> Delete </button >'
+                        '<button type="button" id="btnAccHead" class="btn btn-primary"> Approval </button >'
                 }
             },
             { "data": "statusName"}
@@ -67,3 +67,4 @@ $(document).ready(function () {
         });
     }).draw();
 });
+

@@ -97,7 +97,6 @@ $(document).ready(function () {
 //})
 
 //insert
-
 $('#insert_form').on("submit", function (event) {
     event.preventDefault();
 
@@ -128,7 +127,7 @@ $('#insert_form').on("submit", function (event) {
 });
 
 
-//deleye
+//delete
 $("#myTable").on('click', '#btnDel', function () {
     Swal.fire({
         title: 'Are you sure?',
@@ -200,10 +199,10 @@ $("#myTable").on('click', '#btnEdit', function () {
     $("#birthDateE").val(data.birthDate);
     $("#salaryE").val(data.salary);
     $("#emailE").val(data.email);
-   
     $("#editModal").modal("show");
-    $("#editModal").on('click', '#edit', function () {
 
+    $("#editModal").on('submit', function (event) {
+        event.preventDefault();
         var obj1 = new Object(); 
         obj1.NIK = $("#nikE").val();
         obj1.FirstName = $("#firstNameE").val();
@@ -215,18 +214,17 @@ $("#myTable").on('click', '#btnEdit', function () {
         obj1.IsDeleted = 0;
         
         $.ajax({
-            type: "PUT",
             url: "https://localhost:44324/API/person",
+            type: "PUT",
             data: JSON.stringify(obj1),
-            contentType: "application/json; charset=utf-8",
-            datatype: "json"
-            
-        }).done((result) => {
-                alert("Update Success");
+            headers: {
+                "content-type": "application/json;charset=UTF-8" // Or add this line
+            }, success: function (data) {
+                $('#edit').val("Save Changes");
+                $('#editModal').modal('hide');
                 $("#myTable").DataTable().ajax.reload();
-            }).fail((error) => {
-                alert("Update Error");
-           
+            }
+            
         })
     })
 })

@@ -32,6 +32,10 @@ namespace WebApplicationOvertime.Controllers
         {
             return View("/Views/TestCORS/Head.cshtml");
         }
+        public IActionResult Employee()
+        {
+            return View("/Views/TestCORS/Employee.cshtml");
+        }
 
         [HttpGet("Accounts/GetUserOvertime/{nik}")]
         public async Task<JsonResult> GetUserOvertime(string nik)
