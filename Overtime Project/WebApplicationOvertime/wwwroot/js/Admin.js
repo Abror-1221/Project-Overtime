@@ -104,6 +104,7 @@ $('#insert_form').on("submit", function (event) {
     obj.NIK = $("#nik").val();
     obj.FirstName = $("#firstName").val();
     obj.LastName = $("#lastName").val();
+    obj.Gender = $("#gender").val();
     obj.Phone = $("#phone").val();
     obj.BirthDate = $("#bdate").val();
     obj.Salary = parseInt($("#salary").val(), 10);
@@ -181,9 +182,10 @@ $("#myTable").on('click','#btnDetail', function () {
     $('#modalDetail').find(".modal-body").html("<p>NIK : " + data.nik
         + "</p> <p>First Name : " + data.firstName
         + "</p> <p>Last Name  : " + data.lastName
+        + "</p> <p>Gender     : " + data.gender
         + "</p> <p>Role       : " + data.role
         + "</p> <p>Phone      : " + data.phone
-        + "</p> <p>Birth Date : " + data.birthDate
+        + "</p> <p>Birth Date : " + data.birthDate.slice(0,10)
         + "</p> <p>Salary     : " + data.salary
         + "</p> <p>Email      : " + data.email + "</p>");
 });
@@ -195,8 +197,9 @@ $("#myTable").on('click', '#btnEdit', function () {
     $("#nikE").val(data.nik);
     $("#firstNameE").val(data.firstName);
     $("#lastNameE").val(data.lastName);
+    $("#genderE").val(data.gender);
     $("#phoneE").val(data.phone);
-    $("#birthDateE").val(data.birthDate);
+    $("#birthDateE").val(data.birthDate.slice(0,10));
     $("#salaryE").val(data.salary);
     $("#emailE").val(data.email);
     $("#editModal").modal("show");
@@ -207,6 +210,7 @@ $("#myTable").on('click', '#btnEdit', function () {
         obj1.NIK = $("#nikE").val();
         obj1.FirstName = $("#firstNameE").val();
         obj1.LastName = $("#lastNameE").val();
+        obj1.Gender = $("#genderE").val();
         obj1.Phone = $("#phoneE").val();
         obj1.BirthDate = $("#birthDateE").val();
         obj1.Salary = $("#salaryE").val();

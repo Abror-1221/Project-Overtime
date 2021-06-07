@@ -7,6 +7,7 @@ namespace Overtime_Project.ViewModels
 {
     public class ReqOvertimeVM
     {
+        public int Id { get; set; }
         public string NIK { get; set; }
         public DateTime Date { get; set; }
         public DateTime StartTime { get; set; }

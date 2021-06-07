@@ -5,22 +5,32 @@
     ViewData["Title"] = "Head Page";
     Layout = "~/Views/Layout/DashboardLayout.cshtml";
 }
+<div class="card">
+    <div class="card-header">
+        <h3>Overtime Employee</h3>
+    </div>
+    <div class="card-body">
+        <div class="row">
+            <div class="user">
+                <table class="table" id="headTable">
+                    <thead>
+                        <tr>
+                            <th>Nomor</th>
+                            <th>NIK</th>
+                            <th>FirstName</th>
+                            <th>LastName</th>
+                            <th>Date Request</th>
+                            <th>Action</th>
+                            <th>Status</th>
+                        </tr>
+                    </thead>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
 
-<h3>Overtime Employee</h3>
 
-<table class="table" id="headTable">
-    <thead>
-        <tr>
-            <th>Nomor</th>
-            <th>NIK</th>
-            <th>FirstName</th>
-            <th>LastName</th>
-            <th>Date Request</th>
-            <th>Action</th>
-            <th>Status</th>
-        </tr>
-    </thead>
-</table>
 
 @section Scripts{
     <script src="~/js/Head.js"></script>

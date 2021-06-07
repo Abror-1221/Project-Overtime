@@ -10,28 +10,33 @@
     ViewData["Title"] = "Home Page";
     Layout = "~/Views/Layout/DashboardLayout.cshtml";
 }
-
-<h3>Employee</h3>
-<div class="row">
-    <div class="user">
-        <div class="d-grid gap-2 col-2">
-            <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
-                Add
-            </button>
+<div class="card">
+    <div class="card-header">
+        <h3>Employee</h3>
+    </div>
+    <div class="card-body">
+        <div class="row">
+            <div class="user">
+                <div class="d-grid gap-2 col-1">
+                    <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
+                        Add
+                    </button>
+                </div>
+                <hr />
+                <table class="table" id="myTable">
+                    <thead>
+                        <tr>
+                            <th>Nomor</th>
+                            <th>NIK</th>
+                            <th>FirstName</th>
+                            <th>LastName</th>
+                            <th>phone</th>
+                            <th>Action</th>
+                        </tr>
+                    </thead>
+                </table>
+            </div>
         </div>
-        <hr />
-        <table class="table" id="myTable">
-            <thead>
-                <tr>
-                    <th>Nomor</th>
-                    <th>NIK</th>
-                    <th>FirstName</th>
-                    <th>LastName</th>
-                    <th>phone</th>
-                    <th>Action</th>
-                </tr>
-            </thead>
-        </table>
     </div>
 </div>
 
@@ -41,7 +46,7 @@
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="staticBackdropLabel">Modal title</h5>
+                <h5 class="modal-title" id="staticBackdropLabel">Detail</h5>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
@@ -65,21 +70,32 @@
             </div>
             <div class="modal-body">
                 <form method="post" id="editForm" class="row needs-validation" novalidate>
-                    <div class="col-md-4 ">
+                    <div class="col-md-6">
                         <label for="nikE" class="form-label">NIK :</label>
                         <input type="text" name="nikE" class="form-control" id="nikE" pattern="[0-9]+" required readonly />
                         <div class="invalid-feedback">
                             Please provide a NIK (only number character)
                         </div>
                     </div>
-                    <div class="col-md-4">
+                    <div class="col-md-6">
+                        <label for="genderE" class="form-label">Gender</label>
+                        <select name="university" id="genderE" class="form-select" required>
+                            <option value="">Select Gender</option>
+                            <option value="Male">Male</option>
+                            <option value="Female">Female</option>
+                        </select>
+                        <div class="invalid-feedback">
+                            Required!
+                        </div>
+                    </div>
+                    <div class="col-md-6">
                         <label for="firstNameE" class="form-label">First Name :</label>
                         <input type="text" name="firstNameE" id="firstNameE" class="form-control" pattern="[a-zA-Z]+" required />
                         <div class="invalid-feedback">
                             Please provide a first name (only uppercase and lowercase letter)
                         </div>
                     </div>
-                    <div class="col-md-4">
+                    <div class="col-md-6">
                         <label for="lastNameE" class="form-label">Last Name :</label>
                         <input type="text" name="lastNameE" id="lastNameE" class="form-control" pattern="[a-zA-Z]+" required />
                         <div class="invalid-feedback">
@@ -131,26 +147,37 @@
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="staticBackdropLabel">Modal title</h5>
+                <h5 class="modal-title" id="staticBackdropLabel">Register Employee</h5>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
                 <form class="row g-3 needs-validation" method="post" id="insert_form" novalidate>
-                    <div class="col-md-4">
+                    <div class="col-md-6">
                         <label for="nik" class="form-label">NIK</label>
                         <input type="text" class="form-control" id="nik" required>
                         <div class="invalid-feedback">
                             Required!
                         </div>
                     </div>
-                    <div class="col-md-4">
+                    <div class="col-md-6">
+                        <label for="gender" class="form-label">Gender</label>
+                        <select name="university" id="gender" class="form-select" required>
+                            <option value="">Select Gender</option>
+                            <option value="Male">Male</option>
+                            <option value="Female">Female</option>
+                        </select>
+                        <div class="invalid-feedback">
+                            Required!
+                        </div>
+                    </div>
+                    <div class="col-md-6">
                         <label for="firstName" class="form-label">First name</label>
                         <input type="text" class="form-control" id="firstName" required>
                         <div class="invalid-feedback">
                             Required!
                         </div>
                     </div>
-                    <div class="col-md-4">
+                    <div class="col-md-6">
                         <label for="lastName" class="form-label">Last name</label>
                         <input type="text" class="form-control" id="lastName" required>
                         <div class="invalid-feedback">

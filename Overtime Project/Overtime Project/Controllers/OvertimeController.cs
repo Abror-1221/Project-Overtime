@@ -52,7 +52,7 @@ namespace Overtime_Project.Controllers
                            DescEmp = o.DescEmp,
                            TotalReimburse = o.TotalReimburse,
                            DayTypeId = o.DayTypeId,
-                           TypeName = k.Name,
+                           DayTypeName = k.Name,
                            StatusId = o.StatusId,
                            StatusName = s.Name,
                        };
@@ -79,6 +79,7 @@ namespace Overtime_Project.Controllers
                            StartTime = o.StartTime,
                            EndTime = o.EndTime,
                            DescEmp = o.DescEmp,
+                           DescHead = o.DescHead,
                            TotalReimburse = o.TotalReimburse,
                            DayTypeId = o.DayTypeId,
                            DayTypeName = k.Name,

@@ -5,22 +5,181 @@
     ViewData["Title"] = "Employee Page";
     Layout = "~/Views/Layout/DashboardLayout.cshtml";
 }
+<div class="card">
+    <div class="card-header">
+        <h3>Overtime</h3>
+    </div>
+    <div class="card-body">
+        <div class="row">
+            <div class="user">
+                <div class="d-grip gap-2 col-2">
+                    <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#staticBackdropEmployeeOvertime">
+                        Add Request
+                    </button>
+                </div>
+                <hr />
+                <table class="table" id="employeeTable">
+                    <thead>
+                        <tr>
+                            <th>Nomor</th>
+                            <th>Date Request</th>
+                            <th>Start Time</th>
+                            <th>End Time</th>
+                            <th>Action</th>
+                            <th>Status</th>
+                        </tr>
+                    </thead>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
 
-<h3>Overtime</h3>
 
-<table class="table" id="employeeTable">
-    <thead>
-        <tr>
-            <th>Nomor</th>
-            <th>Date Request</th>
-            <th>Start Time</th>
-            <th>End Time</th>
-            <th>Action</th>
-            <th>Status</th>
-        </tr>
-    </thead>
-</table>
+<!--Detail-->
+<div class="modal fade" id="modalDetailEmployeeOvertime" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="staticBackdropLabelEmployee">Detail</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                ...
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-primary">Save changes</button>
+            </div>
+        </div>
+    </div>
+</div>
 
+<!--Add Request-->
+<div class="modal fade" id="staticBackdropEmployeeOvertime" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="staticBackdropLabelEmployeeOvertime">Request Overtime Form</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <form class="row g-3 needs-validation" method="post" id="request_form" novalidate>
+                    <div class="col-md-6">
+                        <label for="date" class="form-label">Date Request</label>
+                        <input type="date" class="form-control" id="date" required>
+                        <div class="invalid-feedback">
+                            Required!
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <label for="day" class="form-label">Day Type</label>
+                        <select name="university" id="day" class="form-select" required>
+                            <option value="">Select Day Type</option>
+                            <option value="1">Weekend</option>
+                            <option value="2">Weekday</option>
+                            <option value="3">National holiday</option>
+                        </select>
+                        <div class="invalid-feedback">
+                            Required!
+                        </div>
+                    </div>
+                    <div class="col-md-12">
+                        <label for="startTime" class="form-label">Start Time</label>
+                        <input type="datetime-local" class="form-control" id="startTime" required>
+                        <div class="invalid-feedback">
+                            Required!
+                        </div>
+                    </div>
+                    <div class="col-md-12">
+                        <label for="endTime" class="form-label">End Time</label>
+                        <input type="datetime-local" class="form-control" id="endTime" required>
+                        <div class="invalid-feedback">
+                            Required!
+                        </div>
+                    </div>
+                    <div class="col-lg-12">
+                        <label for="descEmp" class="form-label">Report Description</label>
+                        <textarea class="form-control" id="descEmp" placeholder="Required report description." required></textarea>
+                        <div class="invalid-feedback">
+                            Please provide a valid report description.
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                        <input type="submit" value="Request" name="Request" id="request" class="btn btn-success" />
+                    </div>
+                    @*<button class="btn btn-primary" type="submit">Submit form</button>*@
+                    @*<input type="submit" value="insert" name="insert" id="insert" class="btn btn-success" />*@
+
+                </form>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+<!--Update Request-->
+<div class="modal fade" id="editModalEmployeeOvertime" tabindex="-1" data-bs-backdrop="static" data-bs-keyboard="false" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleInsertModalLabelEmployeeOvertime">Update Request Overtime</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <form method="post" id="editFormEmployeeOvertime" class="row needs-validation" novalidate>
+                    <div class="col-md-6">
+                        <label for="dateE" class="form-label">Date Request</label>
+                        <input type="date" class="form-control" id="dateE" required>
+                        <div class="invalid-feedback">
+                            Required!
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <label for="dayE" class="form-label">Day Type</label>
+                        <select name="university" id="dayE" class="form-select" required>
+                            <option value="">Select Day Type</option>
+                            <option value="1">Weekend</option>
+                            <option value="2">Weekday</option>
+                            <option value="3">National holiday</option>
+                        </select>
+                        <div class="invalid-feedback">
+                            Required!
+                        </div>
+                    </div>
+                    <div class="col-md-12">
+                        <label for="startTimeE" class="form-label">Start Time</label>
+                        <input type="datetime-local" class="form-control" id="startTimeE" required>
+                        <div class="invalid-feedback">
+                            Required!
+                        </div>
+                    </div>
+                    <div class="col-md-12">
+                        <label for="endTimeE" class="form-label">End Time</label>
+                        <input type="datetime-local" class="form-control" id="endTimeE" required>
+                        <div class="invalid-feedback">
+                            Required!
+                        </div>
+                    </div>
+                    <div class="col-lg-12">
+                        <label for="descEmpE" class="form-label">Report Description</label>
+                        <textarea class="form-control" id="descEmpE" placeholder="Required report description." required></textarea>
+                        <div class="invalid-feedback">
+                            Please provide a valid report description.
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                        <input type="submit" id="edit" class="btn btn-success" name="Save Changes" value="Save Changes" />
+                        @*<input type="submit" value="insert" name="insert" id="insert" class="btn btn-success" />*@
+
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
 @section Scripts{
     <script src="~/js/Employee.js"></script>
 }

@@ -24,6 +24,7 @@ namespace Overtime_Project.ViewModels
         public string NIK { get; set; }
         public string FirstName { get; set; }
         public string LastName { get; set; }
+        public string Gender { get; set; }
         public string Role { get; set; }
         public int RoleId { get; set; }
         public string Phone { get; set; }
