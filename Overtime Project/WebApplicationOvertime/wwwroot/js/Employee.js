@@ -5,7 +5,7 @@ $(document).ready(function () {
     var h = $('#headTable').DataTable({
 
         "ajax": {
-            "url": "https://localhost:44324/API/Overtime/OvertimeDataAll",
+            "url": "/Accounts/GetUserOvertime",
 
             "datatype": "json",
             "dataSrc": "",
@@ -44,7 +44,7 @@ $(document).ready(function () {
             { "data": "lastName" },
             {
                 "data": "date", render: function (data, type, row) {
-                    return data.slice(0,10);
+                    return data.slice(0, 10);
                 }
             },
             {
@@ -54,11 +54,9 @@ $(document).ready(function () {
                 "render": function (data, type, row, item, column) {
                     return '<button id="btnDetailOvertime" type="button" class="btn btn-secondary" data-bs-toggle="modal"' +
                         'data-bs-target="#modalDetail"> Detail </button > ' +
-                        '<button type="button" id="btnAcc" class="btn btn-danger"> Delete </button >'
+                        '<button type="button" id="btnAcc" class="btn btn-danger"> Delete </button > '
                 }
-            },
-            { "data": "statusName"}
-            
+            }
         ]
     });
     h.on('order.dt search.dt', function () {

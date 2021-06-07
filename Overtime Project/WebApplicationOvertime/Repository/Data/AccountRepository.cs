@@ -15,12 +15,14 @@ namespace WebApplicationOvertime.Repository.Data
     {
         private readonly Address address;
         private readonly string request;
+        private readonly string overtime;
         private readonly IHttpContextAccessor _contextAccessor;
         private readonly HttpClient httpClient;
-        public AccountRepository(Address address, string request = "Account/") : base(address, request)
+        public AccountRepository(Address address, string request = "Account/", string overtime = "Overtime/") : base(address, request)
         {
             this.address = address;
             this.request = request;
+            this.overtime = overtime;
             _contextAccessor = new HttpContextAccessor();
             httpClient = new HttpClient
             {
@@ -40,5 +42,16 @@ namespace WebApplicationOvertime.Repository.Data
             return entities;
         }
 
+        public async Task<List<ReqOvertimeVM>> GetUserOvertime(string nik)
+        {
+            List<ReqOvertimeVM> entities = new List<ReqOvertimeVM>();
+
+            using (var response = await httpClient.GetAsync(overtime + $"OvertimeData/{nik}"))
+            {
+                string apiResponse = await response.Content.ReadAsStringAsync();
+                entities = JsonConvert.DeserializeObject<List<ReqOvertimeVM>>(apiResponse);
+            }
+            return entities;
+        }
     }
 }

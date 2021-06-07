@@ -15,6 +15,8 @@ namespace Overtime_Project.ViewModels
         public string DescHead { get; set; }
         public int TotalReimburse { get; set; }
         public int DayTypeId { get; set; }
+        public string DayTypeName { get; set; }
         public int StatusId { get; set; }
+        public string StatusName { get; set; }
     }
 }

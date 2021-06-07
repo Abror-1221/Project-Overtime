@@ -2,26 +2,23 @@
     For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 *@
 @{
-    ViewData["Title"] = "Head Page";
+    ViewData["Title"] = "Employee Page";
     Layout = "~/Views/Layout/DashboardLayout.cshtml";
 }
 
-<h3>Overtime Employee</h3>
+<h3>Overtime</h3>
 
-<table class="table" id="headTable">
+<table class="table" id="employeeTable">
     <thead>
         <tr>
             <th>Nomor</th>
             <th>NIK</th>
-            <th>FirstName</th>
-            <th>LastName</th>
             <th>Date</th>
             <th>Action</th>
-            <th>Status</th>
         </tr>
     </thead>
 </table>
 
 @section Scripts{
-    <script src="~/js/Head.js"></script>
+    <script src="~/js/Employee.js"></script>
 }
