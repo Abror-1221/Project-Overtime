@@ -54,15 +54,15 @@ $(document).ready(function () {
                 //"wrap": true,educationID 
                 //onclick="Delete(' + "'" + row.nik + "'" + ',' + "'" + row.overtimeId + "'" + ')"
                 "render": function (data, type, row, item, column) {
-<<<<<<< Updated upstream
+/*<<<<<<< Updated upstream*/
                     return '<button id="btnDetailOvertimeHead" type="button" class="btn btn-secondary" data-bs-toggle="modal"' +
                         'data-bs-target="#modalDetail"> Detail </button > ' +
                         '<button type="button" id="btnAccHead" class="btn btn-primary"> Approval </button >'
-=======
-                    return '<button id="btnDetail" type="button" class="btn btn-secondary" data-bs-toggle="modal"' +
-                        'data-bs-target="#modalDetail"> Detail </button > ' +
-                        '<button type="button" id="btnValidate" class="btn btn-danger"> Validation </button >'
->>>>>>> Stashed changes
+//=======
+//                    return '<button id="btnDetail" type="button" class="btn btn-secondary" data-bs-toggle="modal"' +
+//                        'data-bs-target="#modalDetail"> Detail </button > ' +
+//                        '<button type="button" id="btnValidate" class="btn btn-danger"> Validation </button >'
+//>>>>>>> Stashed changes
                 }
             }
             
@@ -74,12 +74,12 @@ $(document).ready(function () {
             cell.innerHTML = i + 1;
         });
     }).draw();
-<<<<<<< Updated upstream
+//<<<<<<< Updated upstream
 });
 
-=======
+//=======
 
-});
+
 
 //detail
 $("#headTable").on('click', '#btnDetail', function () {
@@ -154,4 +154,4 @@ $("#headTable").on('click', '#btnValidate', function () {
         //})
     //})
 })
->>>>>>> Stashed changes
+/*>>>>>>> Stashed changes*/
