@@ -105,9 +105,9 @@ $("#employeeTable").on('click', '#btnDetailOvertimeEmployee', function () {
     var data = $("#employeeTable").DataTable().row($(this).parents('tr')).data();
     console.log(data);
     //alert("tes aaaaaa dong bro");
-    $('#modalDetailEmployeeOvertime').find(".modal-body").html('<p>Day type : ' + data.dayTypeName
-        + '</p> <p>Report Description : ' + data.descEmp
-        + '</p> <p value="Unfilled">Annotation  : ' + data.descHead + '</p>');
+    $('#modalDetailEmployeeOvertime').find(".modal-body").html('<p>Day type               : ' + data.dayTypeName
+        + '</p> <p>Overtime Report        : ' + data.descEmp
+        + '</p> <p value="Unfilled">Validation Description : ' + data.descHead + '</p>');
 });
 
 //Update Overtime

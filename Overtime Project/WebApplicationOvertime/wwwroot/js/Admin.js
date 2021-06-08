@@ -91,11 +91,6 @@ $(document).ready(function () {
     }).draw();
 });
 
-//$("#myTable").on('click', '#btnDel', function () {
-//    alert("hello");
-
-//})
-
 //insert
 $('#insert_form').on("submit", function (event) {
     event.preventDefault();

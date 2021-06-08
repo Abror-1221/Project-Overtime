@@ -99,7 +99,7 @@
                         </div>
                     </div>
                     <div class="col-lg-12">
-                        <label for="descEmp" class="form-label">Report Description</label>
+                        <label for="descEmp" class="form-label">Overtime Report</label>
                         <textarea class="form-control" id="descEmp" placeholder="Required report description." required></textarea>
                         <div class="invalid-feedback">
                             Please provide a valid report description.
@@ -131,14 +131,14 @@
                 <form method="post" id="editFormEmployeeOvertime" class="row needs-validation" novalidate>
                     <div class="col-md-6">
                         <label for="dateE" class="form-label">Date Request</label>
-                        <input type="date" class="form-control" id="dateE" required>
+                        <input type="date" class="form-control" id="dateE" required readonly>
                         <div class="invalid-feedback">
                             Required!
                         </div>
                     </div>
                     <div class="col-md-6">
                         <label for="dayE" class="form-label">Day Type</label>
-                        <select name="university" id="dayE" class="form-select" required>
+                        <select name="university" id="dayE" class="form-select" required >
                             <option value="">Select Day Type</option>
                             <option value="1">Weekend</option>
                             <option value="2">Weekday</option>
@@ -150,20 +150,20 @@
                     </div>
                     <div class="col-md-12">
                         <label for="startTimeE" class="form-label">Start Time</label>
-                        <input type="datetime-local" class="form-control" id="startTimeE" required>
+                        <input type="datetime-local" class="form-control" id="startTimeE" required readonly>
                         <div class="invalid-feedback">
                             Required!
                         </div>
                     </div>
                     <div class="col-md-12">
                         <label for="endTimeE" class="form-label">End Time</label>
-                        <input type="datetime-local" class="form-control" id="endTimeE" required>
+                        <input type="datetime-local" class="form-control" id="endTimeE" required readonly>
                         <div class="invalid-feedback">
                             Required!
                         </div>
                     </div>
                     <div class="col-lg-12">
-                        <label for="descEmpE" class="form-label">Report Description</label>
+                        <label for="descEmpE" class="form-label">Overtime Report</label>
                         <textarea class="form-control" id="descEmpE" placeholder="Required report description." required></textarea>
                         <div class="invalid-feedback">
                             Please provide a valid report description.
@@ -171,7 +171,7 @@
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                        <input type="submit" id="edit" class="btn btn-success" name="Save Changes" value="Save Changes" />
+                        <input type="submit" id="editEmployeeOvertime" class="btn btn-success" name="Save Changes" value="Save Changes" />
                         @*<input type="submit" value="insert" name="insert" id="insert" class="btn btn-success" />*@
 
                     </div>
@@ -180,6 +180,7 @@
         </div>
     </div>
 </div>
+
 @section Scripts{
     <script src="~/js/Employee.js"></script>
 }

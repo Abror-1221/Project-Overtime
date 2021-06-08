@@ -1,9 +1,9 @@
 ﻿
 
 $(document).ready(function () {
-
-    var h = $('#headTable').DataTable({
-
+    
+    var head = $('#headOvertimeTable').DataTable({
+        retrieve: true, //ada potensi error
         "ajax": {
             "url": "https://localhost:44324/API/Overtime/OvertimeDataAll",
 
@@ -44,114 +44,145 @@ $(document).ready(function () {
             { "data": "lastName" },
             {
                 "data": "date", render: function (data, type, row) {
-                    return data.slice(0,10);
+                    return data.slice(0, 10);
                 }
             },
-            { "data": "statusName" },
-            { "data": "totalReimburse" },
             {
-                "data": null, "sortable": false,
+                "data": null,
                 //"wrap": true,educationID 
                 //onclick="Delete(' + "'" + row.nik + "'" + ',' + "'" + row.overtimeId + "'" + ')"
                 "render": function (data, type, row, item, column) {
-/*<<<<<<< Updated upstream*/
-                    return '<button id="btnDetailOvertimeHead" type="button" class="btn btn-secondary" data-bs-toggle="modal"' +
-                        'data-bs-target="#modalDetail"> Detail </button > ' +
-                        '<button type="button" id="btnAccHead" class="btn btn-primary"> Approval </button >'
-//=======
-//                    return '<button id="btnDetail" type="button" class="btn btn-secondary" data-bs-toggle="modal"' +
-//                        'data-bs-target="#modalDetail"> Detail </button > ' +
-//                        '<button type="button" id="btnValidate" class="btn btn-danger"> Validation </button >'
-//>>>>>>> Stashed changes
+                    return '<button id="btnDetailHead" type="button" class="btn btn-secondary" data-bs-toggle="modal"' +
+                        'data-bs-target="#modalDetailHead"> Detail </button > ' +
+                        '<button type="button" id="btnUpdateHead" class="btn btn-primary"> Approval </button > '
                 }
-            }
-            
-            
+            },
+            { "data": "statusName" }
         ]
     });
-    h.on('order.dt search.dt', function () {
-        h.column(0, { search: 'applied', order: 'applied' }).nodes().each(function (cell, i) {
+    head.on('order.dt search.dt', function () {
+        head.column(0, { search: 'applied', order: 'applied' }).nodes().each(function (cell, i) {
             cell.innerHTML = i + 1;
         });
     }).draw();
-//<<<<<<< Updated upstream
 });
 
-//=======
-
-
-
-//detail
-$("#headTable").on('click', '#btnDetail', function () {
-    var data2 = $("#headTable").DataTable().row($(this).parents('tr')).data();
+//Detail
+$("#headOvertimeTable").on('click', '#btnDetailHead', function () {
+    var data = $("#headOvertimeTable").DataTable().row($(this).parents('tr')).data();
     console.log(data);
-    $.ajax({
-        url: "https://localhost:44324/api/Account/Profile/" + data2.nik + "/"
-        //type: "PUT"
-    }).done((result) => {
-       
-        email = result[0].email
-        console.log(email);
-    }).fail((error) => {
-        alert("error");
-    });
-    var data = $("#headTable").DataTable().row($(this).parents('tr')).data();
     //alert("tes aaaaaa dong bro");
-    $("#staticBackdropLabel").text(data.firstName + " " + data.lastName);
-    $('#modalDetail').find(".modal-body").html("<p>NIK : " + data.nik
-        + "</p> <p>First Name : " + data.firstName
-        + "</p> <p>Last Name  : " + data.lastName
-        + "</p> <p>Role       : " + data.role
-        + "</p> <p>Email      : " + email + "</p>");
-        //+ "</p> <p>Phone      : " + data.phone
-        //+ "</p> <p>Birth Date : " + data.birthDate
-        //+ "</p> <p>Salary     : " + data.salary
-        //+ "</p> <p>Email      : " + data.email + "</p>");
+    $('#modalDetailHead').find(".detailBody").html('<p>Day type            : ' + data.dayTypeName
+        + '</p> <p>Start Time             : ' + data.startTime.slice(0, 10) + ", Time : " + data.startTime.slice(11)
+        + '</p> <p>End Time               : ' + data.endTime.slice(0, 10) + ", Time : " + data.endTime.slice(11)
+        + '</p> <p>Reimburse              : ' + data.totalReimburse
+        + '</p> <p>Email                  : ' + data.email
+        + '</p> <p>Phone                  : ' + data.phone
+        + '</p> <p>Overtime Report        : ' + data.descEmp
+        + '</p> <p>Validation Description : ' + data.descHead + '</p>');
 });
 
-//UPDATE
-$("#headTable").on('click', '#btnValidate', function () {
-    var data = $("#headTable").DataTable().row($(this).parents('tr')).data();
-    //alert(data.nik);
-    console.log(data);
-    //var FormattedDate = (data.date).ToShortDateString();
-    $("#nikE").val(data.nik);
-    $("#firstNameE").val(data.firstName);
-    $("#lastNameE").val(data.lastName);
-    $("#overtimeDateE").val(data.date);
-    $("#totalReimburseE").val(data.totalReimburse);
-    $("#overtimeDescE").val(data.descEmp);
-    $("#validDescE").val(data.descHead);
-    
-   // $("#emailE").val(data.email);
+//Update v.1
+$("#headOvertimeTable").on('click', '#btnUpdateHead', function () {
+    var data = $("#headOvertimeTable").DataTable().row($(this).parents('tr')).data();
+    $("#descHeadE").val(data.descHead);
+    $("#statusE").val(data.statusId);
+    $("#editModalHead").modal("show");
 
-    $("#editModal").modal("show");
-    /*$("#editModal").on('click', '#edit', function () {*/
+    $("#editModalHead").on('submit', function (event) {
+        event.preventDefault();
+        var obj2 = new Object();
+        obj2.Id = data.id;
+        obj2.NIK = data.nik;
+        obj2.Date = data.date;
+        obj2.StartTime = data.startTime;
+        obj2.EndTime = data.endTime;
+        obj2.DescEmp = data.descEmp;
+        obj2.DescHead = $("#descHeadE").val();
+        obj2.TotalReimburse = data.totalReimburse
+        obj2.DayTypeId = data.dayTypeId;
+        obj2.StatusId = $("#statusE").val();
 
-        //var obj1 = new Object();
-        //obj1.NIK = $("#nikE").val();
-        //obj1.FirstName = $("#firstNameE").val();
-        //obj1.LastName = $("#lastNameE").val();
-        //obj1.Phone = $("#phoneE").val();
-        //obj1.BirthDate = $("#birthDateE").val();
-        //obj1.Salary = $("#salaryE").val();
-        //obj1.Email = $("#emailE").val();
-        //obj1.IsDeleted = 0;
+        $.ajax({
+            url: "https://localhost:44324/API/Overtime",
+            type: "PUT",
+            data: JSON.stringify(obj2),
+            headers: {
+                "content-type": "application/json;charset=UTF-8" // Or add this line
+            }, success: function (data) {
+                $('#validated').val("Submit");
+                $('#editModalHead').modal('hide');
+                $("#headOvertimeTable").DataTable().ajax.reload();
+            }
 
-        //$.ajax({
-        //    type: "PUT",
-        //    url: "https://localhost:44324/API/person",
-        //    data: JSON.stringify(obj1),
-        //    contentType: "application/json; charset=utf-8",
-        //    datatype: "json"
-
-        //}).done((result) => {
-        //    alert("Update Success");
-        //    $("#myTable").DataTable().ajax.reload();
-        //}).fail((error) => {
-        //    alert("Update Error");
-
-        //})
-    //})
+        })
+    })
 })
-/*>>>>>>> Stashed changes*/
+
+//Update v.2
+//var dataHead = null;
+//function reject() {
+//    var obj2 = new Object();
+//    obj2.Id = dataHead.id;
+//    obj2.NIK = dataHead.nik;
+//    obj2.Date = dataHead.date;
+//    obj2.StartTime = dataHead.startTime;
+//    obj2.EndTime = dataHead.endTime;
+//    obj2.DescEmp = dataHead.descEmp;
+//    obj2.DescHead = $("#descHeadE").val();
+//    obj2.TotalReimburse = dataHead.totalReimburse
+//    obj2.DayTypeId = dataHead.dayTypeId;
+//    obj2.StatusId = 3;
+
+//    $.ajax({
+//        url: "https://localhost:44324/API/Overtime",
+//        type: "PUT",
+//        data: JSON.stringify(obj2),
+//        headers: {
+//            "content-type": "application/json;charset=UTF-8" // Or add this line
+//        }
+//    }).then((hasil) => {
+//        $('#rejected').val("Rejected");
+//        $('#editModalHead').modal('hide');
+//        $("#headOvertimeTable").DataTable().ajax.reload();
+//    })
+//}
+
+//function valid() {
+//    var obj2 = new Object();
+//    obj2.Id = dataHead.id;
+//    obj2.NIK = dataHead.nik;
+//    obj2.Date = dataHead.date;
+//    obj2.StartTime = dataHead.startTime;
+//    obj2.EndTime = dataHead.endTime;
+//    obj2.DescEmp = dataHead.descEmp;
+//    obj2.DescHead = $("#descHeadE").val();
+//    obj2.TotalReimburse = dataHead.totalReimburse
+//    obj2.DayTypeId = dataHead.dayTypeId;
+//    obj2.StatusId = 2;
+
+//    $.ajax({
+//        url: "https://localhost:44324/API/Overtime",
+//        type: "PUT",
+//        data: JSON.stringify(obj2),
+//        headers: {
+//            "content-type": "application/json;charset=UTF-8" // Or add this line
+//        }
+//    }).then((hasil) => {
+//        $('#validated').val("Validated");
+//        $('#editModalHead').modal('hide');
+//        $("#headOvertimeTable").DataTable().ajax.reload();
+//    })
+//}
+
+//$("#headOvertimeTable").on('click', '#btnUpdateHead', function () {
+//    dataHead = $("#headOvertimeTable").DataTable().row($(this).parents('tr')).data();
+//    $("#descHeadE").val(dataHead.descHead);
+//    $("#statusE").val(dataHead.statusId);
+//    $("#editModalHead").modal("show");
+//})
+
+
+
+
+
