@@ -1,0 +1,204 @@
+﻿@*<script>
+    $.ajax({
+        url: "https://localhost:44324/API/Account/userdata",
+        success: function (result) {
+            console.log(result);
+     }
+     })
+     </script>*@
+@{
+    ViewData["Title"] = "Admin Page";
+    Layout = "~/Views/Layout/DashboardLayout.cshtml";
+}
+
+<h3>Employee</h3>
+<button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
+    Add
+</button>
+
+<table class="table" id="myTable">
+    <thead>
+        <tr>
+            <th>Nomor</th>
+            <th>NIK</th>
+            <th>FirstName</th>
+            <th>LastName</th>
+            <th>phone</th>
+            <th>Action</th>
+        </tr>
+    </thead>
+</table>
+
+
+<!--Modal DATA TABLES DETAILS-->
+<div class="modal fade" id="modalDetail" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="staticBackdropLabel">Modal title</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                ...
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-primary">Save changes</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!--Modal DATA TABLES EDIT-->
+<div class="modal fade" id="editModal" tabindex="-1" data-bs-backdrop="static" data-bs-keyboard="false" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleInsertModalLabel">Update Data</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <form method="post" id="editForm" class="row needs-validation" novalidate>
+                    <div class="col-md-4 ">
+                        <label for="nikE" class="form-label">NIK :</label>
+                        <input type="text" name="nikE" class="form-control" id="nikE" pattern="[0-9]+" required readonly />
+                        <div class="invalid-feedback">
+                            Please provide a NIK (only number character)
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <label for="firstNameE" class="form-label">First Name :</label>
+                        <input type="text" name="firstNameE" id="firstNameE" class="form-control" pattern="[a-zA-Z]+" required />
+                        <div class="invalid-feedback">
+                            Please provide a first name (only uppercase and lowercase letter)
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <label for="lastNameE" class="form-label">Last Name :</label>
+                        <input type="text" name="lastNameE" id="lastNameE" class="form-control" pattern="[a-zA-Z]+" required />
+                        <div class="invalid-feedback">
+                            Please provide a last name (only uppercase and lowercase letter)
+                        </div>
+                    </div>
+                    <div class="col-md-6 mt-2">
+                        <label for="phoneE" class="form-label">Phone :</label>
+                        <input type="text" name="phoneE" id="phoneE" class="form-control" pattern="[0-9]+" required />
+                        <div class="invalid-feedback">
+                            Please provide a phone number (only number character)
+                        </div>
+                    </div>
+                    <div class="col-md-6 mt-2">
+                        <label for="birthDateE" class="form-label">Birth Date :</label>
+                        <input type="date" name="birthDateE" id="birthDateE" class="form-control" required />
+                        <div class="invalid-feedback">
+                            Required
+                        </div>
+                    </div>
+                    <div class="col-md-6 mt-2">
+                        <label for="salaryE" class="form-label">Salary :</label>
+                        <input type="number" name="salaryE" id="salaryE" class="form-control" pattern="[0-9]+" required />
+                        <div class="invalid-feedback">
+                            Required (only number character)
+                        </div>
+                    </div>
+                    <div class="col-md-6 mt-2">
+                        <label for="emailE" class="form-label">Email :</label>
+                        <input type="email" name="emailE" id="emailE" class="form-control" required placeholder="email@example.com" />
+                        <div class="invalid-feedback">
+                            Required
+                        </div>
+                    </div>
+
+
+                    <button type="submit" id="edit" class="btn btn-success">Save changes</button>
+                </form>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+
+
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!--==============MODAL INSERT================-->
+<div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="staticBackdropLabel">Modal title</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <form class="row g-3 needs-validation" method="post" id="insert_form" novalidate>
+                    <div class="col-md-4">
+                        <label for="nik" class="form-label">NIK</label>
+                        <input type="text" class="form-control" id="nik" required>
+                        <div class="invalid-feedback">
+                            Required!
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <label for="firstName" class="form-label">First name</label>
+                        <input type="text" class="form-control" id="firstName" required>
+                        <div class="invalid-feedback">
+                            Required!
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <label for="lastName" class="form-label">Last name</label>
+                        <input type="text" class="form-control" id="lastName" required>
+                        <div class="invalid-feedback">
+                            Required!
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <label for="email" class="form-label">Email</label>
+                        <input type="email" class="form-control" id="email" required>
+                        <div class="invalid-feedback">
+                            Please provide a valid email.
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <label for="bdate" class="form-label">Birth date</label>
+                        <input type="date" class="form-control" id="bdate" required>
+                        <div class="invalid-feedback">
+                            Please provide a valid date.
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <label for="salary" class="form-label">Salary</label>
+                        <input type="text" class="form-control" id="salary" required>
+                        <div class="invalid-feedback">
+                            Please provide a valid salary.
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <label for="phone" class="form-label">Phone number</label>
+                        <input type="text" class="form-control" id="phone" required>
+                        <div class="invalid-feedback">
+                            Please provide a valid phone number.
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <label for="password" class="form-label">Password</label>
+                        <input type="text" class="form-control" id="password" required>
+                        <div class="invalid-feedback">
+                            Please provide a valid pass.
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                        <input type="submit" value="insert" name="insert" id="insert" class="btn btn-success" />
+                    </div>
+                    @*<button class="btn btn-primary" type="submit">Submit form</button>*@
+                    @*<input type="submit" value="insert" name="insert" id="insert" class="btn btn-success" />*@
+
+                </form>
+            </div>
+
+        </div>
+    </div>
+</div>

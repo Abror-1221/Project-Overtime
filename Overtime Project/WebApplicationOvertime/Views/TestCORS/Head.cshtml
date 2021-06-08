@@ -31,6 +31,120 @@
 </div>
 
 
+<<<<<<< Updated upstream
+=======
+<table class="table" id="headTable">
+    <thead>
+        <tr>
+            <th>Nomor</th>
+            <th>NIK</th>
+            <th>FirstName</th>
+            <th>LastName</th>
+            <th>Date</th>
+            <th>Status</th>
+            <th>TotalReimburse</th>
+            <th>Status</th>
+        </tr>
+    </thead>
+</table>
+>>>>>>> Stashed changes
+
+<!--Modal DATA TABLES DETAILS-->
+<div class="modal fade" id="modalDetail" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="staticBackdropLabel">Modal title</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                ...
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-primary">Save changes</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!--Modal DATA TABLES EDIT-->
+<div class="modal fade" id="editModal" tabindex="-1" data-bs-backdrop="static" data-bs-keyboard="false" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleInsertModalLabel">Update Data</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <form method="post" id="editForm" class="row needs-validation" novalidate>
+                    <div class="col-md-4 ">
+                        <label for="nikE" class="form-label">NIK :</label>
+                        <input type="text" name="nikE" class="form-control" id="nikE" pattern="[0-9]+" required readonly />
+                        <div class="invalid-feedback">
+                            Please provide a NIK (only number character)
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <label for="firstNameE" class="form-label">First Name :</label>
+                        <input type="text" name="firstNameE" id="firstNameE" class="form-control" pattern="[a-zA-Z]+" required readonly />
+                        <div class="invalid-feedback">
+                            Please provide a first name (only uppercase and lowercase letter)
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <label for="lastNameE" class="form-label">Last Name :</label>
+                        <input type="text" name="lastNameE" id="lastNameE" class="form-control" pattern="[a-zA-Z]+" required readonly />
+                        <div class="invalid-feedback">
+                            Please provide a last name (only uppercase and lowercase letter)
+                        </div>
+                    </div>
+
+                    <div class="col-md-6 mt-2">
+                        <label for="birthDateE" class="form-label">Overtime Date :</label>
+                        <input type="text" name="birthDateE" id="overtimeDateE" class="form-control" required readonly />
+                        <div class="invalid-feedback">
+                            Required
+                        </div>
+                    </div>
+                    <div class="col-md-6 mt-2">
+                        <label for="salaryE" class="form-label">Total Reimburse :</label>
+                        <input type="number" name="salaryE" id="totalReimburseE" class="form-control" pattern="[0-9]+" required readonly />
+                        <div class="invalid-feedback">
+                            Required (only number character)
+                        </div>
+                    </div>
+                    <br />
+                    <div>
+                        <label for="emailE" class="form-label">Overtime Description :</label>
+                        <input type ="text" id="overtimeDescE" class="form-control" required readonly />
+                        <div class="invalid-feedback">
+                            Required
+                        </div>
+                    </div>
+                    
+                    <br />
+                    <div>
+                        <label for="lastNameE" class="form-label">Validation Description :</label>
+                        <input type ="text" name="lastNameE" id="validDescE" class="form-control" form="editForm" required />
+                        <div class="invalid-feedback">
+                            Please provide a last name (only uppercase and lowercase letter)
+                        </div>
+                    </div>
+
+
+                    <button type="submit" id="edit" class="btn btn-success">Save changes</button>
+                </form>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+
+
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
 
 @section Scripts{
     <script src="~/js/Head.js"></script>
