@@ -53,5 +53,16 @@ namespace WebApplicationOvertime.Repository.Data
             }
             return entities;
         }
+        public async Task<List<ReqOvertimeVM>> GetUserOvertimeHistory(string nik)
+        {
+            List<ReqOvertimeVM> entities = new List<ReqOvertimeVM>();
+
+            using (var response = await httpClient.GetAsync(overtime + $"OvertimeDataHistory/{nik}"))
+            {
+                string apiResponse = await response.Content.ReadAsStringAsync();
+                entities = JsonConvert.DeserializeObject<List<ReqOvertimeVM>>(apiResponse);
+            }
+            return entities;
+        }
     }
 }

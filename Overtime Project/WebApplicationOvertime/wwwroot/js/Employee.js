@@ -1,14 +1,15 @@
-﻿
+﻿var IdNik = "rsendusr";//asasaff
 
 $(document).ready(function () {
 
     var e = $('#employeeTable').DataTable({
 
         "ajax": {
-            "url": "/Accounts/GetUserOvertime/" + 2, //ngambil dari form login
+            "url": "/Accounts/getUserOvertime/" + IdNik,//"https://localhost:44351/accounts/get",//"Accounts/get/", //ngambil dari form login
 
             "datatype": "json",
             "dataSrc": "",
+            
             //    "columnDefs": [{
             //        "targets": [0],
             //        "orderable": false
@@ -31,7 +32,7 @@ $(document).ready(function () {
             }
 
         ],
-        "order": [[1, 'asc']], //mengihlangkan tanda arrow sorting di kolomn 0, jadi mulai dari kolm 1
+        "order": [[1, 'desc']], //mengihlangkan tanda arrow sorting di kolomn 0, jadi mulai dari kolm 1
         "columns": [
             {
                 "data": null, "sortable": false,
@@ -60,8 +61,8 @@ $(document).ready(function () {
                 //onclick="Delete(' + "'" + row.nik + "'" + ',' + "'" + row.overtimeId + "'" + ')"
                 "render": function (data, type, row, item, column) {
                     return '<button id="btnDetailOvertimeEmployee" type="button" class="btn btn-secondary" data-bs-toggle="modal"' +
-                        'data-bs-target="#modalDetailEmployeeOvertime"> Detail </button > ' +
-                        '<button type="button" id="btnUpdateEmployee" class="btn btn-primary"> Update </button > '
+                        'data-bs-target="#modalDetailEmployeeOvertime"> Detail </button > ' //+
+                        //'<button type="button" id="btnUpdateEmployee" class="btn btn-primary"> Update </button > '
                 }
             }
         ]

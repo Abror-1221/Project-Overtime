@@ -40,6 +40,9 @@ namespace WebApplicationOvertime.Controllers
                 var jwt = jwtReader.ReadJwtToken(token);
 
                 var role = jwt.Claims.First(c => c.Type == "http://schemas.microsoft.com/ws/2008/06/identity/claims/role").Value;
+                var nik = jwt.Claims.First(c => c.Type == "NIK").Value;
+                HttpContext.Session.SetString("nik", nik);
+                ViewData["nik"] = HttpContext.Session.GetString("nik");
                 if (role == "Head")
                 {
                     return Url.Action("Head", "TestCORS");
@@ -52,6 +55,7 @@ namespace WebApplicationOvertime.Controllers
                 else if (role == "Employee")
                 {
                     return Url.Action("Employee", "TestCORS");
+                    
                 }
               
                 else

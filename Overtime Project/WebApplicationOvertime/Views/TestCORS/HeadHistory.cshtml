@@ -1,0 +1,70 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+    ViewData["Title"] = "Head Page";
+    Layout = "~/Views/Layout/DashboardLayout.cshtml";
+}
+<div class="card">
+    <div class="card-header">
+        <h3>Overtime Employee</h3>
+    </div>
+    <div class="card-body">
+        <div class="row">
+            <div class="user">
+                <table class="table" id="headOvertimeTableHistory">
+                    <thead>
+                        <tr>
+                            <th>Nomor</th>
+                            <th>Date Request</th>
+                            <th>NIK</th>
+                            <th>FirstName</th>
+                            <th>LastName</th>
+                            <th>Status</th>
+                            <th>Action</th>
+                        </tr>
+                    </thead>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<!--Modal DATA TABLES DETAILS-->
+<div class="modal fade" id="modalDetailHeadHistory" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="staticBackdropLabel">Approval</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                @*<form method="post" id="editFormDetailsHead" class="row needs-validation" novalidate>*@
+                    <div class="row detailBody">
+
+                    </div>
+                    @*<div class="row">
+                        <div class="col-lg-12">
+                            <label for="descHeadE" class="form-label">Annotation</label>
+                            <textarea class="form-control" id="descHeadE" placeholder="Required annotation description." required></textarea>
+                            <div class="invalid-feedback">
+                                Required
+                            </div>
+                        </div>
+                    </div>*@
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                        @*<input type="submit" value="Rejected" name="Rejected" id="rejected" class="btn btn-danger" />*@
+                        @*<input type="submit" value="Validated" name="Validated" id="validated" class="btn btn-success" />*@
+                    </div>
+                @*</form>*@
+            </div>
+        </div>
+    </div>
+</div>
+
+
+@section Scripts{
+    <script src="~/js/HeadHistory.js"></script>
+}

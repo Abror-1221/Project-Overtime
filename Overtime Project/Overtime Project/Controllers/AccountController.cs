@@ -242,7 +242,7 @@ namespace Overtime_Project.Controllers
         }
 
         [HttpPost("Changepass")]
-        [Authorize(Roles = "Employee")]
+       // [Authorize(Roles = "Employee")]
         public ActionResult Updatepassword(ChangePasswordVM changePasswordVM)
         {
             var person = overtimeContext.Person.FirstOrDefault(p => p.Email == changePasswordVM.Email);

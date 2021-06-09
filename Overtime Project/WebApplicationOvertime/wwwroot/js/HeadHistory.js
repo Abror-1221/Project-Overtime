@@ -1,0 +1,188 @@
+﻿
+
+$(document).ready(function () {
+    
+    var head = $('#headOvertimeTableHistory').DataTable({
+        retrieve: true, //ada potensi error
+        "ajax": {
+            "url": "https://localhost:44324/API/Overtime/OvertimeDataAllHistory",
+
+            "datatype": "json",
+            "dataSrc": "",
+            //    "columnDefs": [{
+            //        "targets": [0],
+            //        "orderable": false
+            //    }]
+            //},
+        },
+        "columnDefs": [
+            //    {
+            //        "targets": -1,
+            //        render: function (data, type, row, meta) {
+            //            return '<input type="button" class="name" id=n-"' + row.nik + '" value="salary"/>';
+            //        },
+            //    //"data": null,
+            //    //"defaultContent": "<button>Click!</button>"
+            //},
+            {
+                "targets": 0,
+                "searchable": false,
+                "orderable": false
+            }
+
+        ],
+        "order": [[1, 'desc']], //mengihlangkan tanda arrow sorting di kolomn 0, jadi mulai dari kolm 1
+        "columns": [
+            {
+                "data": null, "sortable": false,
+                render: function (data, type, row, meta) {
+                    return meta.row + meta.settings._iDisplayStart + 1;
+                }
+            },
+            {
+                "data": "date", render: function (data, type, row) {
+                    return data.slice(0, 10);
+                }
+            },
+            { "data": "nik" },
+            { "data": "firstName" },
+            { "data": "lastName" },
+            { "data": "statusName" },
+            {
+                "data": null,
+                //"wrap": true,educationID 
+                //onclick="Delete(' + "'" + row.nik + "'" + ',' + "'" + row.overtimeId + "'" + ')"
+                "render": function (data, type, row, item, column) {
+                    return '<button id="btnDetailHeadHistory" type="button" class="btn btn-secondary" data-bs-toggle="modal"' +
+                        'data-bs-target="#modalDetailHeadHistory"> Detail </button > '// +
+                       // '<button type="button" id="btnUpdateHead" class="btn btn-primary"> Approval </button > '
+                }
+            }
+        ]
+    });
+    head.on('order.dt search.dt', function () {
+        head.column(0, { search: 'applied', order: 'applied' }).nodes().each(function (cell, i) {
+            cell.innerHTML = i + 1;
+        });
+    }).draw();
+});
+
+//Detail
+$("#headOvertimeTableHistory").on('click', '#btnDetailHeadHistory', function () {
+    var data = $("#headOvertimeTableHistory").DataTable().row($(this).parents('tr')).data();
+    console.log(data);
+    //alert("tes aaaaaa dong bro");
+    $('#modalDetailHeadHistory').find(".detailBody").html('<p>Day type            : ' + data.dayTypeName
+        + '</p> <p>Start Time             : ' + data.startTime.slice(0, 10) + ", Time : " + data.startTime.slice(11)
+        + '</p> <p>End Time               : ' + data.endTime.slice(0, 10) + ", Time : " + data.endTime.slice(11)
+        + '</p> <p>Reimburse              : ' + data.totalReimburse
+        + '</p> <p>Email                  : ' + data.email
+        + '</p> <p>Phone                  : ' + data.phone
+        + '</p> <p>Overtime Report        : ' + data.descEmp
+        + '</p> <p>Validation Description : ' + data.descHead + '</p>');
+});
+
+////Update v.1
+//$("#headOvertimeTable").on('click', '#btnUpdateHead', function () {
+//    var data = $("#headOvertimeTable").DataTable().row($(this).parents('tr')).data();
+//    $("#descHeadE").val(data.descHead);
+//    $("#statusE").val(data.statusId);
+//    $("#editModalHead").modal("show");
+
+//    $("#editModalHead").on('submit', function (event) {
+//        event.preventDefault();
+//        var obj2 = new Object();
+//        obj2.Id = data.id;
+//        obj2.NIK = data.nik;
+//        obj2.Date = data.date;
+//        obj2.StartTime = data.startTime;
+//        obj2.EndTime = data.endTime;
+//        obj2.DescEmp = data.descEmp;
+//        obj2.DescHead = $("#descHeadE").val();
+//        obj2.TotalReimburse = data.totalReimburse
+//        obj2.DayTypeId = data.dayTypeId;
+//        obj2.StatusId = $("#statusE").val();
+
+//        $.ajax({
+//            url: "https://localhost:44324/API/Overtime",
+//            type: "PUT",
+//            data: JSON.stringify(obj2),
+//            headers: {
+//                "content-type": "application/json;charset=UTF-8" // Or add this line
+//            }, success: function (data) {
+//                $('#validated').val("Submit");
+//                $('#editModalHead').modal('hide');
+//                $("#headOvertimeTable").DataTable().ajax.reload();
+//            }
+
+//        })
+//    })
+//})
+
+//Update v.2
+//var dataHead = null;
+//function reject() {
+//    var obj2 = new Object();
+//    obj2.Id = dataHead.id;
+//    obj2.NIK = dataHead.nik;
+//    obj2.Date = dataHead.date;
+//    obj2.StartTime = dataHead.startTime;
+//    obj2.EndTime = dataHead.endTime;
+//    obj2.DescEmp = dataHead.descEmp;
+//    obj2.DescHead = $("#descHeadE").val();
+//    obj2.TotalReimburse = dataHead.totalReimburse
+//    obj2.DayTypeId = dataHead.dayTypeId;
+//    obj2.StatusId = 3;
+
+//    $.ajax({
+//        url: "https://localhost:44324/API/Overtime",
+//        type: "PUT",
+//        data: JSON.stringify(obj2),
+//        headers: {
+//            "content-type": "application/json;charset=UTF-8" // Or add this line
+//        }
+//    }).then((hasil) => {
+//        $('#rejected').val("Rejected");
+//        $('#editModalHead').modal('hide');
+//        $("#headOvertimeTable").DataTable().ajax.reload();
+//    })
+//}
+
+//function valid() {
+//    var obj2 = new Object();
+//    obj2.Id = dataHead.id;
+//    obj2.NIK = dataHead.nik;
+//    obj2.Date = dataHead.date;
+//    obj2.StartTime = dataHead.startTime;
+//    obj2.EndTime = dataHead.endTime;
+//    obj2.DescEmp = dataHead.descEmp;
+//    obj2.DescHead = $("#descHeadE").val();
+//    obj2.TotalReimburse = dataHead.totalReimburse
+//    obj2.DayTypeId = dataHead.dayTypeId;
+//    obj2.StatusId = 2;
+
+//    $.ajax({
+//        url: "https://localhost:44324/API/Overtime",
+//        type: "PUT",
+//        data: JSON.stringify(obj2),
+//        headers: {
+//            "content-type": "application/json;charset=UTF-8" // Or add this line
+//        }
+//    }).then((hasil) => {
+//        $('#validated').val("Validated");
+//        $('#editModalHead').modal('hide');
+//        $("#headOvertimeTable").DataTable().ajax.reload();
+//    })
+//}
+
+//$("#headOvertimeTable").on('click', '#btnUpdateHead', function () {
+//    dataHead = $("#headOvertimeTable").DataTable().row($(this).parents('tr')).data();
+//    $("#descHeadE").val(dataHead.descHead);
+//    $("#statusE").val(dataHead.statusId);
+//    $("#editModalHead").modal("show");
+//})
+
+
+
+
+

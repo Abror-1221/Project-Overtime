@@ -17,6 +17,9 @@ namespace WebApplicationOvertime.Controllers
         } public IActionResult Head()
         {
             return View();
+        }public IActionResult EmployeeHistory()
+        {
+            return View();
         }
     }
 }

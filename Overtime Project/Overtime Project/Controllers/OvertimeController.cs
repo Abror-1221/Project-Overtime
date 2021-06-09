@@ -5,6 +5,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Overtime_Project.Base;
 using Overtime_Project.Context;
+using Overtime_Project.EmailHandling;
 using Overtime_Project.Models;
 using Overtime_Project.Repository.Data;
 using Overtime_Project.ViewModels;
@@ -23,6 +24,7 @@ namespace Overtime_Project.Controllers
     {
         private readonly OvertimeRepository overtimeRepository;
         private readonly OvertimeContext overtimeContext;
+        private readonly SendMail sendMail = new SendMail();
         public IConfiguration _configuration;
         public OvertimeController(OvertimeRepository overtimeRepository, OvertimeContext overtimeContext, IConfiguration configuration) : base(overtimeRepository)
         {
@@ -42,7 +44,34 @@ namespace Overtime_Project.Controllers
                        join o in overtimeContext.Overtime on p.NIK equals o.NIK
                        join s in overtimeContext.Status on o.StatusId equals s.Id
                        join k in overtimeContext.DayType on o.DayTypeId equals k.Id
-                       where o.NIK == NIK
+                       where o.NIK == NIK && p.IsDeleted == 0 && s.Id == 1
+                       select new
+                       {
+                           Id = o.Id,
+                           NIK = o.NIK,
+                           Date = o.Date,
+                           StartTime = o.StartTime,
+                           EndTime = o.EndTime,
+                           DescEmp = o.DescEmp,
+                           DescHead = o.DescHead,
+                           DayTypeId = o.DayTypeId,
+                           DayTypeName = k.Name,
+                           StatusId = o.StatusId,
+                           StatusName = s.Name,
+                       };
+            return Ok(data.ToList());
+        }
+        [HttpGet("OvertimeDataHistory/{NIK}")]
+        public ActionResult ViewDataOvertimeHisotry(string NIK)
+        {
+            var data = from p in overtimeContext.Person
+                       join a in overtimeContext.Account on p.NIK equals a.NIK
+                       join ar in overtimeContext.RoleAccount on a.NIK equals ar.NIK
+                       join r in overtimeContext.Role on ar.RoleId equals r.Id
+                       join o in overtimeContext.Overtime on p.NIK equals o.NIK
+                       join s in overtimeContext.Status on o.StatusId equals s.Id
+                       join k in overtimeContext.DayType on o.DayTypeId equals k.Id
+                       where o.NIK == NIK && p.IsDeleted == 0 && s.Id !=1
                        select new
                        {
                            Id = o.Id,
@@ -70,6 +99,7 @@ namespace Overtime_Project.Controllers
                        join o in overtimeContext.Overtime on p.NIK equals o.NIK
                        join s in overtimeContext.Status on o.StatusId equals s.Id
                        join k in overtimeContext.DayType on o.DayTypeId equals k.Id
+                       where p.IsDeleted == 0 && s.Id == 1
                        select new
                        {
                            Id = o.Id,
@@ -91,13 +121,58 @@ namespace Overtime_Project.Controllers
                        };
             return Ok(await data.ToListAsync());
         }
-        
+        [HttpGet("OvertimeDataAllHistory")]
+        public async Task<ActionResult> ViewDataOvertimeAllHistory()
+        {
+            var data = from p in overtimeContext.Person
+                       join a in overtimeContext.Account on p.NIK equals a.NIK
+                       join ar in overtimeContext.RoleAccount on a.NIK equals ar.NIK
+                       join r in overtimeContext.Role on ar.RoleId equals r.Id
+                       join o in overtimeContext.Overtime on p.NIK equals o.NIK
+                       join s in overtimeContext.Status on o.StatusId equals s.Id
+                       join k in overtimeContext.DayType on o.DayTypeId equals k.Id
+                       where p.IsDeleted == 0 && s.Id != 1
+                       select new
+                       {
+                           Id = o.Id,
+                           NIK = o.NIK,
+                           FirstName = p.FirstName,
+                           LastName = p.LastName,
+                           Email = p.Email,
+                           Phone = p.Phone,
+                           Date = o.Date,
+                           StartTime = o.StartTime,
+                           EndTime = o.EndTime,
+                           DescEmp = o.DescEmp,
+                           DescHead = o.DescHead,
+                           TotalReimburse = o.TotalReimburse,
+                           DayTypeId = o.DayTypeId,
+                           DayTypeName = k.Name,
+                           StatusId = o.StatusId,
+                           StatusName = s.Name,
+                       };
+            return Ok(await data.ToListAsync());
+        }
+
         [HttpPost("ReqOvertime/{NIK}")]
       //  [Authorize(Roles = "Employee")]
         public ActionResult RequestOvertime(string NIK,ReqOvertimeVM reqOvertimeVM)
         {
             var totalReimburse = 0;
             var hour = 0;
+            //var myHead = from p in overtimeContext.Person
+            //             join a in overtimeContext.Account on p.NIK equals a.NIK
+            //             join ra in overtimeContext.RoleAccount on a.NIK equals ra.NIK
+            //             join r in overtimeContext.Role on ra.RoleId equals r.Id
+            //             where r.Name=="Head"
+            //             select new
+            //             {
+            //                 Email = p.Email
+            //             };
+            var myHead = overtimeContext.RoleAccount.FirstOrDefault(i => i.RoleId == 2);
+            //var myHeadAcc = overtimeContext.Account.FirstOrDefault(u => u.NIK == myHead.NIK);
+            var myHeadPerson = overtimeContext.Person.FirstOrDefault(u => u.NIK == myHead.NIK);
+
             var myPerson = overtimeContext.Person.FirstOrDefault(u => u.NIK == NIK);
             if (myPerson != null)
             {
@@ -163,29 +238,19 @@ namespace Overtime_Project.Controllers
                 };
                 if (reqOvertime.TotalReimburse < 0)
                 {
-                    return StatusCode(403, new { status = HttpStatusCode.Forbidden, message = "Error : Invalid StartTime and EndTime Invalid..." });
+                    return StatusCode(403   , new { status = HttpStatusCode.Forbidden, message = "Error : Invalid StartTime and EndTime Invalid..." });
                 }
                 else
                 {
                     overtimeContext.Overtime.Add(reqOvertime);
                     var addReq = overtimeContext.SaveChanges();
 
-                    
-                    //DateTime d = DateTime.Now;
-                    //MailMessage mm = new MailMessage();
-                    //mm.From = new MailAddress("developit9@gmail.com");
-                    //mm.To.Add(new MailAddress("muliausman11@gmail.com"));
-                    //mm.Subject = $"[OVERTIME REQUEST] {d.ToString("dd-MM-yyyy")}";
-                    //mm.Body = $"Hello .\nneed your validation overtime...";
-                    //mm.IsBodyHtml = false;
-                    //SmtpClient smtp = new SmtpClient("smtp.gmail.com");
-                    //smtp.Port = 587;
-                    //smtp.EnableSsl = true;
-                    //smtp.UseDefaultCredentials = false;
-                    //smtp.Credentials = new NetworkCredential("developit9@gmail.com", "Sembilan!@9");
-                    //smtp.DeliveryMethod = SmtpDeliveryMethod.Network;
-                    //smtp.Send(mm);
-                    return Ok("Email sent...");
+                   // var user = myPerson. Where(u => u.NIK == reqOvertimeVM.NIK).FirstOrDefault();
+                    var subject = "Request for An Asset";
+                    var body = $"Request lembur baru untuk divalidasi telah diterima! Request validasi telah dikirim atas nama: {myPerson.FirstName} nik: {myPerson.NIK},\nMohon untuk ditinjau kembali sebelum melakukan validasi.\n Terima kasih dan Selamat Bekerja.";
+                    sendMail.SendEmail(myHeadPerson.Email, body, subject);
+                    return StatusCode(200, new { status = HttpStatusCode.OK, message = "Requested for validation" });
+                   
                 }
             }
             return NotFound();

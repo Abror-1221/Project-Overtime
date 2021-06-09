@@ -32,7 +32,7 @@ $(document).ready(function () {
             }
 
         ],
-        "order": [[1, 'asc']], //mengihlangkan tanda arrow sorting di kolomn 0, jadi mulai dari kolm 1
+        "order": [[1, 'desc']], //mengihlangkan tanda arrow sorting di kolomn 0, jadi mulai dari kolm 1
         "columns": [
             {
                 "data": null, "sortable": false,
