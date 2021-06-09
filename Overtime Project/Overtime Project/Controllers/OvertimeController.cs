@@ -12,6 +12,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Net;
+using System.Net.Mail;
 using System.Threading.Tasks;
 
 namespace Overtime_Project.Controllers
@@ -168,10 +169,123 @@ namespace Overtime_Project.Controllers
                 {
                     overtimeContext.Overtime.Add(reqOvertime);
                     var addReq = overtimeContext.SaveChanges();
-                    return Ok();
+
+                    
+                    //DateTime d = DateTime.Now;
+                    //MailMessage mm = new MailMessage();
+                    //mm.From = new MailAddress("developit9@gmail.com");
+                    //mm.To.Add(new MailAddress("muliausman11@gmail.com"));
+                    //mm.Subject = $"[OVERTIME REQUEST] {d.ToString("dd-MM-yyyy")}";
+                    //mm.Body = $"Hello .\nneed your validation overtime...";
+                    //mm.IsBodyHtml = false;
+                    //SmtpClient smtp = new SmtpClient("smtp.gmail.com");
+                    //smtp.Port = 587;
+                    //smtp.EnableSsl = true;
+                    //smtp.UseDefaultCredentials = false;
+                    //smtp.Credentials = new NetworkCredential("developit9@gmail.com", "Sembilan!@9");
+                    //smtp.DeliveryMethod = SmtpDeliveryMethod.Network;
+                    //smtp.Send(mm);
+                    return Ok("Email sent...");
                 }
             }
             return NotFound();
+        }
+
+        [HttpPost("SendEmaiOvertime")]
+        public ActionResult SendMailOvertime(SendEmailVM change)
+        {
+            if (change.Email != null)
+            {
+                if (change.Email != "")
+                {
+                    string nik = null;
+                    IEnumerable<Person> person = overtimeContext.Person.ToList();
+                    foreach (Person p in person)
+                    {
+                        if (p.Email == change.Email)
+                        {
+                            nik = p.NIK;
+                            break;
+                        }
+                        else
+                        {
+                            continue;
+                        }
+                    }
+
+                    if (nik != null)
+                    {
+                        var cekPerson = overtimeContext.Person.Find(nik);
+                        var cekAccount2 = overtimeContext.Account.Find(nik);
+                        if(change.StatusId == 1)
+                        {
+                            DateTime d = DateTime.Now;
+                            MailMessage mm = new MailMessage();
+                            mm.From = new MailAddress("developit9@gmail.com");
+                            mm.To.Add(new MailAddress(change.Email));
+                            mm.Subject = $"[OVERTIME REQUEST] {d.ToString("dd-MM-yyyy")}";
+                            mm.Body = $"Hello {cekPerson.FirstName} {cekPerson.LastName}.\n{change.FirstName} {change.LastName} need your validation overtime...";
+                            mm.IsBodyHtml = false;
+                            SmtpClient smtp = new SmtpClient("smtp.gmail.com");
+                            smtp.Port = 587;
+                            smtp.EnableSsl = true;
+                            smtp.UseDefaultCredentials = false;
+                            smtp.Credentials = new NetworkCredential("developit9@gmail.com", "Sembilan!@9");
+                            smtp.DeliveryMethod = SmtpDeliveryMethod.Network;
+                            smtp.Send(mm);
+                            return Ok("Email sent...");
+                        }
+                        else if(change.StatusId == 2)
+                        {
+                            DateTime d = DateTime.Now;
+                            MailMessage mm = new MailMessage();
+                            mm.From = new MailAddress("developit9@gmail.com");
+                            mm.To.Add(new MailAddress(change.Email));
+                            mm.Subject = $"[OVERTIME VALIDATED] {d.ToString("dd-MM-yyyy")}";
+                            mm.Body = $"Hello {cekPerson.FirstName} {cekPerson.LastName}.\n your overtime validation request has been validated\nOvertime date : {change.StartTime} - {change.EndTime}\nValidation Description : {change.DescHead}";
+                            mm.IsBodyHtml = false;
+                            SmtpClient smtp = new SmtpClient("smtp.gmail.com");
+                            smtp.Port = 587;
+                            smtp.EnableSsl = true;
+                            smtp.UseDefaultCredentials = false;
+                            smtp.Credentials = new NetworkCredential("developit9@gmail.com", "Sembilan!@9");
+                            smtp.DeliveryMethod = SmtpDeliveryMethod.Network;
+                            smtp.Send(mm);
+                            return Ok("Email sent...");
+                        }
+                        else
+                        {
+                            DateTime d = DateTime.Now;
+                            MailMessage mm = new MailMessage();
+                            mm.From = new MailAddress("developit9@gmail.com");
+                            mm.To.Add(new MailAddress(change.Email));
+                            mm.Subject = $"[OVERTIME REJECTED] {d.ToString("dd-MM-yyyy")}";
+                            mm.Body = $"Hello {cekPerson.FirstName} {cekPerson.LastName}.\n your overtime validation request has been rejected\nOvertime date : {change.StartTime} - {change.EndTime}\nRejection Description : {change.DescHead}";
+                            mm.IsBodyHtml = false;
+                            SmtpClient smtp = new SmtpClient("smtp.gmail.com");
+                            smtp.Port = 587;
+                            smtp.EnableSsl = true;
+                            smtp.UseDefaultCredentials = false;
+                            smtp.Credentials = new NetworkCredential("developit9@gmail.com", "Sembilan!@9");
+                            smtp.DeliveryMethod = SmtpDeliveryMethod.Network;
+                            smtp.Send(mm);
+                            return Ok("Email sent...");
+                        }
+                    }
+                    else
+                    {
+                        return StatusCode(400, new { status = HttpStatusCode.Forbidden, message = "Error : Email is not registered..." });
+                    }
+                }
+                else
+                {
+                    return StatusCode(400, new { status = HttpStatusCode.Forbidden, message = "Error : No Email input..." });
+                }
+            }
+            else
+            {
+                return StatusCode(400, new { status = HttpStatusCode.Forbidden, message = "Error : No Email input..." });
+            }
         }
     }
 }

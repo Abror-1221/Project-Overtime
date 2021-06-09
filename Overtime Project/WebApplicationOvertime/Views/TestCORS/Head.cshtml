@@ -17,11 +17,10 @@
                         <tr>
                             <th>Nomor</th>
                             <th>NIK</th>
-                            <th>FirstName</th>
-                            <th>LastName</th>
+                            <th>Name</th>
                             <th>Date Request</th>
-                            <th>Action</th>
                             <th>Status</th>
+                            <th>Action</th>
                         </tr>
                     </thead>
                 </table>
@@ -41,22 +40,44 @@
             </div>
             <div class="modal-body">
                 <form method="post" id="editFormDetailsHead" class="row needs-validation" novalidate>
-                    <div class="row detailBody">
+                    @*<div class="row detailBody">
 
+        </div>*@
+                    <div class="col-md-6">
+                        <label for="dayTypeD" class="form-label">Day Type</label>
+                        <input type="text" name="dayTypeD" id="dayTypeD" class="form-control" required readonly />
                     </div>
-                    @*<div class="row">
-                        <div class="col-lg-12">
-                            <label for="descHeadE" class="form-label">Annotation</label>
-                            <textarea class="form-control" id="descHeadE" placeholder="Required annotation description." required></textarea>
-                            <div class="invalid-feedback">
-                                Required
-                            </div>
-                        </div>
-                    </div>*@
+                    <div class="col-md-6">
+                        <label for="paymentD" class="form-label">Payment</label>
+                        <input type="text" name="paymentD" id="paymentD" class="form-control" required readonly />
+                    </div>
+                    <div class="col-md-6">
+                        <label for="emailD" class="form-label">Email</label>
+                        <input type="email" name="emailD" id="emailD" class="form-control" required readonly />
+                    </div>
+                    <div class="col-md-6">
+                        <label for="phoneD" class="form-label">Phone</label>
+                        <input type="text" name="phoneD" id="phoneD" class="form-control" required readonly />
+                    </div>
+                    <div class="col-md-6">
+                        <label for="startTimeD" class="form-label">Start Time</label>
+                        <input type="datetime-local" name="startTimeD" id="startTimeD" class="form-control" required readonly />
+                    </div>
+                    <div class="col-md-6">
+                        <label for="endTimeD" class="form-label">End Time</label>
+                        <input type="datetime-local" name="endTimeD" id="endTimeD" class="form-control" required readonly />
+                    </div>
+                    <div class="col-md-12">
+                        <label for="overtimeReportD" class="form-label">Overtime Report</label>
+                        <input type="text" name="overtimeReportD" id="overtimeReportD" class="form-control" required readonly />
+                    </div>
+                    <div class="col-md-12">
+                        <label for="validationD" class="form-label">Validation Description</label>
+                        <input type="text" name="validationD" id="validationD" class="form-control" required readonly />
+                    </div>
                     <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                        @*<input type="submit" value="Rejected" name="Rejected" id="rejected" class="btn btn-danger" />*@
-                        @*<input type="submit" value="Validated" name="Validated" id="validated" class="btn btn-success" />*@
+                        @*<button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>*@
+                        
                     </div>
                 </form>
             </div>
@@ -82,7 +103,7 @@
                                 Required!
                             </div>
                         </div>
-                        <div class="col-md-6">
+                        @*<div class="col-md-6">
                             <label for="statusE" class="form-label">Approval Action</label>
                             <select name="university" id="statusE" class="form-select" required>
                                 <option value="">Select Action</option>
@@ -92,14 +113,13 @@
                             <div class="invalid-feedback">
                                 Required!
                             </div>
-                        </div>
-                        <br />
+                        </div>*@
                     </div>
                     <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                        <input type="submit" value="Submit" name="Submit" id="validated" class="btn btn-success" />
-                        @*<input type="submit" value="Rejected" name="Rejected" id="rejected" onclick="reject()" class="btn btn-danger" />*@
-                        @*<input type="submit" value="Validated" name="Validated" id="validated" onclick="valid()" class="btn btn-success" />*@
+                        @*<button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>*@
+                        @*<input type="submit" value="Submit" name="Submit" id="validated" class="btn btn-success" />*@
+                        <input type="submit" value="Rejected" name="Rejected" id="rejected" onclick="reject()" class="btn btn-danger" />
+                        <input type="submit" value="Validated" name="Validated" id="validated" onclick="valid()" class="btn btn-success" />
                     </div>
                 </form>
             </div>

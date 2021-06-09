@@ -64,8 +64,12 @@ $(document).ready(function () {
                 }
             },
             { "data": "nik" },
-            { "data": "firstName" },
-            { "data": "lastName" },
+            {
+                "data": null,
+                "render": function (data, type, row) {
+                    return row.firstName +" "+ row.lastName;
+                }
+            },
             {
                 "data": "phone", render: function (data, type, row) {
                     return '+62' + data.slice(1);
@@ -174,22 +178,31 @@ $("#myTable").on('click','#btnDetail', function () {
     console.log(data);
     //alert("tes aaaaaa dong bro");
     $("#staticBackdropLabel").text(data.firstName + " " + data.lastName);
-    $('#modalDetail').find(".modal-body").html("<p>NIK : " + data.nik
-        + "</p> <p>First Name : " + data.firstName
-        + "</p> <p>Last Name  : " + data.lastName
-        + "</p> <p>Gender     : " + data.gender
-        + "</p> <p>Role       : " + data.role
-        + "</p> <p>Phone      : " + data.phone
-        + "</p> <p>Birth Date : " + data.birthDate.slice(0,10)
-        + "</p> <p>Salary     : " + data.salary
-        + "</p> <p>Email      : " + data.email + "</p>");
+    //$('#modalDetail').find(".modal-body").html("<p>NIK : " + data.nik
+    //    + "</p> <p>First Name : " + data.firstName
+    //    + "</p> <p>Last Name  : " + data.lastName
+    //    + "</p> <p>Gender     : " + data.gender
+    //    + "</p> <p>Role       : " + data.role
+    //    + "</p> <p>Phone      : " + data.phone
+    //    + "</p> <p>Birth Date : " + data.birthDate.slice(0,10)
+    //    + "</p> <p>Salary     : " + data.salary
+    //    + "</p> <p>Email      : " + data.email + "</p>");
+    //$("#nikDA").val(data.nik);
+    $("#firstNameDA").val(data.firstName);
+    $("#lastNameDA").val(data.lastName);
+    $("#genderDA").val(data.gender);
+    $("#roleDA").val(data.role);
+    $("#phoneDA").val(data.phone);
+    $("#birthDateDA").val(data.birthDate.slice(0, 10));
+    $("#salaryDA").val(formatRupiah(data.salary.toString(), 'Rp. '));
+    $("#emailDA").val(data.email);
 });
 
 //UPDATE
 $("#myTable").on('click', '#btnEdit', function () {
     var data = $("#myTable").DataTable().row($(this).parents('tr')).data();
     //alert(data.nik);
-    $("#nikE").val(data.nik);
+    //$("#nikE").val(data.nik);
     $("#firstNameE").val(data.firstName);
     $("#lastNameE").val(data.lastName);
     $("#genderE").val(data.gender);
@@ -202,7 +215,7 @@ $("#myTable").on('click', '#btnEdit', function () {
     $("#editModal").on('submit', function (event) {
         event.preventDefault();
         var obj1 = new Object(); 
-        obj1.NIK = $("#nikE").val();
+        obj1.NIK = data.nik;
         obj1.FirstName = $("#firstNameE").val();
         obj1.LastName = $("#lastNameE").val();
         obj1.Gender = $("#genderE").val();

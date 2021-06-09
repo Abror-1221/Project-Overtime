@@ -1,11 +1,11 @@
-﻿var IdNik = 2;
+﻿
 
 $(document).ready(function () {
 
     var e = $('#employeeTable').DataTable({
 
         "ajax": {
-            "url": "/Accounts/GetUserOvertime/" + IdNik, //ngambil dari form login
+            "url": "/Accounts/GetUserOvertime/" + 2, //ngambil dari form login
 
             "datatype": "json",
             "dataSrc": "",
@@ -51,7 +51,9 @@ $(document).ready(function () {
             {
                 "data": "endTime", render: function (data, type, row) {
                     return data.slice(0, 10) + ", Time : " + data.slice(11);
-                } },
+                }
+            },
+            { "data": "statusName" },
             {
                 "data": null,
                 //"wrap": true,educationID 
@@ -61,8 +63,7 @@ $(document).ready(function () {
                         'data-bs-target="#modalDetailEmployeeOvertime"> Detail </button > ' +
                         '<button type="button" id="btnUpdateEmployee" class="btn btn-primary"> Update </button > '
                 }
-            },
-            { "data":"statusName"}
+            }
         ]
     });
     e.on('order.dt search.dt', function () {
@@ -105,9 +106,13 @@ $("#employeeTable").on('click', '#btnDetailOvertimeEmployee', function () {
     var data = $("#employeeTable").DataTable().row($(this).parents('tr')).data();
     console.log(data);
     //alert("tes aaaaaa dong bro");
-    $('#modalDetailEmployeeOvertime').find(".modal-body").html('<p>Day type               : ' + data.dayTypeName
-        + '</p> <p>Overtime Report        : ' + data.descEmp
-        + '</p> <p value="Unfilled">Validation Description : ' + data.descHead + '</p>');
+    //$('#modalDetailEmployeeOvertime').find(".modal-body").html('<p>Day type               : ' + data.dayTypeName
+    //    + '</p> <p>Overtime Report        : ' + data.descEmp
+    //    + '</p> <p value="Unfilled">Validation Description : ' + data.descHead + '</p>');
+
+    $("#dayTypeDE").val(data.dayTypeName);
+    $("#overtimeReportDE").val(data.descEmp);
+    $("#validationDescDE").val(data.descHead);
 });
 
 //Update Overtime

@@ -20,4 +20,18 @@ namespace Overtime_Project.ViewModels
         public int StatusId { get; set; }
         public string StatusName { get; set; }
     }
+
+    public class SendEmailVM
+    {
+        public string Email { get; set; }
+        public string FirstName { get; set; }
+        public string LastName { get; set; }
+        public DateTime Date { get; set; }
+        public DateTime StartTime { get; set; }
+        public DateTime EndTime { get; set; }
+        public string DescHead { get; set; }
+        public string DescEmp { get; set; }
+        public int StatusId { get; set; }
+        public string StatusName { get; set; }
+    }
 }
