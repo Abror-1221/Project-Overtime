@@ -40,17 +40,18 @@ $(document).ready(function () {
                     return meta.row + meta.settings._iDisplayStart + 1;
                 }
             },
+            {
+                "data": "date", render: function (data, type, row) {
+                    return data.slice(0, 10);
+                }
+            },
             { "data": "nik" },
             {
                 "data": null,
                 "render": function (data, type, row) {
                     return row.firstName + " " + row.lastName;
                 }},
-            {
-                "data": "date", render: function (data, type, row) {
-                    return data.slice(0, 10);
-                }
-            },
+            
             { "data": "statusName" },
             {
                 "data": null,
@@ -64,6 +65,7 @@ $(document).ready(function () {
             }
         ]
     });
+    $("#headOvertimeTable").ajax.reload(null, false);
     head.on('order.dt search.dt', function () {
         head.column(0, { search: 'applied', order: 'applied' }).nodes().each(function (cell, i) {
             cell.innerHTML = i + 1;
@@ -151,34 +153,35 @@ function formatRupiah(angka, prefix) {
 
 //Update v.2
 var dataHead = null;
-function reject() {
-    var obj2 = new Object();
-    obj2.Id = dataHead.id;
-    obj2.NIK = dataHead.nik;
-    obj2.Date = dataHead.date;
-    obj2.StartTime = dataHead.startTime;
-    obj2.EndTime = dataHead.endTime;
-    obj2.DescEmp = dataHead.descEmp;
-    obj2.DescHead = $("#descHeadE").val();
-    obj2.TotalReimburse = dataHead.totalReimburse
-    obj2.DayTypeId = dataHead.dayTypeId;
-    obj2.StatusId = 3;
+//function reject() {
+//    var obj2 = new Object();
+//    obj2.Id = dataHead.id;
+//    obj2.NIK = dataHead.nik;
+//    obj2.Date = dataHead.date;
+//    obj2.StartTime = dataHead.startTime;
+//    obj2.EndTime = dataHead.endTime;
+//    obj2.DescEmp = dataHead.descEmp;
+//    obj2.DescHead = $("#descHeadE").val();
+//    obj2.TotalReimburse = dataHead.totalReimburse
+//    obj2.DayTypeId = dataHead.dayTypeId;
+//    obj2.StatusId = 3;
 
-    $.ajax({
-        url: "https://localhost:44324/API/Overtime",
-        type: "PUT",
-        data: JSON.stringify(obj2),
-        headers: {
-            "content-type": "application/json;charset=UTF-8" // Or add this line
-        }
-    }).then((hasil) => {
-        $('#rejected').val("Rejected");
-        $('#editModalHead').modal('hide');
-        $("#headOvertimeTable").DataTable().ajax.reload();
-    })
-}
+//    $.ajax({
+//        url: "https://localhost:44324/API/validating",
+//        type: "PUT",
+//        data: JSON.stringify(obj2),
+//        headers: {
+//            "content-type": "application/json;charset=UTF-8" // Or add this line
+//        }
+//    }).then((hasil) => {
+//        $('#rejected').val("Rejected");
+//        $('#editModalHead').modal('hide');
+//        $("#headOvertimeTable").DataTable().ajax.reload();
+//    })
+//}
 
-function valid() {
+
+$("#editFormHead").on('click', '#validated', function () {
     var obj2 = new Object();
     obj2.Id = dataHead.id;
     obj2.NIK = dataHead.nik;
@@ -192,18 +195,76 @@ function valid() {
     obj2.StatusId = 2;
 
     $.ajax({
-        url: "https://localhost:44324/API/Overtime",
+        url: "https://localhost:44324/API/Overtime/validating",
         type: "PUT",
         data: JSON.stringify(obj2),
         headers: {
             "content-type": "application/json;charset=UTF-8" // Or add this line
-        }
-    }).then((hasil) => {
-        $('#validated').val("Validated");
+        
+    }, success: function (data) {
+           
+       
         $('#editModalHead').modal('hide');
         $("#headOvertimeTable").DataTable().ajax.reload();
+    }
     })
-}
+});
+
+$("#editFormHead").on('click', '#rejected', function () {
+    var obj2 = new Object();
+    obj2.Id = dataHead.id;
+    obj2.NIK = dataHead.nik;
+    obj2.Date = dataHead.date;
+    obj2.StartTime = dataHead.startTime;
+    obj2.EndTime = dataHead.endTime;
+    obj2.DescEmp = dataHead.descEmp;
+    obj2.DescHead = $("#descHeadE").val();
+    obj2.TotalReimburse = dataHead.totalReimburse
+    obj2.DayTypeId = dataHead.dayTypeId;
+    obj2.StatusId = 3;
+
+    $.ajax({
+        url: "https://localhost:44324/API/Overtime/validating",
+        type: "PUT",
+        data: JSON.stringify(obj2),
+        headers: {
+            "content-type": "application/json;charset=UTF-8" // Or add this line
+        }, success: function (data) {
+           
+        
+            $('#editModalHead').modal('hide');
+            $("#headOvertimeTable").DataTable().ajax.reload();
+        }
+    })
+    
+});
+
+//function valid() {
+//    var obj2 = new Object();
+//    obj2.Id = dataHead.id;
+//    obj2.NIK = dataHead.nik;
+//    obj2.Date = dataHead.date;
+//    obj2.StartTime = dataHead.startTime;
+//    obj2.EndTime = dataHead.endTime;
+//    obj2.DescEmp = dataHead.descEmp;
+//    obj2.DescHead = $("#descHeadE").val();
+//    obj2.TotalReimburse = dataHead.totalReimburse
+//    obj2.DayTypeId = dataHead.dayTypeId;
+//    obj2.StatusId = 2;
+
+//    $.ajax({
+//        url: "https://localhost:44324/API/Overtime/validating",
+//        type: "PUT",
+//        data: JSON.stringify(obj2),
+//        headers: {
+//            "content-type": "application/json;charset=UTF-8" // Or add this line
+//        }
+//    }).then((hasil) => {
+//        $('#validated').val("Validated");
+//        $('#editModalHead').modal('hide');
+//        $("#headOvertimeTable").DataTable().ajax.reload();
+//    })
+//}
 
 $("#headOvertimeTable").on('click', '#btnUpdateHead', function () {
     dataHead = $("#headOvertimeTable").DataTable().row($(this).parents('tr')).data();

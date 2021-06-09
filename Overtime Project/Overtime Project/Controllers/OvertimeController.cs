@@ -255,102 +255,32 @@ namespace Overtime_Project.Controllers
             }
             return NotFound();
         }
-
-        [HttpPost("SendEmaiOvertime")]
-        public ActionResult SendMailOvertime(SendEmailVM change)
+        [HttpPut("validating")]
+        public ActionResult Validating(Overtime overtime)
         {
-            if (change.Email != null)
+            try
             {
-                if (change.Email != "")
-                {
-                    string nik = null;
-                    IEnumerable<Person> person = overtimeContext.Person.ToList();
-                    foreach (Person p in person)
-                    {
-                        if (p.Email == change.Email)
-                        {
-                            nik = p.NIK;
-                            break;
-                        }
-                        else
-                        {
-                            continue;
-                        }
-                    }
 
-                    if (nik != null)
-                    {
-                        var cekPerson = overtimeContext.Person.Find(nik);
-                        var cekAccount2 = overtimeContext.Account.Find(nik);
-                        if(change.StatusId == 1)
-                        {
-                            DateTime d = DateTime.Now;
-                            MailMessage mm = new MailMessage();
-                            mm.From = new MailAddress("developit9@gmail.com");
-                            mm.To.Add(new MailAddress(change.Email));
-                            mm.Subject = $"[OVERTIME REQUEST] {d.ToString("dd-MM-yyyy")}";
-                            mm.Body = $"Hello {cekPerson.FirstName} {cekPerson.LastName}.\n{change.FirstName} {change.LastName} need your validation overtime...";
-                            mm.IsBodyHtml = false;
-                            SmtpClient smtp = new SmtpClient("smtp.gmail.com");
-                            smtp.Port = 587;
-                            smtp.EnableSsl = true;
-                            smtp.UseDefaultCredentials = false;
-                            smtp.Credentials = new NetworkCredential("developit9@gmail.com", "Sembilan!@9");
-                            smtp.DeliveryMethod = SmtpDeliveryMethod.Network;
-                            smtp.Send(mm);
-                            return Ok("Email sent...");
-                        }
-                        else if(change.StatusId == 2)
-                        {
-                            DateTime d = DateTime.Now;
-                            MailMessage mm = new MailMessage();
-                            mm.From = new MailAddress("developit9@gmail.com");
-                            mm.To.Add(new MailAddress(change.Email));
-                            mm.Subject = $"[OVERTIME VALIDATED] {d.ToString("dd-MM-yyyy")}";
-                            mm.Body = $"Hello {cekPerson.FirstName} {cekPerson.LastName}.\n your overtime validation request has been validated\nOvertime date : {change.StartTime} - {change.EndTime}\nValidation Description : {change.DescHead}";
-                            mm.IsBodyHtml = false;
-                            SmtpClient smtp = new SmtpClient("smtp.gmail.com");
-                            smtp.Port = 587;
-                            smtp.EnableSsl = true;
-                            smtp.UseDefaultCredentials = false;
-                            smtp.Credentials = new NetworkCredential("developit9@gmail.com", "Sembilan!@9");
-                            smtp.DeliveryMethod = SmtpDeliveryMethod.Network;
-                            smtp.Send(mm);
-                            return Ok("Email sent...");
-                        }
-                        else
-                        {
-                            DateTime d = DateTime.Now;
-                            MailMessage mm = new MailMessage();
-                            mm.From = new MailAddress("developit9@gmail.com");
-                            mm.To.Add(new MailAddress(change.Email));
-                            mm.Subject = $"[OVERTIME REJECTED] {d.ToString("dd-MM-yyyy")}";
-                            mm.Body = $"Hello {cekPerson.FirstName} {cekPerson.LastName}.\n your overtime validation request has been rejected\nOvertime date : {change.StartTime} - {change.EndTime}\nRejection Description : {change.DescHead}";
-                            mm.IsBodyHtml = false;
-                            SmtpClient smtp = new SmtpClient("smtp.gmail.com");
-                            smtp.Port = 587;
-                            smtp.EnableSsl = true;
-                            smtp.UseDefaultCredentials = false;
-                            smtp.Credentials = new NetworkCredential("developit9@gmail.com", "Sembilan!@9");
-                            smtp.DeliveryMethod = SmtpDeliveryMethod.Network;
-                            smtp.Send(mm);
-                            return Ok("Email sent...");
-                        }
-                    }
-                    else
-                    {
-                        return StatusCode(400, new { status = HttpStatusCode.Forbidden, message = "Error : Email is not registered..." });
-                    }
-                }
-                else
-                {
-                    return StatusCode(400, new { status = HttpStatusCode.Forbidden, message = "Error : No Email input..." });
-                }
+                overtimeContext.Overtime.Update(overtime);
+                var myPerson = overtimeContext.Person.FirstOrDefault(i => i.NIK == overtime.NIK);
+                var validate = overtimeContext.SaveChanges();
+                var status = overtimeContext.Status.FirstOrDefault(i => i.Id == overtime.StatusId);
+                var myHead = overtimeContext.RoleAccount.FirstOrDefault(i => i.RoleId == 2);
+                //var myHeadAcc = overtimeContext.Account.FirstOrDefault(u => u.NIK == myHead.NIK);
+                var myHeadPerson = overtimeContext.Person.FirstOrDefault(u => u.NIK == myHead.NIK);
+
+                var subject = $"{status.Name} request lembur";
+                var body = $"Hello {myPerson.FirstName}!\n Request validasi lembur anda pada tanggal {overtime.Date} telah di tinjau oleh Head Department!\n Deskripsi lembur: {overtime.DescEmp}\n Deskripsi validasi: {overtime.DescHead} \n Validation Status : {status.Name} \n Untuk keterangan lebih lanjut silahkan hubungi Head Department pada email: {myHeadPerson.Email}\n Terima kasih dan Selamat Bekerja.";
+                sendMail.SendEmail(myPerson.Email, body, subject);
+                //return StatusCode(200, new { status = HttpStatusCode.OK, message = "Requested for validation" });
+
+                return StatusCode(200, new { status = HttpStatusCode.OK, message = "Validation success" });
             }
-            else
+            catch (Exception)
             {
-                return StatusCode(400, new { status = HttpStatusCode.Forbidden, message = "Error : No Email input..." });
+                return StatusCode(400, new { status = HttpStatusCode.NotModified, message = "Error : Data not updated" });
             }
         }
+
     }
 }
