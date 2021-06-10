@@ -104,12 +104,12 @@
             <div class="modal-body">
                 <form method="post" id="editFormUpdateAdmin" class="row needs-validation" novalidate>
                     @*<div class="col-md-6">
-                        <label for="nikE" class="form-label">NIK :</label>
-                        <input type="text" name="nikE" class="form-control" id="nikE" pattern="[0-9]+" required readonly />
-                        <div class="invalid-feedback">
-                            Please provide a NIK (only number character)
-                        </div>
-                    </div>*@
+            <label for="nikE" class="form-label">NIK :</label>
+            <input type="text" name="nikE" class="form-control" id="nikE" pattern="[0-9]+" required readonly />
+            <div class="invalid-feedback">
+                Please provide a NIK (only number character)
+            </div>
+        </div>*@
                     <div class="col-md-4">
                         <label for="firstNameE" class="form-label">First Name :</label>
                         <input type="text" name="firstNameE" id="firstNameE" class="form-control" pattern="[a-zA-Z]+" required />
@@ -159,6 +159,13 @@
                     <div class="col-md-6 mt-2">
                         <label for="emailE" class="form-label">Email :</label>
                         <input type="email" name="emailE" id="emailE" class="form-control" required placeholder="email@example.com" />
+                        <div class="invalid-feedback">
+                            Required
+                        </div>
+                    </div>
+                    <div class="col-md-4 mt-2">
+                        <label for="overtimeHourE" class="form-label">Overtime Allowance :</label>
+                        <input type="number" name="overtimeHourE" id="overtimeHourE" class="form-control" required />
                         <div class="invalid-feedback">
                             Required
                         </div>

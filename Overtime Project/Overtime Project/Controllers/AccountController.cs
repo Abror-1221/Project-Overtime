@@ -82,7 +82,8 @@ namespace Overtime_Project.Controllers
                            Phone = p.Phone,
                            BirthDate = p.BirthDate,
                            Salary = p.Salary,
-                           Email = p.Email
+                           Email = p.Email,
+                           OvertimeHour = p.OvertimeHour
                        };
 
             return Ok(await data.ToListAsync());
@@ -108,6 +109,7 @@ namespace Overtime_Project.Controllers
                         BirthDate = registerVM.BirthDate,
                         Salary = registerVM.Salary,
                         Email = registerVM.Email,
+                        OvertimeHour = 14,
                         IsDeleted = 0
                     };
                     overtimeContext.Person.Add(person);

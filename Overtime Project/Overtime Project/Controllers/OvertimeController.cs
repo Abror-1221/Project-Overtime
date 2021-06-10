@@ -161,7 +161,7 @@ namespace Overtime_Project.Controllers
             var totalReimburse = 0;
             var hour = 0;
             var daytype = 0;
-
+            var hourOvertime = 0;
             //var myHead = from p in overtimeContext.Person
             //             join a in overtimeContext.Account on p.NIK equals a.NIK
             //             join ra in overtimeContext.RoleAccount on a.NIK equals ra.NIK
@@ -178,26 +178,27 @@ namespace Overtime_Project.Controllers
             var myPerson = overtimeContext.Person.FirstOrDefault(u => u.NIK == NIK);
             if (myPerson != null)
             {
-
+                hourOvertime = (int)Math.Ceiling(Convert.ToDouble((reqOvertimeVM.EndTime.TimeOfDay - reqOvertimeVM.StartTime.TimeOfDay).TotalHours));
                 hour = (int)Math.Ceiling(Convert.ToDouble((reqOvertimeVM.EndTime - reqOvertimeVM.StartTime).TotalHours));
-                if (reqOvertimeVM.StartTime.DayOfWeek == DayOfWeek.Sunday || reqOvertimeVM.StartTime.DayOfWeek == DayOfWeek.Saturday)
+                if ((reqOvertimeVM.StartTime.DayOfWeek == DayOfWeek.Sunday || reqOvertimeVM.StartTime.DayOfWeek == DayOfWeek.Saturday) && myPerson.OvertimeHour >= hourOvertime)
                 {
-                    if (hour <= 8)
+                    
+                    if (hourOvertime <= 8)
                     {
-                        totalReimburse += (int)Math.Ceiling((double)hour * 2 / 173 * myPerson.Salary);
+                        totalReimburse += (int)Math.Ceiling((double)hourOvertime * 2 / 173 * myPerson.Salary);
                     }
                     else
                     {
                         totalReimburse += (int)Math.Ceiling(8.0 * 2 / 173 * (double)myPerson.Salary);
                         totalReimburse += (int)Math.Ceiling(3.0 / 173 * (double)myPerson.Salary);
-                        for (int i=2 ; i <= hour-8 ; i++)
+                        for (int i=2 ; i <= hourOvertime - 8 ; i++)
                         {
                             totalReimburse += (int)Math.Ceiling(4.0 / 173 * (double)myPerson.Salary);
                         }
                     }
                     daytype = 1;
                 }
-                else if (reqOvertimeVM.StartTime.DayOfWeek != DayOfWeek.Sunday || reqOvertimeVM.StartTime.DayOfWeek != DayOfWeek.Saturday)
+                else if ((reqOvertimeVM.StartTime.DayOfWeek != DayOfWeek.Sunday || reqOvertimeVM.StartTime.DayOfWeek != DayOfWeek.Saturday) && myPerson.OvertimeHour >= hourOvertime)
                 {
                     totalReimburse = (int)Math.Ceiling(1.5 / 173 * myPerson.Salary);
                     for (int i = 1; i <= hour - 1; i++)

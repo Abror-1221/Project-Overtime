@@ -107,6 +107,7 @@ $('#insert_form').on("submit", function (event) {
     obj.Phone = $("#phone").val();
     obj.BirthDate = $("#bdate").val();
     obj.Salary = parseInt($("#salary").val(), 10);
+    obj.OvertimeHour = 14;
     obj.Email = $("#email").val();
     obj.Password = $("#password").val();
 
@@ -209,6 +210,7 @@ $("#myTable").on('click', '#btnEdit', function () {
     $("#phoneE").val(data.phone);
     $("#birthDateE").val(data.birthDate.slice(0,10));
     $("#salaryE").val(data.salary);
+    $("#overtimeHourE").val(data.overtimeHour);
     $("#emailE").val(data.email);
     $("#editModal").modal("show");
 
@@ -222,6 +224,7 @@ $("#myTable").on('click', '#btnEdit', function () {
         obj1.Phone = $("#phoneE").val();
         obj1.BirthDate = $("#birthDateE").val();
         obj1.Salary = $("#salaryE").val();
+        obj1.OvertimeHour = $("#overtimeHourE").val();
         obj1.Email = $("#emailE").val();
         obj1.IsDeleted = 0;
         

@@ -80,6 +80,7 @@ $('#request_form').on("submit", function (event) {
 
     var dateOvertime = $("#demo-calendar").val();
     var timeOvertime = $("#demo-time").val();
+    
     var dateRequest = new Date();
     var obj = new Object(); //sesuaikan sendiri nama objectnya dan beserta isinya
     //obj.Date = $("#date").val();
@@ -93,20 +94,20 @@ $('#request_form').on("submit", function (event) {
     console.log(obj.EndTime);
     //obj.DayTypeId = $("#day").val();
     obj.StatusId = 1;
-    $.ajax({
-        url: "https://localhost:44324/API/Overtime/ReqOvertime/" + IdNik,
-        type: "POST",
-        data: JSON.stringify(obj),
-        headers: {
-            "content-type": "application/json;charset=UTF-8" // Or add this line
-        }, success: function (data) {
-            alert("done");
-            $('#request_form')[0].reset();
-            $('#request').val("Request");
-            $('#staticBackdropEmployeeOvertime').modal('hide');
-            $("#employeeTable").DataTable().ajax.reload();
-        }
-    })
+    //$.ajax({
+    //    url: "https://localhost:44324/API/Overtime/ReqOvertime/" + IdNik,
+    //    type: "POST",
+    //    data: JSON.stringify(obj),
+    //    headers: {
+    //        "content-type": "application/json;charset=UTF-8" // Or add this line
+    //    }, success: function (data) {
+    //        alert("done");
+    //        $('#request_form')[0].reset();
+    //        $('#request').val("Request");
+    //        $('#staticBackdropEmployeeOvertime').modal('hide');
+    //        $("#employeeTable").DataTable().ajax.reload();
+    //    }
+    //})
 });
 
 mobiscroll.setOptions({
