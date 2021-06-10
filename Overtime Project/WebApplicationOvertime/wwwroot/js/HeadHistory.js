@@ -45,8 +45,11 @@ $(document).ready(function () {
                 }
             },
             { "data": "nik" },
-            { "data": "firstName" },
-            { "data": "lastName" },
+            {
+                "data": null,
+                "render": function (data, type, row) {
+                    return row.firstName + " " + row.lastName;
+                }},
             { "data": "statusName" },
             {
                 "data": null,

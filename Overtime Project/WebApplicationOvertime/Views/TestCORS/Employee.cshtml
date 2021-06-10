@@ -85,7 +85,7 @@
             </div>
             <div class="modal-body">
                 <form class="row g-3 needs-validation" method="post" id="request_form" novalidate>
-                    <div class="col-md-6">
+                    @*<div class="col-md-6">
                         <label for="date" class="form-label">Date Request</label>
                         <input type="date" class="form-control" id="date" required>
                         <div class="invalid-feedback">
@@ -103,8 +103,8 @@
                         <div class="invalid-feedback">
                             Required!
                         </div>
-                    </div>
-                    <div class="col-md-12">
+                    </div>*@
+                    @*<div class="col-md-12">
                         <label for="startTime" class="form-label">Start Time</label>
                         <input type="datetime-local" class="form-control" id="startTime" required>
                         <div class="invalid-feedback">
@@ -114,6 +114,24 @@
                     <div class="col-md-12">
                         <label for="endTime" class="form-label">End Time</label>
                         <input type="datetime-local" class="form-control" id="endTime" required>
+                        <div class="invalid-feedback">
+                            Required!
+                        </div>
+                    </div>*@
+                    <div class="col-md-12">
+                        <label>
+                            Date
+                            <input id="demo-calendar" mbsc-input data-input-style="outline" data-label-style="stacked" placeholder="Please select..." required/>
+                        </label>
+                        <div class="invalid-feedback">
+                            Required!
+                        </div>
+                    </div>
+                    <div class="col-md-12">
+                        <label>
+                            Time
+                            <input id="demo-time" mbsc-input data-input-style="outline" data-label-style="stacked" placeholder="Please select..." />
+                        </label>
                         <div class="invalid-feedback">
                             Required!
                         </div>

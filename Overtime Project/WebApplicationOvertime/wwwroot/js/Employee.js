@@ -1,4 +1,4 @@
-﻿var IdNik = "rsendusr";//asasaff
+﻿var IdNik = 2;//asasaff
 
 $(document).ready(function () {
 
@@ -78,14 +78,20 @@ $(document).ready(function () {
 $('#request_form').on("submit", function (event) {
     event.preventDefault();
 
+    var dateOvertime = $("#demo-calendar").val();
+    var timeOvertime = $("#demo-time").val();
+    var dateRequest = new Date();
     var obj = new Object(); //sesuaikan sendiri nama objectnya dan beserta isinya
-    obj.Date = $("#date").val();
-    obj.StartTime = $("#startTime").val();
-    obj.EndTime = $("#endTime").val();
+    //obj.Date = $("#date").val();
+    //obj.Date = dateRequest.getMonth() + "/" + dateRequest.getDate() + "/" + dateRequest.getFullYear();
+    //obj.StartTime = $("#startTime").val();
+    //obj.EndTime = $("#endTime").val();
+    obj.StartTime = dateOvertime.slice(0, 10) + " " + timeOvertime.slice(0, 7);
+    obj.EndTime = dateOvertime.slice(13) + " " + timeOvertime.slice(10);
     obj.DescEmp = $("#descEmp").val();
-    obj.DayTypeId = $("#day").val();
+    //obj.DayTypeId = $("#day").val();
+    obj.DayTypeId = 1;
     obj.StatusId = 1;
-
     $.ajax({
         url: "https://localhost:44324/API/Overtime/ReqOvertime/" + IdNik,
         type: "POST",
@@ -102,6 +108,21 @@ $('#request_form').on("submit", function (event) {
     })
 });
 
+mobiscroll.setOptions({
+    theme: 'ios',
+    themeVariant: 'light'
+});
+
+mobiscroll.datepicker('#demo-calendar', {
+    controls: ['calendar'],
+    select: 'range',
+    display: 'anchored'
+});
+mobiscroll.datepicker('#demo-time', {
+    controls: ['time'],
+    select: 'range',
+    display: 'anchored'
+});
 //Detail
 $("#employeeTable").on('click', '#btnDetailOvertimeEmployee', function () {
     var data = $("#employeeTable").DataTable().row($(this).parents('tr')).data();

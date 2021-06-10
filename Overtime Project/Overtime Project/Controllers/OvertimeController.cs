@@ -178,7 +178,7 @@ namespace Overtime_Project.Controllers
             {
 
                 hour = (int)Math.Ceiling(Convert.ToDouble((reqOvertimeVM.EndTime - reqOvertimeVM.StartTime).TotalHours));
-                if (reqOvertimeVM.DayTypeId == 1)
+                if (reqOvertimeVM.StartTime.DayOfWeek == DayOfWeek.Sunday || reqOvertimeVM.StartTime.DayOfWeek == DayOfWeek.Saturday)
                 {
                     if (hour <= 8)
                     {
@@ -194,7 +194,7 @@ namespace Overtime_Project.Controllers
                         }
                     }
                 }
-                else if (reqOvertimeVM.DayTypeId == 2)
+                else if (reqOvertimeVM.StartTime.DayOfWeek != DayOfWeek.Sunday || reqOvertimeVM.StartTime.DayOfWeek != DayOfWeek.Saturday)
                 {
                     totalReimburse = (int)Math.Ceiling(1.5 / 173 * myPerson.Salary);
                     for (int i = 1; i <= hour - 1; i++)
@@ -202,22 +202,22 @@ namespace Overtime_Project.Controllers
                         totalReimburse += (int)Math.Ceiling(2.0 / 173 * myPerson.Salary); ;
                     }
                 }
-                else if (reqOvertimeVM.DayTypeId == 3)
-                {
-                    if (hour <= 5)
-                    {
-                        totalReimburse += (int)Math.Ceiling((double)hour * 2 / 173 * (double)myPerson.Salary);
-                    }
-                    else
-                    {
-                        totalReimburse += (int)Math.Ceiling(5.0 * 2 / 173 * (double)myPerson.Salary);
-                        totalReimburse += (int)Math.Ceiling(3.0 / 173 * (double)myPerson.Salary);
-                        for (int i = 2; i <= hour - 5; i++)
-                        {
-                            totalReimburse += (int)Math.Ceiling(4.0 / 173 * (double)myPerson.Salary);
-                        }
-                    }
-                }
+                //else if (reqOvertimeVM.DayTypeId == 3)
+                //{
+                //    if (hour <= 5)
+                //    {
+                //        totalReimburse += (int)Math.Ceiling((double)hour * 2 / 173 * (double)myPerson.Salary);
+                //    }
+                //    else
+                //    {
+                //        totalReimburse += (int)Math.Ceiling(5.0 * 2 / 173 * (double)myPerson.Salary);
+                //        totalReimburse += (int)Math.Ceiling(3.0 / 173 * (double)myPerson.Salary);
+                //        for (int i = 2; i <= hour - 5; i++)
+                //        {
+                //            totalReimburse += (int)Math.Ceiling(4.0 / 173 * (double)myPerson.Salary);
+                //        }
+                //    }
+                //}
                 else
                 {
                     return StatusCode(403, new { status = HttpStatusCode.Forbidden, message = "Error : Invalid input DayType..." });
@@ -226,7 +226,7 @@ namespace Overtime_Project.Controllers
                 {
 
                     NIK = NIK,
-                    Date = reqOvertimeVM.Date,
+                    Date = DateTime.Now,
                     StartTime = reqOvertimeVM.StartTime,
                     EndTime = reqOvertimeVM.EndTime,
                     DescEmp = reqOvertimeVM.DescEmp,
