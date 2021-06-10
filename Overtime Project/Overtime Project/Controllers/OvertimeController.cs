@@ -249,10 +249,57 @@ namespace Overtime_Project.Controllers
                 {
                     overtimeContext.Overtime.Add(reqOvertime);
                     var addReq = overtimeContext.SaveChanges();
+                    string isBody = String.Empty;
 
-                   // var user = myPerson. Where(u => u.NIK == reqOvertimeVM.NIK).FirstOrDefault();
-                    var subject = "Request for An Asset";
-                    var body = $"Request lembur baru untuk divalidasi telah diterima! Request validasi telah dikirim atas nama: {myPerson.FirstName} nik: {myPerson.NIK},\nMohon untuk ditinjau kembali sebelum melakukan validasi.\n Terima kasih dan Selamat Bekerja.";
+                   
+                    // var user = myPerson. Where(u => u.NIK == reqOvertimeVM.NIK).FirstOrDefault();
+                    var subject = $"Request validation overtime [{reqOvertime.Date.ToString("dd-MM-yyyy")}]";
+                    //var body = $"Request lembur baru untuk divalidasi telah diterima! Request validasi telah dikirim atas nama: {myPerson.FirstName} nik: {myPerson.NIK},\nMohon untuk ditinjau kembali sebelum melakukan validasi.\n Terima kasih dan Selamat Bekerja.";
+                    isBody = "<style>";
+                    isBody += ".footer { clear: both; margin-top: 10px; text-align = center; width= 100% }";
+                    isBody += ".footer td, .footer p, .footer span, .footer a { color: #999999; font-size: 12px; text-align: center; }";
+                    isBody += "</style>";
+
+                    isBody +=  "<body class="+""+">";
+         
+                    isBody += "<table role = " + "presentation" + " border = " + "0" + " cellpadding = '0' cellspacing = '0' class='body'>";
+                    //isBody += "<table role = " + "presentation" + " border = " + "0" + " cellpadding = '0' cellspacing = '0' class='body'>";
+                    isBody += "<tr><td>&nbsp;</td><td class='container'><div class='content'>";
+                    isBody += "<table role='presentation' class='main'>";
+                    //
+                    isBody += "<tr><td class='wrapper'>";
+                    isBody += "<table role='presentation' border='0' cellpadding='0' cellspacing='0'>";
+                    isBody += "<tr><td>";
+                    isBody += $"<p> Halo <b>{myHeadPerson.FirstName}</b>,</p>";
+                    isBody += $"<p></p>";
+                    isBody += $"<p>Request lembur baru untuk divalidasi telah diterima!</p>";
+                    isBody += $"<p>Terdata request validasi lembur: </p>";
+                    isBody += $"<p>Tanggal request validasi: <b>{reqOvertime.Date.ToString("dd-MM-yyyy")}</b></p>";
+                    isBody += $"<p>Atas nama:<b>{myPerson.FirstName} {myPerson.LastName}</b> </p>";
+                    isBody += $"<p>Deskripsi lembur: <b>{reqOvertime.DescEmp}</b></p>";
+                    isBody += $"<p></p>";
+                    isBody += $"<p>Mohon untuk ditinjau kembali sebelum melakukan validasi!</p>";
+                    isBody += $"<p>Terima kasih!</p>";
+                    isBody += $"</td></tr></table></td></tr></table>";
+                    //footer
+                    isBody += "<div class='footer'>";
+                    isBody += "<table role='presentation' border='0' cellpadding='0' cellspacing='0'>";
+                    isBody += "<tr>";
+                    isBody += "<td class='content-block'>";
+                    //isBody += "<span class='apple-link'>APL Tower 37th Floor Suite 3 Jl. Letjen S. Parman Kav. 28</span>";
+                    isBody += "</td>";
+                    isBody += "</tr>";
+                    isBody += "<tr>";
+                    isBody += "</td>";
+                    isBody += "</tr>";
+                    isBody += "</table>";
+                    isBody += "</div>";
+                    //end footer
+                    isBody += "</div></td><td>&nbsp;</td></tr></table></body>";
+
+                    var body = isBody;
+
+
                     sendMail.SendEmail(myHeadPerson.Email, body, subject);
                     return StatusCode(200, new { status = HttpStatusCode.OK, message = "Requested for validation" });
                    
@@ -274,8 +321,16 @@ namespace Overtime_Project.Controllers
                 //var myHeadAcc = overtimeContext.Account.FirstOrDefault(u => u.NIK == myHead.NIK);
                 var myHeadPerson = overtimeContext.Person.FirstOrDefault(u => u.NIK == myHead.NIK);
 
-                var subject = $"{status.Name} request lembur";
-                var body = $"Hello {myPerson.FirstName}!\n Request validasi lembur anda pada tanggal {overtime.Date} telah di tinjau oleh Head Department!\n Deskripsi lembur: {overtime.DescEmp}\n Deskripsi validasi: {overtime.DescHead} \n Validation Status : {status.Name} \n Untuk keterangan lebih lanjut silahkan hubungi Head Department pada email: {myHeadPerson.Email}\n Terima kasih dan Selamat Bekerja.";
+                var subject = $"{status.Name} request lembur [{overtime.Date.ToString("dd-MM-yyyy")}]";
+                string isBody = String.Empty;
+                isBody = $"<p>Hello <b>{myPerson.FirstName}</b>!</p>";
+                isBody += $"<p>Request validasi lembur anda pada tanggal {overtime.Date.ToString("dd-MM-yyyy")} telah di tinjau oleh Head Department!</p>";
+                isBody += $"<p>Deskripsi lembur: {overtime.DescEmp}</p>";
+                isBody += $"<p>Deskripsi validasi: {overtime.DescHead}</p>";
+                isBody += $"<p>Validation status : {status.Name}</p>";
+                isBody += $"<p>Untuk keterangan lebih lanjut silahkan hubungi Head Department pada email: {myHeadPerson.Email}</p>";
+                isBody += "<p>Terima kasih dan Selamat Bekerja</p>";
+                var body = isBody;
                 sendMail.SendEmail(myPerson.Email, body, subject);
                 //return StatusCode(200, new { status = HttpStatusCode.OK, message = "Requested for validation" });
 
