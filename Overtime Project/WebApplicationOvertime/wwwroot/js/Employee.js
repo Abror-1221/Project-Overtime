@@ -1,4 +1,4 @@
-﻿var IdNik = 2;//asasaff
+﻿var IdNik = "rsendusr";//asasaff
 
 $(document).ready(function () {
 
@@ -80,18 +80,24 @@ $('#request_form').on("submit", function (event) {
 
     var dateOvertime = $("#demo-calendar").val();
     var timeOvertime = $("#demo-time").val();
-    
+    var tes = timeOvertime.split('-')[0];
+    var tes2 = timeOvertime.split('-')[1];
+    //if(tes2.lenght == )
     var dateRequest = new Date();
     var obj = new Object(); //sesuaikan sendiri nama objectnya dan beserta isinya
     //obj.Date = $("#date").val();
     //obj.Date = dateRequest.getMonth() + "/" + dateRequest.getDate() + "/" + dateRequest.getFullYear();
     //obj.StartTime = $("#startTime").val();
     //obj.EndTime = $("#endTime").val();
-    obj.StartTime = dateOvertime.slice(0, 10) + " " + timeOvertime.slice(0, 8);
-    obj.EndTime = dateOvertime.slice(13) + " " + timeOvertime.slice(11);
+    obj.StartTime = dateOvertime.slice(0, 10) + " " + tes;
+    //obj.StartTime = dateOvertime.slice(0, 10) + " " + timeOvertime.slice(0, 8);
+   // obj.EndTime = dateOvertime.slice(13) + " " + timeOvertime.slice(11);
+    obj.EndTime = dateOvertime.slice(13) + tes2;
     obj.DescEmp = $("#descEmp").val();
     console.log(obj.StartTime);
     console.log(obj.EndTime);
+    //console.log(tes);
+    //console.log(tes2);
     //obj.DayTypeId = $("#day").val();
     obj.StatusId = 1;
     //$.ajax({

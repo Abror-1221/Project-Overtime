@@ -1,4 +1,4 @@
-﻿var IdNik = 2;
+﻿var IdNik = "rsendusr";
 
 $(document).ready(function () {
 
