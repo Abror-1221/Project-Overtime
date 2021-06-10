@@ -86,11 +86,12 @@ $('#request_form').on("submit", function (event) {
     //obj.Date = dateRequest.getMonth() + "/" + dateRequest.getDate() + "/" + dateRequest.getFullYear();
     //obj.StartTime = $("#startTime").val();
     //obj.EndTime = $("#endTime").val();
-    obj.StartTime = dateOvertime.slice(0, 10) + " " + timeOvertime.slice(0, 7);
-    obj.EndTime = dateOvertime.slice(13) + " " + timeOvertime.slice(10);
+    obj.StartTime = dateOvertime.slice(0, 10) + " " + timeOvertime.slice(0, 8);
+    obj.EndTime = dateOvertime.slice(13) + " " + timeOvertime.slice(11);
     obj.DescEmp = $("#descEmp").val();
+    console.log(obj.StartTime);
+    console.log(obj.EndTime);
     //obj.DayTypeId = $("#day").val();
-    obj.DayTypeId = 1;
     obj.StatusId = 1;
     $.ajax({
         url: "https://localhost:44324/API/Overtime/ReqOvertime/" + IdNik,

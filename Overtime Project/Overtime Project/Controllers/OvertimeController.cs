@@ -160,6 +160,8 @@ namespace Overtime_Project.Controllers
         {
             var totalReimburse = 0;
             var hour = 0;
+            var daytype = 0;
+
             //var myHead = from p in overtimeContext.Person
             //             join a in overtimeContext.Account on p.NIK equals a.NIK
             //             join ra in overtimeContext.RoleAccount on a.NIK equals ra.NIK
@@ -193,6 +195,7 @@ namespace Overtime_Project.Controllers
                             totalReimburse += (int)Math.Ceiling(4.0 / 173 * (double)myPerson.Salary);
                         }
                     }
+                    daytype = 1;
                 }
                 else if (reqOvertimeVM.StartTime.DayOfWeek != DayOfWeek.Sunday || reqOvertimeVM.StartTime.DayOfWeek != DayOfWeek.Saturday)
                 {
@@ -201,6 +204,7 @@ namespace Overtime_Project.Controllers
                     {
                         totalReimburse += (int)Math.Ceiling(2.0 / 173 * myPerson.Salary); ;
                     }
+                    daytype = 2;
                 }
                 //else if (reqOvertimeVM.DayTypeId == 3)
                 //{
@@ -232,7 +236,7 @@ namespace Overtime_Project.Controllers
                     DescEmp = reqOvertimeVM.DescEmp,
                     DescHead = reqOvertimeVM.DescHead,
                     TotalReimburse = totalReimburse,
-                    DayTypeId = reqOvertimeVM.DayTypeId,
+                    DayTypeId = daytype,
                     StatusId = reqOvertimeVM.StatusId
                     
                 };
