@@ -127,7 +127,6 @@ $('#insert_form').on("submit", function (event) {
     })
 });
 
-
 //delete
 $("#myTable").on('click', '#btnDel', function () {
     Swal.fire({

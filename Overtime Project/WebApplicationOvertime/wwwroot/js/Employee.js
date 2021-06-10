@@ -1,4 +1,4 @@
-﻿var IdNik = "rsendusr";//asasaff
+﻿var IdNik = "2";//asasaff
 
 $(document).ready(function () {
 
@@ -100,20 +100,20 @@ $('#request_form').on("submit", function (event) {
     //console.log(tes2);
     //obj.DayTypeId = $("#day").val();
     obj.StatusId = 1;
-    //$.ajax({
-    //    url: "https://localhost:44324/API/Overtime/ReqOvertime/" + IdNik,
-    //    type: "POST",
-    //    data: JSON.stringify(obj),
-    //    headers: {
-    //        "content-type": "application/json;charset=UTF-8" // Or add this line
-    //    }, success: function (data) {
-    //        alert("done");
-    //        $('#request_form')[0].reset();
-    //        $('#request').val("Request");
-    //        $('#staticBackdropEmployeeOvertime').modal('hide');
-    //        $("#employeeTable").DataTable().ajax.reload();
-    //    }
-    //})
+    $.ajax({
+        url: "https://localhost:44324/API/Overtime/ReqOvertime/" + IdNik,
+        type: "POST",
+        data: JSON.stringify(obj),
+        headers: {
+            "content-type": "application/json;charset=UTF-8" // Or add this line
+        }, success: function (data) {
+            alert("done");
+            $('#request_form')[0].reset();
+            $('#request').val("Request");
+            $('#staticBackdropEmployeeOvertime').modal('hide');
+            $("#employeeTable").DataTable().ajax.reload();
+        }
+    })
 });
 
 mobiscroll.setOptions({

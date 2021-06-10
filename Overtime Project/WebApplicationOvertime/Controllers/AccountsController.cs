@@ -30,7 +30,18 @@ namespace WebApplicationOvertime.Controllers
             var result = await repository.GetUserData();
             return Json(result);
         }
-
+        public IActionResult AdminProfile()
+        {
+            return View("/Views/TestCORS/AdminProfile.cshtml");
+        }
+        public IActionResult HeadProfile()
+        {
+            return View("/Views/TestCORS/HeadProfile.cshtml");
+        }
+        public IActionResult EmployeeProfile()
+        {
+            return View("/Views/TestCORS/EmployeeProfile.cshtml");
+        }
         public IActionResult Head()
         {
             return View("/Views/TestCORS/Head.cshtml");
