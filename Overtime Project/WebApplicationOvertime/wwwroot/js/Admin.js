@@ -140,15 +140,17 @@ $("#myTable").on('click', '#btnDel', function () {
     }).then((result) => {
         if (result.isConfirmed) {
             var data = $("#myTable").DataTable().row($(this).parents('tr')).data();
-            console.log(data.nik);
+            console.log(data);
             console.log(data.firstName);
             var obj1 = new Object(); //sesuaikan sendiri nama objectnya dan beserta isinya
             obj1.NIK = data.nik;
             obj1.FirstName = data.firstName;
             obj1.LastName = data.lastName;
+            obj1.Gender = data.gender;
             obj1.Phone = data.phone;
             obj1.BirthDate = data.birthDate;
             obj1.Salary = data.salary;
+            obj1.OvertimeHour = data.overtimeHour;
             obj1.Email = data.email;
             obj1.IsDeleted = 1;
 
