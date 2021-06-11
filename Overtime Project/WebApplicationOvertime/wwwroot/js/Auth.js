@@ -10,7 +10,7 @@
     }).done((result) => {
         console.log("ok", result);
         if (result == '/TestCORS/Employee' || result == '/TestCORS/Head' || result == '/' ) {
-            alert("Successed to Login");
+            //alert("Successed to Login");
             localStorage.setItem('LoginRes', JSON.stringify(result));
             window.location.href = result;
         }
@@ -27,7 +27,7 @@
 
 function logout() {
  
-    window.open('https://localhost:44351/login')
+    window.location.href='https://localhost:44351/login'
 }
 function ForgotPass() {
     var Login = new Object();

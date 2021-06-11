@@ -81,9 +81,9 @@ $(document).ready(function () {
                 //onclick="Delete(' + "'" + row.nik + "'" + ',' + "'" + row.overtimeId + "'" + ')"
                 "render": function (data, type, row, item, column) {
                     return '<button id="btnDetail" type="button" class="btn btn-secondary" data-bs-toggle="modal"' +
-                        'data-bs-target="#modalDetail"> Detail </button > ' +
-                        '<button type="button" id="btnDel" class="btn btn-danger"> Delete </button > ' +
-                        '<button type="button" id="btnEdit" class="btn btn-primary"> Update </button > '
+                        'data-bs-target="#modalDetail"><i class="fas fa-info-circle"></i></button > ' +
+                        '<button type="button" id="btnDel" class="btn btn-danger"> <i class="fas fa-trash"></i> </button > ' +
+                        '<button type="button" id="btnEdit" class="btn btn-primary"> <i class="fas fa-user-edit"></i> </button > '
                 }
             }
         ]

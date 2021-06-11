@@ -59,7 +59,7 @@ $(document).ready(function () {
                 //onclick="Delete(' + "'" + row.nik + "'" + ',' + "'" + row.overtimeId + "'" + ')"
                 "render": function (data, type, row, item, column) {
                     return '<button id="btnDetailHead" type="button" class="btn btn-secondary" data-bs-toggle="modal"' +
-                        'data-bs-target="#modalDetailHead"> Detail </button > ' +
+                        'data-bs-target="#modalDetailHead"> <i class="fas fa-info-circle"></i> </button > ' +
                         '<button type="button" id="btnUpdateHead" class="btn btn-primary"> Approval </button > '
                 }
             }
