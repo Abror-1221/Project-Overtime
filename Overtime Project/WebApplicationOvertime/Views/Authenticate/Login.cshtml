@@ -19,22 +19,60 @@
                 <div class="form-group">
                     <input type="password" id="Password" class="form-control form-control-user" placeholder="Password">
                 </div>
-                <div class="form-group">
-                    <div class="custom-control custom-checkbox small">
+                <!--<div class="form-group">-->
+                @*<div class="custom-control custom-checkbox small">
                         <input type="checkbox" class="custom-control-input" id="customCheck">
                         <label class="custom-control-label" for="customCheck">Remember Me</label>
-                    </div>
-                </div>
+                    </div>*@
+                <!--</div>-->
                 @*<a href="index.html" class="btn btn-primary btn-user btn-block">Login</a>*@
 
                 <button id="login" class="btn btn-primary btn-user btn-block" onclick="Login()">Login</button>
             </div>
             <hr>
             <div class="text-center">
-                <a class="small" href="forgot-password.html">Forgot Password?</a>
+                @*<a class="small" href="forgot-password.html">Forgot Password?</a>*@
+                <a id="btnDetailOvertimeEmployee" class="small" data-bs-toggle="modal" data-bs-target="#ModalForgotPass"> Forgot Password? </a>
             </div>
-            <div class="text-center">
-                <a class="small" href="/register">Create an Account!</a>
+            @*<div class="text-center">
+                    <a class="small" href="/register">Create an Account!</a>
+                </div>*@
+        </div>
+    </div>
+</div>
+<!--Modal forgotpassword-->
+<div class="modal fade" id="ModalForgotPass" tabindex="-1" data-bs-backdrop="static" data-bs-keyboard="false" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleInsertModalLabel">Forgot Password</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <form method="post" id="formForgotPass" class="row needs-validation" novalidate>
+                    @*<div class="col-md-6">
+                            <label for="nikE" class="form-label">NIK :</label>
+                            <input type="text" name="nikE" class="form-control" id="nikE" pattern="[0-9]+" required readonly />
+                            <div class="invalid-feedback">
+                                Please provide a NIK (only number character)
+                            </div>
+                        </div>*@
+                    
+                    <div class="col-md-12">
+                        <label for="emailE" class="form-label">Enter Your Email :</label>
+                        <input type="email" name="emailE" id="emailE" class="form-control" required placeholder="email@example.com" />
+                        <div class="invalid-feedback">
+                            Required
+                        </div>
+                    </div>
+                   
+                    <div class="modal-footer">
+                        @*<button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>*@
+                        <input onclick="ForgotPass()" type="submit" id="submitForgotPass" class="btn btn-success" name="Save Changes" value="Reset Your Password" />
+                        @*<input type="submit" value="insert" name="insert" id="insert" class="btn btn-success" />*@
+
+                    </div>
+                </form>
             </div>
         </div>
     </div>

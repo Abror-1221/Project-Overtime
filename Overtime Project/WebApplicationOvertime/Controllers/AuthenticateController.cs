@@ -17,6 +17,8 @@ namespace WebApplicationOvertime.Controllers
         [Route("login")]
         public IActionResult Login()
         {
+            HttpContext.Session.Clear();
+           // HttpContext.Session.Remove();
             return View();//"~/Views/Auth/Login.cshtml"
         }
         public IActionResult Index()

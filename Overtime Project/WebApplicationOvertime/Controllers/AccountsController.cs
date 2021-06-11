@@ -32,35 +32,105 @@ namespace WebApplicationOvertime.Controllers
         }
         public IActionResult AdminProfile()
         {
+            var token = HttpContext.Session.GetString("token");
+            if (token == null)
+            {
+                return View("/Views/Authenticate/login.cshtml");
+            }
+            ViewData["token"] = token;
+
+            var jwtReader = new JwtSecurityTokenHandler();
+            var jwt = jwtReader.ReadJwtToken(token);
+            var nik = jwt.Claims.First(c => c.Type == "NIK").Value;
+            var fname = jwt.Claims.First(c => c.Type == "First Name").Value;
+            ViewData["fname"] = fname;
+            ViewData["nik"] = nik;
             return View("/Views/TestCORS/AdminProfile.cshtml");
         }
         public IActionResult HeadProfile()
         {
+            var token = HttpContext.Session.GetString("token");
+            if (token == null)
+            {
+                return View("/Views/Authenticate/login.cshtml");
+            }
+            ViewData["token"] = token;
+
+            var jwtReader = new JwtSecurityTokenHandler();
+            var jwt = jwtReader.ReadJwtToken(token);
+            var nik = jwt.Claims.First(c => c.Type == "NIK").Value;
+            var fname = jwt.Claims.First(c => c.Type == "First Name").Value;
+            ViewData["fname"] = fname;
+            ViewData["nik"] = nik;
             return View("/Views/TestCORS/HeadProfile.cshtml");
         }
         public IActionResult EmployeeProfile()
         {
+            var token = HttpContext.Session.GetString("token");
+            if (token == null)
+            {
+                return View("/Views/Authenticate/login.cshtml");
+            }
+            ViewData["token"] = token;
+
+            var jwtReader = new JwtSecurityTokenHandler();
+            var jwt = jwtReader.ReadJwtToken(token);
+            var nik = jwt.Claims.First(c => c.Type == "NIK").Value;
+            var fname = jwt.Claims.First(c => c.Type == "First Name").Value;
+            ViewData["fname"] = fname;
+            ViewData["nik"] = nik;
             return View("/Views/TestCORS/EmployeeProfile.cshtml");
         }
         public IActionResult Head()
         {
+            var token = HttpContext.Session.GetString("token");
+            if (token == null)
+            {
+                return View("/Views/Authenticate/login.cshtml");
+            }
+            ViewData["token"] = token;
+
+            var jwtReader = new JwtSecurityTokenHandler();
+            var jwt = jwtReader.ReadJwtToken(token);
+            var nik = jwt.Claims.First(c => c.Type == "NIK").Value;
+            var fname = jwt.Claims.First(c => c.Type == "First Name").Value;
+            ViewData["fname"] = fname;
+            ViewData["nik"] = nik;
             return View("/Views/TestCORS/Head.cshtml");
         }
 
         public IActionResult HeadHistory()
         {
+            var token = HttpContext.Session.GetString("token");
+            if (token == null)
+            {
+                return View("/Views/Authenticate/login.cshtml");
+            }
+            ViewData["token"] = token;
+
+            var jwtReader = new JwtSecurityTokenHandler();
+            var jwt = jwtReader.ReadJwtToken(token);
+            var nik = jwt.Claims.First(c => c.Type == "NIK").Value;
+            var fname = jwt.Claims.First(c => c.Type == "First Name").Value;
+            ViewData["fname"] = fname;
+            ViewData["nik"] = nik;
             return View("/Views/TestCORS/HeadHistory.cshtml");
         }
 
         public IActionResult Employee()
         {
-        //    var token = HttpContext.Session.GetString("token");
-        //    ViewData["token"] = token;
+            var token = HttpContext.Session.GetString("token");
+            if (token == null)
+            {
+                return View("/Views/Authenticate/login.cshtml");
+            }
+            ViewData["token"] = token;
 
-        //    var jwtReader = new JwtSecurityTokenHandler();
-        //    var jwt = jwtReader.ReadJwtToken(token);
-        //    var nik = jwt.Claims.First(c => c.Type == "NIK").Value;
-        //    ViewData["nik"] = nik;
+            var jwtReader = new JwtSecurityTokenHandler();
+            var jwt = jwtReader.ReadJwtToken(token);
+            var nik = jwt.Claims.First(c => c.Type == "NIK").Value;
+            var fname = jwt.Claims.First(c => c.Type == "First Name").Value;
+            ViewData["fname"] = fname;
             return View("/Views/TestCORS/Employee.cshtml");
         }
         public IActionResult EmployeeHistory()
@@ -72,21 +142,77 @@ namespace WebApplicationOvertime.Controllers
             //    var jwt = jwtReader.ReadJwtToken(token);
             //    var nik = jwt.Claims.First(c => c.Type == "NIK").Value;
             //    ViewData["nik"] = nik;
+            var token = HttpContext.Session.GetString("token");
+            if (token == null)
+            {
+                return View("/Views/Authenticate/login.cshtml");
+            }
+            ViewData["token"] = token;
+
+            var jwtReader = new JwtSecurityTokenHandler();
+            var jwt = jwtReader.ReadJwtToken(token);
+            var nik = jwt.Claims.First(c => c.Type == "NIK").Value;
+            var fname = jwt.Claims.First(c => c.Type == "First Name").Value;
+            ViewData["fname"] = fname;
+            ViewData["nik"] = nik;
             return View("/Views/TestCORS/EmployeeHistory.cshtml");
         }
 
-        [HttpGet("Accounts/GetUserOvertime/{nik}")]
-        public async Task<JsonResult> GetUserOvertime(string nik)
+        //[HttpGet("Accounts/GetUserOvertime/{nik}")]
+        [HttpGet("Accounts/GetUserOvertime/")]
+        public async Task<JsonResult> GetUserOvertime()
         {
-            var result = await repository.GetUserOvertime(nik);
+            var token = HttpContext.Session.GetString("token");
+            ViewData["token"] = token;
+
+            var jwtReader = new JwtSecurityTokenHandler();
+            var jwt = jwtReader.ReadJwtToken(token);
+            var id = jwt.Claims.First(c => c.Type == "NIK").Value;
+
+            var result = await repository.GetUserOvertime(id);
             return Json(result);
         } 
-        [HttpGet("Accounts/GetUserOvertimeHisotry/{nik}")]
-        public async Task<JsonResult> GetUserOvertimeHistory(string nik)
+        //[HttpGet("Accounts/GetUserOvertimeHisotry/{nik}")]
+        [HttpGet("Accounts/GetUserOvertimeHistory/")]
+        public async Task<JsonResult> GetUserOvertimeHistory()
         {
-            var result = await repository.GetUserOvertimeHistory(nik);
+            var token = HttpContext.Session.GetString("token");
+            ViewData["token"] = token;
+
+            var jwtReader = new JwtSecurityTokenHandler();
+            var jwt = jwtReader.ReadJwtToken(token);
+            var id = jwt.Claims.First(c => c.Type == "NIK").Value;
+
+            var result = await repository.GetUserOvertimeHistory(id);
             return Json(result);
         }
+
+        [HttpGet("Accounts/GetNIK/")]
+        public string GetNIK()
+
+        {
+            var token = HttpContext.Session.GetString("token");
+            ViewData["token"] = token;
+
+            var jwtReader = new JwtSecurityTokenHandler();
+            var jwt = jwtReader.ReadJwtToken(token);
+            var id = jwt.Claims.First(c => c.Type == "NIK").Value;
+            return id;
+        }
+
+        //[HttpPost("Accounts/ReqOvertime/")]
+        //public async Task<JsonResult> ReqOvertime()
+        //{
+        //    var token = HttpContext.Session.GetString("token");
+        //    ViewData["token"] = token;
+
+        //    var jwtReader = new JwtSecurityTokenHandler();
+        //    var jwt = jwtReader.ReadJwtToken(token);
+        //    var id = jwt.Claims.First(c => c.Type == "NIK").Value;
+
+        //    var result = await repository.ReqOvertime(id, ReqOvertimeVM entity);
+        //    return Json(result);
+        //}
         //[HttpGet]
         //public String Get()
         //{

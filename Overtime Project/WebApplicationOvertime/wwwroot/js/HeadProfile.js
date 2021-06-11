@@ -1,6 +1,18 @@
 ﻿$(document).ready(function () {
+
+    var getNik = $.ajax({
+        url: "https://localhost:44351/accounts/getNik",
+        async: false,
+    }).done((result) => {
+        return result;
+    }).fail((error) => {
+
+    });
+    userID = getNik.responseText;
+    console.log(userID);
+
     $.ajax({
-        url: "https://localhost:44324/API/Account/Profile/12"
+        url: "https://localhost:44324/API/Account/Profile/" + userID
     }).done((result) => {
         userId = `<label class="form-control-label" for="input-id">NIK</label>
                   <input id="input-userId" class="form-control form-control-alternative" placeholder="Your Id" value="${result[0].nik}" type="text" readonly>`
@@ -36,7 +48,7 @@
 
 function EditProfile() {
     $.ajax({
-        url: "https://localhost:44324/API/Account/Profile/12"
+        url: "https://localhost:44324/API/Account/Profile/" + userID
     }).done((result) => {
         fname = `<label class="form-control-label" for="input-first-name">First name</label>
              <input type="text" id="input-first-name" class="form-control form-control-alternative" placeholder="First name" value="${result[0].firstName}">`
@@ -85,7 +97,7 @@ function SubmitEdit() {
     editProfile.DepartmentId = $('#input-department').val();
     $.ajax({
         type: "PUT",
-        url: "https://localhost:44324/API/Users/",
+        url: "https://localhost:44324/API/person/",
         data: JSON.stringify(editProfile),
         contentType: "application/json; charset=utf-8",
         datatype: "json"
@@ -96,7 +108,7 @@ function SubmitEdit() {
             'success'
         );
         $.ajax({
-            url: "https://localhost:44324/API/Accounts/Profile/11"
+            url: "https://localhost:44324/API/Accounts/Profile/" + userID
         }).done((result) => {
             fname = `<label class="form-control-label" for="input-first-name">First name</label>
              <input type="text" id="input-first-name" class="form-control form-control-alternative" placeholder="First name" value="${result[0].firstName}" readonly>`

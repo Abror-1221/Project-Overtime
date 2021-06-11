@@ -70,11 +70,11 @@ namespace WebApplicationOvertime.Repository
             return result.StatusCode;
         }
 
-        public HttpStatusCode Post(TEntity entity)
-        {
-            StringContent content = new StringContent(JsonConvert.SerializeObject(entity), Encoding.UTF8, "application/json");
-            var result = httpClient.PostAsync(address.link + request, content).Result;
-            return result.StatusCode;
-        }
+            public HttpStatusCode Post(TEntity entity)
+            {
+                StringContent content = new StringContent(JsonConvert.SerializeObject(entity), Encoding.UTF8, "application/json");
+                var result = httpClient.PostAsync(address.link + request, content).Result;
+                return result.StatusCode;
+            }
     }
 }

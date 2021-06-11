@@ -1,11 +1,23 @@
-﻿var IdNik = "2";//asasaff
-
+﻿//var IdNik = "2";//asasaff
+//var nik = ViewData["nik"];
+var userID;
 $(document).ready(function () {
+
+    var getNik = $.ajax({
+        url: "https://localhost:44351/accounts/getNik",
+        async: false,
+    }).done((result) => {
+        return result;
+    }).fail((error) => {
+
+    });
+    userID = getNik.responseText;
+    console.log(userID);
 
     var e = $('#employeeTable').DataTable({
 
         "ajax": {
-            "url": "/Accounts/getUserOvertime/" + IdNik,//"https://localhost:44351/accounts/get",//"Accounts/get/", //ngambil dari form login
+            "url": "/Accounts/getUserOvertime/",//"https://localhost:44351/accounts/get",//"Accounts/get/", //ngambil dari form login
 
             "datatype": "json",
             "dataSrc": "",
@@ -101,7 +113,7 @@ $('#request_form').on("submit", function (event) {
     //obj.DayTypeId = $("#day").val();
     obj.StatusId = 1;
     $.ajax({
-        url: "https://localhost:44324/API/Overtime/ReqOvertime/" + IdNik,
+        url: "https://localhost:44324/API/Overtime/ReqOvertime/" + userID,
         type: "POST",
         data: JSON.stringify(obj),
         headers: {
@@ -146,43 +158,43 @@ $("#employeeTable").on('click', '#btnDetailOvertimeEmployee', function () {
 });
 
 //Update Overtime
-$("#employeeTable").on('click', '#btnUpdateEmployee', function () {
-    var data = $("#employeeTable").DataTable().row($(this).parents('tr')).data();
-    //alert(data.nik);
-    $("#dateE").val(data.date.slice(0, 10));
-    $("#startTimeE").val(data.startTime);
-    $("#endTimeE").val(data.endTime);
-    $("#descEmpE").val(data.descEmp);
-    $("#dayE").val(data.dayTypeId);
-    $("#editModalEmployeeOvertime").modal("show");
+//$("#employeeTable").on('click', '#btnUpdateEmployee', function () {
+//    var data = $("#employeeTable").DataTable().row($(this).parents('tr')).data();
+//    //alert(data.nik);
+//    $("#dateE").val(data.date.slice(0, 10));
+//    $("#startTimeE").val(data.startTime);
+//    $("#endTimeE").val(data.endTime);
+//    $("#descEmpE").val(data.descEmp);
+//    $("#dayE").val(data.dayTypeId);
+//    $("#editModalEmployeeOvertime").modal("show");
 
-    $("#editModalEmployeeOvertime").on('submit', function (event) {
-        event.preventDefault();
-        var obj1 = new Object();
-        obj1.Id = data.id;
-        obj1.NIK = data.nik;
-        obj1.Date = $("#dateE").val();
-        obj1.StartTime = $("#startTimeE").val();
-        obj1.EndTime = $("#endTimeE").val();
-        obj1.DescEmp = $("#descEmpE").val();
-        obj1.DescHead = data.descHead;
-        obj1.TotalReimburse = data.totalReimburse
-        obj1.DayTypeId = $("#dayE").val();
-        obj1.StatusId = data.statusId;
+//    $("#editModalEmployeeOvertime").on('submit', function (event) {
+//        event.preventDefault();
+//        var obj1 = new Object();
+//        obj1.Id = data.id;
+//        obj1.NIK = data.nik;
+//        obj1.Date = $("#dateE").val();
+//        obj1.StartTime = $("#startTimeE").val();
+//        obj1.EndTime = $("#endTimeE").val();
+//        obj1.DescEmp = $("#descEmpE").val();
+//        obj1.DescHead = data.descHead;
+//        obj1.TotalReimburse = data.totalReimburse
+//        obj1.DayTypeId = $("#dayE").val();
+//        obj1.StatusId = data.statusId;
 
-        $.ajax({
-            url: "https://localhost:44324/API/Overtime",
-            type: "PUT",
-            data: JSON.stringify(obj1),
-            headers: {
-                "content-type": "application/json;charset=UTF-8" // Or add this line
-            }, success: function (data) {
-                $('#editEmployeeOvertime').val("Save Changes");
-                $('#editModalEmployeeOvertime').modal('hide');
-                $("#employeeTable").DataTable().ajax.reload();
-            }
+//        $.ajax({
+//            url: "https://localhost:44324/API/Overtime",
+//            type: "PUT",
+//            data: JSON.stringify(obj1),
+//            headers: {
+//                "content-type": "application/json;charset=UTF-8" // Or add this line
+//            }, success: function (data) {
+//                $('#editEmployeeOvertime').val("Save Changes");
+//                $('#editModalEmployeeOvertime').modal('hide');
+//                $("#employeeTable").DataTable().ajax.reload();
+//            }
 
-        })
-    })
-})
+//        })
+//    })
+//})
 

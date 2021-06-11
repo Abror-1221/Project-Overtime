@@ -1,11 +1,11 @@
-﻿var IdNik = "2";
+﻿//var IdNik = "rsendusr";
 
 $(document).ready(function () {
 
     var e = $('#employeeTableHistory').DataTable({
 
         "ajax": {
-            "url": "https://localhost:44324/api/overtime/overtimedatahistory/" + IdNik,//"/Accounts/getUserOvertimeHistory/nikcobalog",//"https://localhost:44351/accounts/get",//"Accounts/get/", //ngambil dari form login
+            "url": "/Accounts/getUserOvertimeHistory/", //"https://localhost:44324/api/overtime/overtimedatahistory/" + IdNik,//"/Accounts/getUserOvertimeHistory/nikcobalog",//"https://localhost:44351/accounts/get",//"Accounts/get/", //ngambil dari form login
 
             "datatype": "json",
             "dataSrc": "",

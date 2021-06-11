@@ -57,7 +57,8 @@ namespace Overtime_Project.Controllers
                            Phone = p.Phone,
                            BirthDate = p.BirthDate,
                            Salary = p.Salary,
-                           Email = p.Email
+                           Email = p.Email,
+                           OvertimeHour = p.OvertimeHour
                        };
             return Ok(data);
         }
@@ -188,7 +189,7 @@ namespace Overtime_Project.Controllers
                         smtp.Credentials = new NetworkCredential("developit9@gmail.com", "Sembilan!@9");
                         smtp.DeliveryMethod = SmtpDeliveryMethod.Network;
                         smtp.Send(mm);
-                        return Ok("Email sent...");
+                        return StatusCode(200, new { status = HttpStatusCode.OK, message = "Requested for reset password" });
                     }
                     else
                     {

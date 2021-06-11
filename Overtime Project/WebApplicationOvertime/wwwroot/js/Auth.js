@@ -24,3 +24,29 @@
         alert("Failed to Login");
     })
 }
+
+function logout() {
+ 
+    window.open('https://localhost:44351/login')
+}
+function ForgotPass() {
+    var Login = new Object();
+    Login.Email = $("#emailE").val();
+   
+    console.log(Login);
+    $.ajax({
+        type: 'post',
+        url: 'https://localhost:44324/api/account/ForgotPassword',
+        data: Login
+    }).done((result) => {
+        //console.log("ok", result);
+        
+            alert("Password Reset! check your email");
+            
+       // window.open('https://localhost:44351/login')
+       
+    }).fail((result) => {
+        //console.log(result);
+        alert("Failed! your email is not registered!");
+    })
+}

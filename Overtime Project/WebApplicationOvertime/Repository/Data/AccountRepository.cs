@@ -5,7 +5,9 @@ using Overtime_Project.ViewModels;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net;
 using System.Net.Http;
+using System.Text;
 using System.Threading.Tasks;
 using WebApplicationOvertime.Base;
 
@@ -64,5 +66,12 @@ namespace WebApplicationOvertime.Repository.Data
             }
             return entities;
         }
+
+        //public HttpStatusCode ReqOvertime(string nik)
+        //{
+        //    StringContent content = new StringContent(JsonConvert.SerializeObject(entity), Encoding.UTF8, "application/json");
+        //    var result = httpClient.PostAsync(address.link + overtime + $"reqovertime/{nik}", content).Result;
+        //    return result.StatusCode;
+        //}
     }
 }
