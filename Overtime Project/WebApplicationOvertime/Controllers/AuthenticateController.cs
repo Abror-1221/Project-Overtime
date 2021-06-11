@@ -18,8 +18,8 @@ namespace WebApplicationOvertime.Controllers
         public IActionResult Login()
         {
             HttpContext.Session.Clear();
-           // HttpContext.Session.Remove();
-            return View();//"~/Views/Auth/Login.cshtml"
+            // HttpContext.Session.Remove();
+            return View("/Views/Authenticate/NewLogin2.cshtml");//~/Views/Auth/Login.cshtml"
         }
         public IActionResult Index()
         {
