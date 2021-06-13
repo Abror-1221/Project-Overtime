@@ -80,10 +80,10 @@ $(document).ready(function () {
                 //"wrap": true,educationID 
                 //onclick="Delete(' + "'" + row.nik + "'" + ',' + "'" + row.overtimeId + "'" + ')"
                 "render": function (data, type, row, item, column) {
-                    return '<button id="btnDetail" type="button" class="btn btn-secondary" data-bs-toggle="modal"' +
+                    return '<button id="btnDetail" type="button" class="btn btn-secondary" data-bs-toggle="modal" data-bs-placement="top" title="Detail"' +
                         'data-bs-target="#modalDetail"><i class="fas fa-info-circle"></i></button > ' +
-                        '<button type="button" id="btnDel" class="btn btn-danger"> <i class="fas fa-trash"></i> </button > ' +
-                        '<button type="button" id="btnEdit" class="btn btn-primary"> <i class="fas fa-user-edit"></i> </button > '
+                        '<button type="button" class="btn btn-danger" data-bs-toggle="tooltip" data-bs-placement="top" title="Delete" id="btnDel"> <i class="fas fa-trash"></i> </button > ' +
+                        '<button type="button" id="btnEdit" class="btn btn-primary" data-bs-toggle="tooltip" data-bs-placement="top" title="Edit"> <i class="fas fa-user-edit"></i> </button > '
                 }
             }
         ]
@@ -94,6 +94,8 @@ $(document).ready(function () {
         });
     }).draw();
 });
+
+
 
 //insert
 $('#insert_form').on("submit", function (event) {

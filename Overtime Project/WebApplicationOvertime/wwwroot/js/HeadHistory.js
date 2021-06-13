@@ -41,7 +41,7 @@ $(document).ready(function () {
             },
             {
                 "data": "date", render: function (data, type, row) {
-                    return data.slice(0, 10);
+                    return data.slice(8, 10) + "/" + data.slice(5, 7) + "/" + data.slice(0, 4);
                 }
             },
             { "data": "nik" },
@@ -56,7 +56,7 @@ $(document).ready(function () {
                 //"wrap": true,educationID 
                 //onclick="Delete(' + "'" + row.nik + "'" + ',' + "'" + row.overtimeId + "'" + ')"
                 "render": function (data, type, row, item, column) {
-                    return '<button id="btnDetailHeadHistory" type="button" class="btn btn-secondary" data-bs-toggle="modal"' +
+                    return '<button id="btnDetailHeadHistory" type="button" class="btn btn-secondary" data-bs-toggle="modal" data-bs-placement="top" title="Detail"' +
                         'data-bs-target="#modalDetailHeadHistory"> <i class="fas fa-info-circle"></i> </button > '// +
                        // '<button type="button" id="btnUpdateHead" class="btn btn-primary"> Approval </button > '
                 }
@@ -70,21 +70,59 @@ $(document).ready(function () {
     }).draw();
 });
 
+function formatRupiah(angka, prefix) {
+    var number_string = angka.replace(/[^,\d]/g, '').toString(),
+        split = number_string.split(','),
+        sisa = split[0].length % 3,
+        rupiah = split[0].substr(0, sisa),
+        ribuan = split[0].substr(sisa).match(/\d{3}/gi);
+
+    // tambahkan titik jika yang di input sudah menjadi angka ribuan
+    if (ribuan) {
+        separator = sisa ? '.' : '';
+        rupiah += separator + ribuan.join('.');
+    }
+
+    rupiah = split[1] != undefined ? rupiah + ',' + split[1] : rupiah;
+    return prefix == undefined ? rupiah : (rupiah ? 'Rp. ' + rupiah : '');
+}
+
 //Detail
+//$("#headOvertimeTableHistory").on('click', '#btnDetailHeadHistory', function () {
+//    var data = $("#headOvertimeTableHistory").DataTable().row($(this).parents('tr')).data();
+//    console.log(data);
+//    //alert("tes aaaaaa dong bro");
+//    $('#modalDetailHeadHistory').find(".detailBody").html('<p>Day type            : ' + data.dayTypeName
+//        + '</p> <p>Start Time             : ' + data.startTime.slice(0, 10) + ", Time : " + data.startTime.slice(11)
+//        + '</p> <p>End Time               : ' + data.endTime.slice(0, 10) + ", Time : " + data.endTime.slice(11)
+//        + '</p> <p>Reimburse              : ' + data.totalReimburse
+//        + '</p> <p>Email                  : ' + data.email
+//        + '</p> <p>Phone                  : ' + data.phone
+//        + '</p> <p>Overtime Report        : ' + data.descEmp
+//        + '</p> <p>Validation Description : ' + data.descHead + '</p>');
+//});
+
 $("#headOvertimeTableHistory").on('click', '#btnDetailHeadHistory', function () {
     var data = $("#headOvertimeTableHistory").DataTable().row($(this).parents('tr')).data();
     console.log(data);
     //alert("tes aaaaaa dong bro");
-    $('#modalDetailHeadHistory').find(".detailBody").html('<p>Day type            : ' + data.dayTypeName
-        + '</p> <p>Start Time             : ' + data.startTime.slice(0, 10) + ", Time : " + data.startTime.slice(11)
-        + '</p> <p>End Time               : ' + data.endTime.slice(0, 10) + ", Time : " + data.endTime.slice(11)
-        + '</p> <p>Reimburse              : ' + data.totalReimburse
-        + '</p> <p>Email                  : ' + data.email
-        + '</p> <p>Phone                  : ' + data.phone
-        + '</p> <p>Overtime Report        : ' + data.descEmp
-        + '</p> <p>Validation Description : ' + data.descHead + '</p>');
+    //$('#modalDetailHead').find(".detailBody").html('<p>Day type            : ' + data.dayTypeName
+    //    + '</p> <p>Start Time             : ' + data.startTime.slice(0, 10) + ", Time : " + data.startTime.slice(11)
+    //    + '</p> <p>End Time               : ' + data.endTime.slice(0, 10) + ", Time : " + data.endTime.slice(11)
+    //    + '</p> <p>Reimburse              : ' + data.totalReimburse
+    //    + '</p> <p>Email                  : ' + data.email
+    //    + '</p> <p>Phone                  : ' + data.phone
+    //    + '</p> <p>Overtime Report        : ' + data.descEmp
+    //    + '</p> <p>Validation Description : ' + data.descHead + '</p>');
+    $("#dayTypeD").val(data.dayTypeName);
+    $("#startTimeD").val(data.startTime.slice(8, 10) + "/" + data.startTime.slice(5, 7) + "/" + data.startTime.slice(0, 4) + " - " + data.endTime.slice(8, 10) + "/" + data.endTime.slice(5, 7) + "/" + data.endTime.slice(0, 4));
+    $("#endTimeD").val(data.startTime.slice(11) + " - " + data.endTime.slice(11));
+    $("#paymentD").val(formatRupiah(data.totalReimburse.toString(), 'Rp. '));
+    $("#emailD").val(data.email);
+    $("#phoneD").val(data.phone);
+    $("#overtimeReportD").val(data.descEmp);
+    $("#validationD").val(data.descHead);
 });
-
 ////Update v.1
 //$("#headOvertimeTable").on('click', '#btnUpdateHead', function () {
 //    var data = $("#headOvertimeTable").DataTable().row($(this).parents('tr')).data();

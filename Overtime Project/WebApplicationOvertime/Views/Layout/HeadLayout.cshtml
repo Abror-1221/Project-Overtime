@@ -25,7 +25,7 @@
         <div class="main-header">
             <div class="logo-header">
                 <a href="index.html" class="logo">
-                    Ready Dashboard
+                    WebApp Overtime
                 </a>
                 <button class="navbar-toggler sidenav-toggler ml-auto" type="button" data-toggle="collapse" data-target="collapse" aria-controls="sidebar" aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
@@ -35,7 +35,7 @@
             <nav class="navbar navbar-header navbar-expand-lg">
                 <div class="container-fluid">
 
-                    <form class="navbar-left navbar-form nav-search mr-md-3" action="">
+                    @*<form class="navbar-left navbar-form nav-search mr-md-3" action="">
                         <div class="input-group">
                             <input type="text" placeholder="Search ..." class="form-control">
                             <div class="input-group-append">
@@ -44,9 +44,9 @@
                                 </span>
                             </div>
                         </div>
-                    </form>
+                    </form>*@
                     <ul class="navbar-nav topbar-nav ml-md-auto align-items-center">
-                        <li class="nav-item dropdown hidden-caret">
+                        @*<li class="nav-item dropdown hidden-caret">
                             <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                 <i class="la la-envelope"></i>
                             </a>
@@ -112,10 +112,10 @@
                                     <a class="see-all" href="javascript:void(0);"> <strong>See all notifications</strong> <i class="la la-angle-right"></i> </a>
                                 </li>
                             </ul>
-                        </li>
+                        </li>*@
                         <li class="nav-item dropdown">
-                            <a class="dropdown-toggle profile-pic" data-toggle="dropdown"  onclick="logout()" href="#" aria-expanded="false"> <img src="/assets/img/profile.jpg" alt="user-img" width="36" class="img-circle"><span>@nik</span></span> </a>
-                            <ul class="dropdown-menu dropdown-user">
+                            <a class="dropdown-toggle profile-pic" data-toggle="dropdown" onclick="logout()" href="#" aria-expanded="false"><span>Log out</span></a>
+                            @*<ul class="dropdown-menu dropdown-user">
                                 <li>
                                     <div class="user-box">
                                         <div class="u-img"><img src="/assets/img/profile.jpg" alt="user"></div>
@@ -133,7 +133,7 @@
                                 <a class="dropdown-item" href="#"><i class="ti-settings"></i> Account Setting</a>
                                 <div class="dropdown-divider"></div>
                                 <a class="dropdown-item" href="#"><i class="fa fa-power-off"></i> Logout</a>
-                            </ul>
+                            </ul>*@
                             <!-- /.dropdown-user -->
                         </li>
                     </ul>
@@ -289,8 +289,14 @@
     <script src="https://cdn.datatables.net/1.10.24/js/jquery.dataTables.js"></script>
     <script src="/js/mobiscroll.javascript.min.js"></script>
     <script src="~/js/Auth.js" asp-append-version="true"></script>
-    <script src="~/js/Admin.js" asp-append-version="true"></script>
-    <script src="~/js/Head.js" asp-append-version="true"></script>
+    @*<script src="~/js/Admin.js" asp-append-version="true"></script>*@
+    @*<script src="~/js/Head.js" asp-append-version="true"></script>*@
+    <script>
+        var tooltipTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="tooltip"]'))
+        var tooltipList = tooltipTriggerList.map(function (tooltipTriggerEl) {
+            return new bootstrap.Tooltip(tooltipTriggerEl)
+        })
+    </script>
     @RenderSection("Scripts", required: false)
 </body>
 </html>

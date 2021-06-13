@@ -1,7 +1,6 @@
 ﻿
 
 $(document).ready(function () {
-    
     var head = $('#headOvertimeTable').DataTable({
         retrieve: true, //ada potensi error
         paging: false,
@@ -42,7 +41,7 @@ $(document).ready(function () {
             },
             {
                 "data": "date", render: function (data, type, row) {
-                    return data.slice(0, 10);
+                    return data.slice(8, 10) + "/" + data.slice(5, 7) + "/" + data.slice(0, 4);
                 }
             },
             { "data": "nik" },
@@ -58,7 +57,7 @@ $(document).ready(function () {
                 //"wrap": true,educationID 
                 //onclick="Delete(' + "'" + row.nik + "'" + ',' + "'" + row.overtimeId + "'" + ')"
                 "render": function (data, type, row, item, column) {
-                    return '<button id="btnDetailHead" type="button" class="btn btn-secondary" data-bs-toggle="modal"' +
+                    return '<button id="btnDetailHead" type="button" class="btn btn-secondary" data-bs-toggle="modal" data-bs-placement="top" title="Detail"' +
                         'data-bs-target="#modalDetailHead"> <i class="fas fa-info-circle"></i> </button > ' +
                         '<button type="button" id="btnUpdateHead" class="btn btn-primary"> Approval </button > '
                 }
@@ -71,6 +70,7 @@ $(document).ready(function () {
             cell.innerHTML = i + 1;
         });
     }).draw();
+
 });
 
 //Detail
@@ -87,8 +87,8 @@ $("#headOvertimeTable").on('click', '#btnDetailHead', function () {
     //    + '</p> <p>Overtime Report        : ' + data.descEmp
     //    + '</p> <p>Validation Description : ' + data.descHead + '</p>');
     $("#dayTypeD").val(data.dayTypeName);
-    $("#startTimeD").val(data.startTime);
-    $("#endTimeD").val(data.endTime);
+    $("#startTimeD").val(data.startTime.slice(8, 10) + "/" + data.startTime.slice(5, 7) + "/" + data.startTime.slice(0, 4) + " - " + data.endTime.slice(8, 10) + "/" + data.endTime.slice(5, 7) + "/" + data.endTime.slice(0, 4));
+    $("#endTimeD").val(data.startTime.slice(11) + " - " + data.endTime.slice(11));
     $("#paymentD").val(formatRupiah(data.totalReimburse.toString(), 'Rp. '));
     $("#emailD").val(data.email);
     $("#phoneD").val(data.phone);

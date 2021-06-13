@@ -54,16 +54,13 @@ $(document).ready(function () {
             },
             {
                 "data": "date", render: function (data, type, row) {
-                    return data.slice(0, 10);
+                    return data.slice(8, 10) + "/" + data.slice(5, 7) + "/" + data.slice(0, 4);
                 }
             },
             {
-                "data": "startTime", render: function (data, type, row) {
-                    return data.slice(0, 10) + ", Time : " + data.slice(11);
-                } },
-            {
-                "data": "endTime", render: function (data, type, row) {
-                    return data.slice(0, 10) + ", Time : " + data.slice(11);
+                "data": null,
+                "render": function (data, type, row) {
+                    return row.startTime.slice(8, 10) + "/" + row.startTime.slice(5, 7) + "/" + row.startTime.slice(0, 4) + " - " + row.endTime.slice(8, 10) + "/" + row.endTime.slice(5, 7) + "/" + row.endTime.slice(0, 4);
                 }
             },
             { "data": "statusName" },
@@ -72,7 +69,7 @@ $(document).ready(function () {
                 //"wrap": true,educationID 
                 //onclick="Delete(' + "'" + row.nik + "'" + ',' + "'" + row.overtimeId + "'" + ')"
                 "render": function (data, type, row, item, column) {
-                    return '<button id="btnDetailOvertimeEmployee" type="button" class="btn btn-secondary" data-bs-toggle="modal"' +
+                    return '<button id="btnDetailOvertimeEmployee" type="button" class="btn btn-secondary" data-bs-toggle="modal" data-bs-placement="top" title="Detail"' +
                         'data-bs-target="#modalDetailEmployeeOvertime"> <i class="fas fa-info-circle"></i> </button > ' //+
                         //'<button type="button" id="btnUpdateEmployee" class="btn btn-primary"> Update </button > '
                 }
@@ -132,7 +129,6 @@ mobiscroll.setOptions({
     theme: 'ios',
     themeVariant: 'light'
 });
-
 mobiscroll.datepicker('#demo-calendar', {
     controls: ['calendar'],
     select: 'range',
@@ -153,6 +149,7 @@ $("#employeeTable").on('click', '#btnDetailOvertimeEmployee', function () {
     //    + '</p> <p value="Unfilled">Validation Description : ' + data.descHead + '</p>');
 
     $("#dayTypeDE").val(data.dayTypeName);
+    $("#overtimeTimeDE").val(data.startTime.slice(11) + " - " + data.endTime.slice(11));
     $("#overtimeReportDE").val(data.descEmp);
     $("#validationDescDE").val(data.descHead);
 });

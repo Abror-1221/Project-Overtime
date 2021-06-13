@@ -42,17 +42,14 @@ $(document).ready(function () {
             },
             {
                 "data": "date", render: function (data, type, row) {
-                    return data.slice(0, 10);
+                    return data.slice(8, 10) + "/" + data.slice(5, 7) + "/" + data.slice(0, 4);
                 }
             },
             {
-                "data": "startTime", render: function (data, type, row) {
-                    return data.slice(0, 10) + ", Time : " + data.slice(11);
-                } },
-            {
-                "data": "endTime", render: function (data, type, row) {
-                    return data.slice(0, 10) + ", Time : " + data.slice(11);
-                } ,
+                "data": null,
+                "render": function (data, type, row) {
+                    return row.startTime.slice(8, 10) + "/" + row.startTime.slice(5, 7) + "/" + row.startTime.slice(0, 4) + " - " + row.endTime.slice(8, 10) + "/" + row.endTime.slice(5, 7) + "/" + row.endTime.slice(0, 4);
+                }
             },
             { "data":"statusName"},
             {
@@ -60,7 +57,7 @@ $(document).ready(function () {
                 //"wrap": true,educationID 
                 //onclick="Delete(' + "'" + row.nik + "'" + ',' + "'" + row.overtimeId + "'" + ')"
                 "render": function (data, type, row, item, column) {
-                    return '<button id="btnDetailOvertimeEmpHistory" type="button" class="btn btn-secondary" data-bs-toggle="modal"' +
+                    return '<button id="btnDetailOvertimeEmpHistory" type="button" class="btn btn-secondary" data-bs-toggle="modal" data-bs-placement="top" title="Detail"' +
                         'data-bs-target="#modalDetailEmpHistory"> <i class="fas fa-info-circle"></i> </button > ' //+
                         //'<button type="button" id="btnUpdateEmployee" class="btn btn-primary"> Update </button > '
                 }
@@ -77,13 +74,27 @@ $(document).ready(function () {
 //Request (Insert)
 
 //Detail
+//$("#employeeTableHistory").on('click', '#btnDetailOvertimeEmpHistory', function () {
+//    var data = $("#employeeTableHistory").DataTable().row($(this).parents('tr')).data();
+//    console.log(data);
+//    //alert("tes aaaaaa dong bro");
+//    $('#modalDetailEmpHistory').find(".modal-body").html('<p>Day type               : ' + data.dayTypeName
+//        + '</p> <p>Overtime Report        : ' + data.descEmp
+//        + '</p> <p value="Unfilled">Validation Description : ' + data.descHead + '</p>');
+//});
+
 $("#employeeTableHistory").on('click', '#btnDetailOvertimeEmpHistory', function () {
     var data = $("#employeeTableHistory").DataTable().row($(this).parents('tr')).data();
     console.log(data);
     //alert("tes aaaaaa dong bro");
-    $('#modalDetailEmpHistory').find(".modal-body").html('<p>Day type               : ' + data.dayTypeName
-        + '</p> <p>Overtime Report        : ' + data.descEmp
-        + '</p> <p value="Unfilled">Validation Description : ' + data.descHead + '</p>');
+    //$('#modalDetailEmployeeOvertime').find(".modal-body").html('<p>Day type               : ' + data.dayTypeName
+    //    + '</p> <p>Overtime Report        : ' + data.descEmp
+    //    + '</p> <p value="Unfilled">Validation Description : ' + data.descHead + '</p>');
+
+    $("#dayTypeDE").val(data.dayTypeName);
+    $("#overtimeTimeDE").val(data.startTime.slice(11) + " - " + data.endTime.slice(11));
+    $("#overtimeReportDE").val(data.descEmp);
+    $("#validationDescDE").val(data.descHead);
 });
 
 
