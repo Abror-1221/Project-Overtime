@@ -62,7 +62,8 @@ namespace WebApplicationOvertime.Controllers
             ViewData["fname"] = fname;
             ViewData["nik"] = nik;
             return View();
-        }public IActionResult EmployeeHistory()
+        }
+        public IActionResult EmployeeHistory()
         {
             var token = HttpContext.Session.GetString("token");
             if (token == null)
@@ -79,6 +80,11 @@ namespace WebApplicationOvertime.Controllers
             ViewData["fname"] = fname;
             ViewData["nik"] = nik;
             return View();
+        }
+        public IActionResult EmailTemplate()
+        {
+           
+            return View("/Views/testcors/Emailtemplate.cshtml");
         }
     }
 }

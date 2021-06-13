@@ -116,11 +116,16 @@ $('#request_form').on("submit", function (event) {
         headers: {
             "content-type": "application/json;charset=UTF-8" // Or add this line
         }, success: function (data) {
-            alert("done");
+           // alert("done");
             $('#request_form')[0].reset();
             $('#request').val("Request");
             $('#staticBackdropEmployeeOvertime').modal('hide');
             $("#employeeTable").DataTable().ajax.reload();
+            Swal.fire(
+                'Requested',
+                'Success',
+                'success'
+            )
         }
     })
 });

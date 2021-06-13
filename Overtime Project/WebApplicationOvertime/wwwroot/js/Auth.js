@@ -22,6 +22,7 @@
     }).fail((result) => {
         console.log(result);
         alert("Failed to Login");
+        window.location.href = 'https://localhost:44351/login';
     })
 }
 

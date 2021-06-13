@@ -255,47 +255,66 @@ namespace Overtime_Project.Controllers
                     // var user = myPerson. Where(u => u.NIK == reqOvertimeVM.NIK).FirstOrDefault();
                     var subject = $"Request validation overtime [{reqOvertime.Date.ToString("dd-MM-yyyy")}]";
                     //var body = $"Request lembur baru untuk divalidasi telah diterima! Request validasi telah dikirim atas nama: {myPerson.FirstName} nik: {myPerson.NIK},\nMohon untuk ditinjau kembali sebelum melakukan validasi.\n Terima kasih dan Selamat Bekerja.";
-                    isBody = "<style>";
-                    isBody += ".footer { clear: both; margin-top: 10px; text-align = center; width= 100% }";
-                    isBody += ".footer td, .footer p, .footer span, .footer a { color: #999999; font-size: 12px; text-align: center; }";
+                    isBody = "<!DOCTYPE html>";
+                    isBody += "<html lang='en' xmlns='http://www.w3.org/1999/xhtml' xmlns:o='urn:schemas-microsoft-com:office:office'>";
+                    isBody += "<head>";
+                    isBody += "<style>";
+                    isBody += "table, td, div, h1, p {";
+                    isBody += "font-family: Arial, sans-serif;";
+                    isBody += "}";
                     isBody += "</style>";
-
-                    isBody +=  "<body class="+""+">";
-         
-                    isBody += "<table role = " + "presentation" + " border = " + "0" + " cellpadding = '0' cellspacing = '0' class='body'>";
-                    //isBody += "<table role = " + "presentation" + " border = " + "0" + " cellpadding = '0' cellspacing = '0' class='body'>";
-                    isBody += "<tr><td>&nbsp;</td><td class='container'><div class='content'>";
-                    isBody += "<table role='presentation' class='main'>";
-                    //
-                    isBody += "<tr><td class='wrapper'>";
-                    isBody += "<table role='presentation' border='0' cellpadding='0' cellspacing='0'>";
-                    isBody += "<tr><td>";
-                    isBody += $"<p> Halo <b>{myHeadPerson.FirstName}</b>,</p>";
-                    isBody += $"<p></p>";
+                    isBody += "</head>";
+                    isBody += "<body style='margin:0; padding:0;'>";
+                    isBody += "<body style='margin:0; padding:0;'>";
+                    isBody += "<table role='presentation' style='width:100%;border-collapse:collapse;border:0;border-spacing:0;background:#ffffff;'>";
+                    isBody += "<tr> <td align='center' style='padding:0;'>";
+                    isBody += "<table role='presentation' style='width:602px;border-collapse:collapse;border:1px solid #cccccc;border-spacing:0;text-align:left;'>";
+                    isBody += "<tr>";
+                    isBody += "<td align='center' style='padding:40px 0 30px 0;background:#ffffff;'>";
+                    isBody += "<img src='https://www.synnexmetrodata.com/wp-content/uploads/2020/06/Logo-SMI-300-x-80-pixel.png' alt='' width='300' style='height:auto;display:block;' />";
+                    isBody += "</td>";
+                    isBody += "</tr>";
+                    isBody += "<tr>";
+                    isBody += "<td style='padding:36px 30px 42px 30px;'>";
+                    isBody += "<table role='presentation' style='width:100%;border-collapse:collapse;border:0;border-spacing:0;'>";
+                    isBody += "<tr>";
+                    isBody += "<td style='padding:0 0 36px 0;color:#153643;'>";
+                    isBody += $"<h1 style='font-size:24px;margin:0 0 20px 0;font-family:Arial,sans-serif;'>Overtime Validation Requested</h1>";
+                    isBody += $"<p style='margin:0 0 12px 0;font-size:16px;line-height:24px;font-family:Arial,sans-serif;'>Halo <b>{myHeadPerson.FirstName}</b></p>";
                     isBody += $"<p>Request lembur baru untuk divalidasi telah diterima!</p>";
                     isBody += $"<p>Terdata request validasi lembur: </p>";
                     isBody += $"<p>Tanggal request validasi: <b>{reqOvertime.Date.ToString("dd-MM-yyyy")}</b></p>";
                     isBody += $"<p>Atas nama:<b>{myPerson.FirstName} {myPerson.LastName}</b> </p>";
                     isBody += $"<p>Deskripsi lembur: <b>{reqOvertime.DescEmp}</b></p>";
-                    isBody += $"<p></p>";
                     isBody += $"<p>Mohon untuk ditinjau kembali sebelum melakukan validasi!</p>";
                     isBody += $"<p>Terima kasih!</p>";
-                    isBody += $"</td></tr></table></td></tr></table>";
-                    //footer
-                    isBody += "<div class='footer'>";
-                    isBody += "<table role='presentation' border='0' cellpadding='0' cellspacing='0'>";
-                    isBody += "<tr>";
-                    isBody += "<td class='content-block'>";
-                    //isBody += "<span class='apple-link'>APL Tower 37th Floor Suite 3 Jl. Letjen S. Parman Kav. 28</span>";
-                    isBody += "</td>";
-                    isBody += "</tr>";
-                    isBody += "<tr>";
-                    isBody += "</td>";
-                    isBody += "</tr>";
-                    isBody += "</table>";
-                    isBody += "</div>";
-                    //end footer
-                    isBody += "</div></td><td>&nbsp;</td></tr></table></body>";
+                    isBody += $"</td>";
+                    isBody += $"</tr>";
+                    isBody += $"</table>";
+                    isBody += $"</td>";
+                    isBody += $"</tr>";
+                    isBody += $"<tr>";
+                    isBody += $"<td style='padding:30px;background:#ee4c50;'>";
+                    isBody += $"<table role='presentation' style='width:100%;border-collapse:collapse;border:0;border-spacing:0;font-size:9px;font-family:Arial,sans-serif;'>";
+                    isBody += $"<tr>";
+                    isBody += $"<td style='padding:0;width:50%;' align='left'>";
+                    isBody += $"<p style='margin:0;font-size:14px;line-height:16px;font-family:Arial,sans-serif;color:#ffffff;'>";
+                    isBody += "&reg; PT Synnex Metrodata Indonesia 2021<br /><a href='https://www.mii.co.id/' style='color:#ffffff;text-decoration:underline;'>Website</a>";
+                    isBody += $"</p>";
+                    isBody += $"</td>";
+                    isBody += $"</tr>";
+                    isBody += $"</table>";
+                    isBody += $"</td>";
+                    isBody += $"</tr>";
+                    isBody += $"</table>"; 
+                    isBody += $"</td>";
+                    isBody += $"</tr>";
+                    isBody += $"</table>";
+                    isBody += $"</body>";
+                    isBody += $"</html>";
+
+                    ////////////////
+                   
 
                     var body = isBody;
 
@@ -323,13 +342,66 @@ namespace Overtime_Project.Controllers
 
                 var subject = $"{status.Name} request lembur [{overtime.Date.ToString("dd-MM-yyyy")}]";
                 string isBody = String.Empty;
-                isBody = $"<p>Hello <b>{myPerson.FirstName}</b>!</p>";
+                isBody = "<!DOCTYPE html>";
+                isBody += "<html lang='en' xmlns='http://www.w3.org/1999/xhtml' xmlns:o='urn:schemas-microsoft-com:office:office'>";
+                isBody += "<head>";
+                isBody += "<style>";
+                isBody += "table, td, div, h1, p {";
+                isBody += "font-family: Arial, sans-serif;";
+                isBody += "}";
+                isBody += "</style>";
+                isBody += "</head>";
+                isBody += "<body style='margin:0; padding:0;'>";
+                isBody += "<body style='margin:0; padding:0;'>";
+                isBody += "<table role='presentation' style='width:100%;border-collapse:collapse;border:0;border-spacing:0;background:#ffffff;'>";
+                isBody += "<tr> <td align='center' style='padding:0;'>";
+                isBody += "<table role='presentation' style='width:602px;border-collapse:collapse;border:1px solid #cccccc;border-spacing:0;text-align:left;'>";
+                isBody += "<tr>";
+                isBody += "<td align='center' style='padding:40px 0 30px 0;background:#ffffff;'>";
+                isBody += "<img src='https://www.synnexmetrodata.com/wp-content/uploads/2020/06/Logo-SMI-300-x-80-pixel.png' alt='' width='300' style='height:auto;display:block;' />";
+                isBody += "</td>";
+                isBody += "</tr>";
+                isBody += "<tr>";
+                isBody += "<td style='padding:36px 30px 42px 30px;'>";
+                isBody += "<table role='presentation' style='width:100%;border-collapse:collapse;border:0;border-spacing:0;'>";
+                isBody += "<tr>";
+                isBody += "<td style='padding:0 0 36px 0;color:#153643;'>";
+
+                isBody += $"<h1 style='font-size:24px;margin:0 0 20px 0;font-family:Arial,sans-serif;'>Overtime Validation {status.Name}</h1>";
+                isBody += $"<p style='margin:0 0 12px 0;font-size:16px;line-height:24px;font-family:Arial,sans-serif;'>Hello <b>{myPerson.FirstName}</b>!</b></p>";
                 isBody += $"<p>Request validasi lembur anda pada tanggal {overtime.Date.ToString("dd-MM-yyyy")} telah di tinjau oleh Head Department!</p>";
                 isBody += $"<p>Deskripsi lembur: {overtime.DescEmp}</p>";
                 isBody += $"<p>Deskripsi validasi: {overtime.DescHead}</p>";
                 isBody += $"<p>Validation status : {status.Name}</p>";
                 isBody += $"<p>Untuk keterangan lebih lanjut silahkan hubungi Head Department pada email: {myHeadPerson.Email}</p>";
                 isBody += "<p>Terima kasih dan Selamat Bekerja</p>";
+                
+                isBody += $"</td>";
+                isBody += $"</tr>";
+                isBody += $"</table>";
+                isBody += $"</td>";
+                isBody += $"</tr>";
+                isBody += $"<tr>";
+                isBody += $"<td style='padding:30px;background:#ee4c50;'>";
+                isBody += $"<table role='presentation' style='width:100%;border-collapse:collapse;border:0;border-spacing:0;font-size:9px;font-family:Arial,sans-serif;'>";
+                isBody += $"<tr>";
+                isBody += $"<td style='padding:0;width:50%;' align='left'>";
+                isBody += $"<p style='margin:0;font-size:14px;line-height:16px;font-family:Arial,sans-serif;color:#ffffff;'>";
+                isBody += "&reg; PT Synnex Metrodata Indonesia 2021<br /><a href='https://www.mii.co.id/' style='color:#ffffff;text-decoration:underline;'>Website</a>";
+                isBody += $"</p>";
+                isBody += $"</td>";
+                isBody += $"</tr>";
+                isBody += $"</table>";
+                isBody += $"</td>";
+                isBody += $"</tr>";
+                isBody += $"</table>";
+                isBody += $"</td>";
+                isBody += $"</tr>";
+                isBody += $"</table>";
+                isBody += $"</body>";
+                isBody += $"</html>";
+                ////////////////////////////
+               
                 var body = isBody;
                 sendMail.SendEmail(myPerson.Email, body, subject);
                 //return StatusCode(200, new { status = HttpStatusCode.OK, message = "Requested for validation" });

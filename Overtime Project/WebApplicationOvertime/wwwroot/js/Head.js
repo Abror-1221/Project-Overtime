@@ -152,7 +152,7 @@ function formatRupiah(angka, prefix) {
 //})
 
 //Update v.2
-var dataHead = null;
+
 //function reject() {
 //    var obj2 = new Object();
 //    obj2.Id = dataHead.id;

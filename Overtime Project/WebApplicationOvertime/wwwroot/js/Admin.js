@@ -120,11 +120,17 @@ $('#insert_form').on("submit", function (event) {
         headers: {
             "content-type": "application/json;charset=UTF-8" // Or add this line
       }, success: function (data) {
-            alert("done");
+            
             $('#insert_form')[0].reset();
             $('#insert').val("Insert");
             $('#staticBackdrop').modal('hide');
             $("#myTable").DataTable().ajax.reload();
+            
+            Swal.fire(
+                'Data Added',
+                'Success',
+                  'success'
+            )
         }
     })
 });
