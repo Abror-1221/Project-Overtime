@@ -88,9 +88,11 @@ $('#request_form').on("submit", function (event) {
     event.preventDefault();
 
     var dateOvertime = $("#demo-calendar").val();
-    var timeOvertime = $("#demo-time").val();
-    var tes = timeOvertime.split('-')[0];
-    var tes2 = timeOvertime.split('-')[1];
+    //var timeOvertime = ;
+    //var tes = ;
+    //var tes2 = ;
+    var convertedTime1 = moment($("input.timerange1").val().split('-')[0], 'hh:mm A').format('HH:mm:ss')
+    var convertedTime2 = moment($("input.timerange1").val().split('-')[1], 'hh:mm A').format('HH:mm:ss')
     //if(tes2.lenght == )
     var dateRequest = new Date();
     var obj = new Object(); //sesuaikan sendiri nama objectnya dan beserta isinya
@@ -98,13 +100,15 @@ $('#request_form').on("submit", function (event) {
     //obj.Date = dateRequest.getMonth() + "/" + dateRequest.getDate() + "/" + dateRequest.getFullYear();
     //obj.StartTime = $("#startTime").val();
     //obj.EndTime = $("#endTime").val();
-    obj.StartTime = dateOvertime.slice(0, 10) + " " + tes;
+    obj.StartTime = dateOvertime.slice(0, 10) + " " + $("input.timerange1").val().split('-')[0];
     //obj.StartTime = dateOvertime.slice(0, 10) + " " + timeOvertime.slice(0, 8);
    // obj.EndTime = dateOvertime.slice(13) + " " + timeOvertime.slice(11);
-    obj.EndTime = dateOvertime.slice(13) + tes2;
-    obj.DescEmp = $("#descEmp").val();
-    console.log(obj.StartTime);
-    console.log(obj.EndTime);
+    obj.EndTime = dateOvertime.slice(13) + $("input.timerange1").val().split('-')[1];
+    obj.DescEmp = $("#descEmp").val() + "@" + convertedTime1 + "-" + convertedTime2 + "#" +
+        $("#descEmp2").val() + "@" + moment($("input.timerange2").val().split('-')[0], 'hh:mm A').format('HH:mm:ss') + "-" + moment($("input.timerange2").val().split('-')[1], 'hh:mm A').format('HH:mm:ss') + "#" +
+        $("#descEmp3").val() + "@" + moment($("input.timerange3").val().split('-')[0], 'hh:mm A').format('HH:mm:ss') + "-" + moment($("input.timerange3").val().split('-')[1], 'hh:mm A').format('HH:mm:ss');
+    console.log(obj.DescEmp);
+    console.log(convertedTime2);
     //console.log(tes);
     //console.log(tes2);
     //obj.DayTypeId = $("#day").val();
@@ -148,14 +152,42 @@ mobiscroll.datepicker('#demo-time', {
 $("#employeeTable").on('click', '#btnDetailOvertimeEmployee', function () {
     var data = $("#employeeTable").DataTable().row($(this).parents('tr')).data();
     console.log(data);
+    var detailAct = data.descEmp.split('#');
+    console.log(detailAct);
+    if (detailAct[0] != "Invalid date-Invalid date" && detailAct[0] != "@Invalid date-Invalid date") {
+        $("#overtimeTimeDE1").val(detailAct[0].split('@')[1]);
+        $("#overtimeReportDE1").val(detailAct[0].split('@')[0]);
+    }
+    else {
+        $("#overtimeTimeDE1").val("-");
+        $("#overtimeReportDE1").val("-");
+    }
+
+    if (detailAct[1] != "Invalid date-Invalid date" && detailAct[1] != "@Invalid date-Invalid date") {
+        $("#overtimeTimeDE2").val(detailAct[1].split('@')[1]);
+        $("#overtimeReportDE2").val(detailAct[1].split('@')[0]);
+    }
+    else {
+        $("#overtimeTimeDE2").val("-");
+        $("#overtimeReportDE2").val("-");
+    }
+
+    if (detailAct[2] != "Invalid date-Invalid date" && detailAct[2] != "@Invalid date-Invalid date") {
+        $("#overtimeTimeDE3").val(detailAct[2].split('@')[1]);
+        $("#overtimeReportDE3").val(detailAct[2].split('@')[0]);
+    }
+    else {
+        $("#overtimeTimeDE3").val("-");
+        $("#overtimeReportDE3").val("-");
+    }
     //alert("tes aaaaaa dong bro");
     //$('#modalDetailEmployeeOvertime').find(".modal-body").html('<p>Day type               : ' + data.dayTypeName
     //    + '</p> <p>Overtime Report        : ' + data.descEmp
     //    + '</p> <p value="Unfilled">Validation Description : ' + data.descHead + '</p>');
 
     $("#dayTypeDE").val(data.dayTypeName);
-    $("#overtimeTimeDE").val(data.startTime.slice(11) + " - " + data.endTime.slice(11));
-    $("#overtimeReportDE").val(data.descEmp);
+    //$("#overtimeTimeDE").val(data.startTime.slice(11) + " - " + data.endTime.slice(11));
+    //$("#overtimeReportDE").val(data.descEmp);
     $("#validationDescDE").val(data.descHead);
 });
 

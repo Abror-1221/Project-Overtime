@@ -85,15 +85,43 @@ $(document).ready(function () {
 
 $("#employeeTableHistory").on('click', '#btnDetailOvertimeEmpHistory', function () {
     var data = $("#employeeTableHistory").DataTable().row($(this).parents('tr')).data();
-    console.log(data);
+    //console.log(data);
     //alert("tes aaaaaa dong bro");
     //$('#modalDetailEmployeeOvertime').find(".modal-body").html('<p>Day type               : ' + data.dayTypeName
     //    + '</p> <p>Overtime Report        : ' + data.descEmp
     //    + '</p> <p value="Unfilled">Validation Description : ' + data.descHead + '</p>');
+    var detailAct = data.descEmp.split('#');
+    console.log(detailAct);
+    if (detailAct[0] != "Invalid date-Invalid date" && detailAct[0] != "@Invalid date-Invalid date") {
+        $("#overtimeTimeDE1").val(detailAct[0].split('@')[1]);
+        $("#overtimeReportDE1").val(detailAct[0].split('@')[0]);
+    }
+    else {
+        $("#overtimeTimeDE1").val("-");
+        $("#overtimeReportDE1").val("-");
+    }
+
+    if (detailAct[1] != "Invalid date-Invalid date" && detailAct[1] != "@Invalid date-Invalid date") {
+        $("#overtimeTimeDE2").val(detailAct[1].split('@')[1]);
+        $("#overtimeReportDE2").val(detailAct[1].split('@')[0]);
+    }
+    else {
+        $("#overtimeTimeDE2").val("-");
+        $("#overtimeReportDE2").val("-");
+    }
+
+    if (detailAct[2] != "Invalid date-Invalid date" && detailAct[2] != "@Invalid date-Invalid date") {
+        $("#overtimeTimeDE3").val(detailAct[2].split('@')[1]);
+        $("#overtimeReportDE3").val(detailAct[2].split('@')[0]);
+    }
+    else {
+        $("#overtimeTimeDE3").val("-");
+        $("#overtimeReportDE3").val("-");
+    }
 
     $("#dayTypeDE").val(data.dayTypeName);
-    $("#overtimeTimeDE").val(data.startTime.slice(11) + " - " + data.endTime.slice(11));
-    $("#overtimeReportDE").val(data.descEmp);
+    //$("#overtimeTimeDE").val(data.startTime.slice(11) + " - " + data.endTime.slice(11));
+    //$("#overtimeReportDE").val(data.descEmp);
     $("#validationDescDE").val(data.descHead);
 });
 

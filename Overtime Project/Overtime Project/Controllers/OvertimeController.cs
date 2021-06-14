@@ -11,6 +11,7 @@ using Overtime_Project.Repository.Data;
 using Overtime_Project.ViewModels;
 using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
 using System.Net;
 using System.Net.Mail;
@@ -161,7 +162,8 @@ namespace Overtime_Project.Controllers
             var totalReimburse = 0;
             var hour = 0;
             var daytype = 0;
-            var hourOvertime = 0;
+            var totalDay = 0;
+            //var hourOvertime = 0;
             //var myHead = from p in overtimeContext.Person
             //             join a in overtimeContext.Account on p.NIK equals a.NIK
             //             join ra in overtimeContext.RoleAccount on a.NIK equals ra.NIK
@@ -174,31 +176,43 @@ namespace Overtime_Project.Controllers
             var myHead = overtimeContext.RoleAccount.FirstOrDefault(i => i.RoleId == 2);
             //var myHeadAcc = overtimeContext.Account.FirstOrDefault(u => u.NIK == myHead.NIK);
             var myHeadPerson = overtimeContext.Person.FirstOrDefault(u => u.NIK == myHead.NIK);
-
-            var myPerson = overtimeContext.Person.FirstOrDefault(u => u.NIK == NIK);
+            var descAct = reqOvertimeVM.DescEmp.Split('#');
+            foreach (string item in descAct)
+            {
+                if (item != "Invalid date-Invalid date" && item != "@Invalid date-Invalid date")
+                {
+                    hour += (int)Math.Ceiling(Convert.ToDouble((DateTime.ParseExact(item.Split('@')[1].Split('-')[1], "HH:mm:ss", CultureInfo.InvariantCulture) - DateTime.ParseExact(item.Split('@')[1].Split('-')[0], "HH:mm:ss", CultureInfo.InvariantCulture)).TotalHours));
+                }
+                else
+                {
+                    continue;
+                }
+            }
+            var myPerson = overtimeContext.Person.AsNoTracking().FirstOrDefault(u => u.NIK == NIK);
+            totalDay = (int)Math.Ceiling(Convert.ToDouble((reqOvertimeVM.EndTime - reqOvertimeVM.StartTime).TotalDays));
             if (myPerson != null)
             {
-                hourOvertime = (int)Math.Ceiling(Convert.ToDouble((reqOvertimeVM.EndTime.TimeOfDay - reqOvertimeVM.StartTime.TimeOfDay).TotalHours));
-                hour = (int)Math.Ceiling(Convert.ToDouble((reqOvertimeVM.EndTime - reqOvertimeVM.StartTime).TotalHours));
-                if ((reqOvertimeVM.StartTime.DayOfWeek == DayOfWeek.Sunday || reqOvertimeVM.StartTime.DayOfWeek == DayOfWeek.Saturday) && myPerson.OvertimeHour >= hourOvertime)
+                //hourOvertime = (int)Math.Ceiling(Convert.ToDouble((reqOvertimeVM.EndTime.TimeOfDay - reqOvertimeVM.StartTime.TimeOfDay).TotalHours));
+                //hour = (int)Math.Ceiling(Convert.ToDouble((reqOvertimeVM.EndTime - reqOvertimeVM.StartTime).TotalHours));
+                if ((reqOvertimeVM.StartTime.DayOfWeek == DayOfWeek.Sunday || reqOvertimeVM.StartTime.DayOfWeek == DayOfWeek.Saturday) && myPerson.OvertimeHour >= hour)
                 {
                     
-                    if (hourOvertime <= 8)
+                    if (hour <= 8)
                     {
-                        totalReimburse += (int)Math.Ceiling((double)hourOvertime * 2 / 173 * myPerson.Salary);
+                        totalReimburse += (int)Math.Ceiling((double)hour * 2 / 173 * myPerson.Salary);
                     }
                     else
                     {
                         totalReimburse += (int)Math.Ceiling(8.0 * 2 / 173 * (double)myPerson.Salary);
                         totalReimburse += (int)Math.Ceiling(3.0 / 173 * (double)myPerson.Salary);
-                        for (int i=2 ; i <= hourOvertime - 8 ; i++)
+                        for (int i=2 ; i <= hour - 8 ; i++)
                         {
                             totalReimburse += (int)Math.Ceiling(4.0 / 173 * (double)myPerson.Salary);
                         }
                     }
                     daytype = 1;
                 }
-                else if ((reqOvertimeVM.StartTime.DayOfWeek != DayOfWeek.Sunday || reqOvertimeVM.StartTime.DayOfWeek != DayOfWeek.Saturday) && myPerson.OvertimeHour >= hourOvertime)
+                else if ((reqOvertimeVM.StartTime.DayOfWeek != DayOfWeek.Sunday || reqOvertimeVM.StartTime.DayOfWeek != DayOfWeek.Saturday) && (myPerson.OvertimeHour >= hour && hour <= totalDay*3))
                 {
                     totalReimburse = (int)Math.Ceiling(1.5 / 173 * myPerson.Salary);
                     for (int i = 1; i <= hour - 1; i++)
@@ -225,7 +239,7 @@ namespace Overtime_Project.Controllers
                 //}
                 else
                 {
-                    return StatusCode(403, new { status = HttpStatusCode.Forbidden, message = "Error : Invalid input DayType..." });
+                    return StatusCode(403, new { status = HttpStatusCode.Forbidden, message = "Error : Invalid input Time..." });
                 }
                 var reqOvertime = new Overtime
                 {
@@ -239,7 +253,19 @@ namespace Overtime_Project.Controllers
                     TotalReimburse = totalReimburse,
                     DayTypeId = daytype,
                     StatusId = reqOvertimeVM.StatusId
-                    
+                };
+                var reqPerson = new Person
+                {
+                    NIK = myPerson.NIK,
+                    FirstName = myPerson.FirstName,
+                    LastName = myPerson.LastName,
+                    Gender = myPerson.Gender,
+                    Email = myPerson.Email,
+                    Phone = myPerson.Phone,
+                    BirthDate = myPerson.BirthDate,
+                    Salary = myPerson.Salary,
+                    OvertimeHour = myPerson.OvertimeHour - hour,
+                    IsDeleted = myPerson.IsDeleted
                 };
                 if (reqOvertime.TotalReimburse < 0)
                 {
@@ -248,6 +274,7 @@ namespace Overtime_Project.Controllers
                 else
                 {
                     overtimeContext.Overtime.Add(reqOvertime);
+                    overtimeContext.Entry(reqPerson).State = EntityState.Modified;
                     var addReq = overtimeContext.SaveChanges();
                     string isBody = String.Empty;
 

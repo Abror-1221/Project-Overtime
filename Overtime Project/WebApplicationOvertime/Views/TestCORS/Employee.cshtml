@@ -58,13 +58,35 @@
                         <label for="dayTypeDE" class="form-label">Day Type</label>
                         <input type="text" name="dayTypeDE" id="dayTypeDE" class="form-control" required readonly />
                     </div>
+                    
                     <div class="col-md-12">
-                        <label for="overtimeTimeDE" class="form-label">Time</label>
-                        <input type="text" name="overtimeTimeDE" id="overtimeTimeDE" class="form-control" required readonly />
+                        <label>Activities 1</label>
+                        @*<label for="overtimeTimeDE1" class="form-label">Time</label>*@
+                        <input type="text" name="overtimeTimeDE1" id="overtimeTimeDE1" class="form-control" required readonly />
                     </div>
                     <div class="col-md-12">
-                        <label for="overtimeReportDE" class="form-label">Overtime Report</label>
-                        <input type="text" name="overtimeReportDE" id="overtimeReportDE" class="form-control" required readonly />
+                        @*<label for="overtimeReportDE1" class="form-label">Overtime Report</label>*@
+                        <input type="text" name="overtimeReportDE1" id="overtimeReportDE1" class="form-control" required readonly />
+                    </div>
+                    
+                    <div class="col-md-12">
+                        <label>Activities 2</label>
+                        @*<label for="overtimeTimeDE2" class="form-label">Time</label>*@
+                        <input type="text" name="overtimeTimeDE2" id="overtimeTimeDE2" class="form-control" required readonly />
+                    </div>
+                    <div class="col-md-12">
+                        @*<label for="overtimeReportDE2" class="form-label">Overtime Report</label>*@
+                        <input type="text" name="overtimeReportDE2" id="overtimeReportDE2" class="form-control" required readonly />
+                    </div>
+                    
+                    <div class="col-md-12">
+                        <label>Activities 3</label>
+                        @*<label for="overtimeTimeDE3" class="form-label">Time</label>*@
+                        <input type="text" name="overtimeTimeDE3" id="overtimeTimeDE3" class="form-control" required readonly />
+                    </div>
+                    <div class="col-md-12">
+                        @*<label for="overtimeReportDE3" class="form-label">Overtime Report</label>*@
+                        <input type="text" name="overtimeReportDE3" id="overtimeReportDE3" class="form-control" required readonly />
                     </div>
                     <div class="col-md-12">
                         <label for="validationDescDE" class="form-label">Validation Description</label>
@@ -91,59 +113,88 @@
             <div class="modal-body">
                 <form class="row g-3 needs-validation" method="post" id="request_form" novalidate>
                     @*<div class="col-md-6">
-                        <label for="date" class="form-label">Date Request</label>
-                        <input type="date" class="form-control" id="date" required>
-                        <div class="invalid-feedback">
-                            Required!
-                        </div>
-                    </div>
-                    <div class="col-md-6">
-                        <label for="day" class="form-label">Day Type</label>
-                        <select name="university" id="day" class="form-select" required>
-                            <option value="">Select Day Type</option>
-                            <option value="1">Weekend</option>
-                            <option value="2">Weekday</option>
-                            <option value="3">National holiday</option>
-                        </select>
-                        <div class="invalid-feedback">
-                            Required!
-                        </div>
-                    </div>*@
+            <label for="date" class="form-label">Date Request</label>
+            <input type="date" class="form-control" id="date" required>
+            <div class="invalid-feedback">
+                Required!
+            </div>
+        </div>
+        <div class="col-md-6">
+            <label for="day" class="form-label">Day Type</label>
+            <select name="university" id="day" class="form-select" required>
+                <option value="">Select Day Type</option>
+                <option value="1">Weekend</option>
+                <option value="2">Weekday</option>
+                <option value="3">National holiday</option>
+            </select>
+            <div class="invalid-feedback">
+                Required!
+            </div>
+        </div>*@
                     @*<div class="col-md-12">
-                        <label for="startTime" class="form-label">Start Time</label>
-                        <input type="datetime-local" class="form-control" id="startTime" required>
-                        <div class="invalid-feedback">
-                            Required!
-                        </div>
-                    </div>
-                    <div class="col-md-12">
-                        <label for="endTime" class="form-label">End Time</label>
-                        <input type="datetime-local" class="form-control" id="endTime" required>
-                        <div class="invalid-feedback">
-                            Required!
-                        </div>
-                    </div>*@
+            <label for="startTime" class="form-label">Start Time</label>
+            <input type="datetime-local" class="form-control" id="startTime" required>
+            <div class="invalid-feedback">
+                Required!
+            </div>
+        </div>
+        <div class="col-md-12">
+            <label for="endTime" class="form-label">End Time</label>
+            <input type="datetime-local" class="form-control" id="endTime" required>
+            <div class="invalid-feedback">
+                Required!
+            </div>
+        </div>*@
                     <div class="col-md-12">
                         <label>
                             Date
-                            <input id="demo-calendar" mbsc-input data-input-style="outline" data-label-style="stacked" placeholder="Please select..." required/>
+                            <input id="demo-calendar" mbsc-input data-input-style="outline" data-label-style="stacked" placeholder="Please select..." required />
                         </label>
                         <div class="invalid-feedback">
                             Required!
                         </div>
                     </div>
+                    <hr />
+                    <label>Activities 1</label>
                     <div class="col-md-12">
                         <label>
                             Time
-                            <input id="demo-time" mbsc-input data-input-style="outline" data-label-style="stacked" placeholder="Please select..." />
+                            <input id="demo-time" class="timerange1" mbsc-input data-input-style="outline" data-label-style="stacked" placeholder="Please select..." />
                         </label>
-                        <div class="invalid-feedback">
-                            Required!
-                        </div>
                     </div>
-                    <div class="col-lg-12">
+                    <div class="col-md-12">
                         <label for="descEmp" class="form-label">Overtime Report</label>
                         <textarea class="form-control" id="descEmp" placeholder="Required report description." required></textarea>
+                        <div class="invalid-feedback">
+                            Please provide a valid report description.
+                        </div>
+                    </div>
+                    <hr />
+                    <label>Activities 2</label>
+                    <div class="col-md-12">
+                        <label>
+                            Time
+                            <input id="demo-time" class="timerange2" mbsc-input data-input-style="outline" data-label-style="stacked" placeholder="Please select..." />
+                        </label>
+                    </div>
+                    <div class="col-md-12">
+                        <label for="descEmp2" class="form-label">Overtime Report</label>
+                        <textarea class="form-control" id="descEmp2" placeholder="Required report description." required></textarea>
+                        <div class="invalid-feedback">
+                            Please provide a valid report description.
+                        </div>
+                    </div>
+                    <hr />
+                    <label>Activities 3</label>
+                    <div class="col-md-12">
+                        <label>
+                            Time
+                            <input id="demo-time" class="timerange3" mbsc-input data-input-style="outline" data-label-style="stacked" placeholder="Please select..." />
+                        </label>
+                    </div>
+                    <div class="col-md-12">
+                        <label for="descEmp3" class="form-label">Overtime Report</label>
+                        <textarea class="form-control" id="descEmp3" placeholder="Required report description." required></textarea>
                         <div class="invalid-feedback">
                             Please provide a valid report description.
                         </div>

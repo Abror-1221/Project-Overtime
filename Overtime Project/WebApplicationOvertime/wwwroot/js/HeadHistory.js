@@ -104,7 +104,7 @@ function formatRupiah(angka, prefix) {
 
 $("#headOvertimeTableHistory").on('click', '#btnDetailHeadHistory', function () {
     var data = $("#headOvertimeTableHistory").DataTable().row($(this).parents('tr')).data();
-    console.log(data);
+    //console.log(data);
     //alert("tes aaaaaa dong bro");
     //$('#modalDetailHead').find(".detailBody").html('<p>Day type            : ' + data.dayTypeName
     //    + '</p> <p>Start Time             : ' + data.startTime.slice(0, 10) + ", Time : " + data.startTime.slice(11)
@@ -114,13 +114,43 @@ $("#headOvertimeTableHistory").on('click', '#btnDetailHeadHistory', function () 
     //    + '</p> <p>Phone                  : ' + data.phone
     //    + '</p> <p>Overtime Report        : ' + data.descEmp
     //    + '</p> <p>Validation Description : ' + data.descHead + '</p>');
+
+    var detailAct = data.descEmp.split('#');
+    console.log(detailAct);
+    if (detailAct[0] != "Invalid date-Invalid date" && detailAct[0] != "@Invalid date-Invalid date") {
+        $("#overtimeTimeDE1").val(detailAct[0].split('@')[1]);
+        $("#overtimeReportDE1").val(detailAct[0].split('@')[0]);
+    }
+    else {
+        $("#overtimeTimeDE1").val("-");
+        $("#overtimeReportDE1").val("-");
+    }
+
+    if (detailAct[1] != "Invalid date-Invalid date" && detailAct[1] != "@Invalid date-Invalid date") {
+        $("#overtimeTimeDE2").val(detailAct[1].split('@')[1]);
+        $("#overtimeReportDE2").val(detailAct[1].split('@')[0]);
+    }
+    else {
+        $("#overtimeTimeDE2").val("-");
+        $("#overtimeReportDE2").val("-");
+    }
+
+    if (detailAct[2] != "Invalid date-Invalid date" && detailAct[2] != "@Invalid date-Invalid date") {
+        $("#overtimeTimeDE3").val(detailAct[2].split('@')[1]);
+        $("#overtimeReportDE3").val(detailAct[2].split('@')[0]);
+    }
+    else {
+        $("#overtimeTimeDE3").val("-");
+        $("#overtimeReportDE3").val("-");
+    }
+
     $("#dayTypeD").val(data.dayTypeName);
     $("#startTimeD").val(data.startTime.slice(8, 10) + "/" + data.startTime.slice(5, 7) + "/" + data.startTime.slice(0, 4) + " - " + data.endTime.slice(8, 10) + "/" + data.endTime.slice(5, 7) + "/" + data.endTime.slice(0, 4));
-    $("#endTimeD").val(data.startTime.slice(11) + " - " + data.endTime.slice(11));
+    //$("#endTimeD").val(data.startTime.slice(11) + " - " + data.endTime.slice(11));
     $("#paymentD").val(formatRupiah(data.totalReimburse.toString(), 'Rp. '));
     $("#emailD").val(data.email);
     $("#phoneD").val(data.phone);
-    $("#overtimeReportD").val(data.descEmp);
+    //$("#overtimeReportD").val(data.descEmp);
     $("#validationD").val(data.descHead);
 });
 ////Update v.1
