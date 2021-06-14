@@ -32,8 +32,8 @@
                 </button>
                 <button class="topbar-toggler more"><i class="la la-ellipsis-v"></i></button>
             </div>
-            <nav class="navbar navbar-header navbar-expand-lg">
-                <div class="container-fluid">
+            <nav class="row navbar navbar-header navbar-expand-lg">
+                @*<div class="container-fluid">*@
 
                     @*<form class="navbar-left navbar-form nav-search mr-md-3" action="">
                         <div class="input-group">
@@ -45,7 +45,9 @@
                             </div>
                         </div>
                     </form>*@
-                    <ul class="navbar-nav topbar-nav ml-md-auto align-items-center">
+                    <div class="col-auto me-auto"></div>
+                    <div class="col-auto">
+                        <ul class="navbar-nav topbar-nav ml-md-auto align-items-center">
                         @*<li class="nav-item dropdown hidden-caret">
                             <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                 <i class="la la-envelope"></i>
@@ -137,7 +139,8 @@
                             <!-- /.dropdown-user -->
                         </li>
                     </ul>
-                </div>
+                    </div>
+                @*</div>*@
             </nav>
         </div>
         <div class="sidebar">
