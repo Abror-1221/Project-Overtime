@@ -51,6 +51,32 @@
     });
 });
 
+//CHANGE PASS
+$("#editFormPass").on('click', '#saveChanges', function (event) {
+    event.preventDefault();
+    var objP = new Object();
+    objP.Email = $("#input-email").val();
+    objP.Password = $("#passEmp").val();
+    objP.NewPassword = $("#passEmpNew").val();
+    //console.log(objP.Email);
+    //console.log(objP.Password);
+    //console.log(objP.NewPassword);
+    $.ajax({
+        url: "https://localhost:44324/API/Account/Changepass",
+        type: "POST",
+        data: JSON.stringify(objP),
+        headers: {
+            "content-type": "application/json;charset=UTF-8" // Or add this line
+        }, success: function (data) {
+            $('#editModalPass').modal('hide');
+        }
+    })
+})
+
+$(".page-breadcrumb").on('click', '#btnChangePass', function () {
+    $("#editModalPass").modal("show");
+})
+
 function EditProfile() {
     $.ajax({
         url: "https://localhost:44324/API/Account/Profile/" + userID

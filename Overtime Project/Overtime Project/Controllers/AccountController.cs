@@ -261,13 +261,13 @@ namespace Overtime_Project.Controllers
                     tesNIK.Password = Hashing.HashPassword(changePasswordVM.NewPassword);
                     overtimeContext.Entry(tesNIK).State = EntityState.Modified;
                     overtimeContext.SaveChanges();
-                    return Ok();
+                    return StatusCode(200, new { status = HttpStatusCode.OK, message = "Requested for change password" });
 
                 }
-                else return NotFound();
+                else return StatusCode(400, new { status = HttpStatusCode.NotModified, message = "Error : Data not updated" });
 
             }
-            else return NotFound("Email Tidak Terdaftar!");
+            else return StatusCode(400, new { status = HttpStatusCode.NotModified, message = "Error : Data not updated" });
 
         }
 

@@ -20,11 +20,11 @@
                     <nav aria-label="breadcrumb">
                         <ol class="breadcrumb m-0 p-0">
                             <li class="breadcrumb-item">
-                                <a href="#">Settings</a>
+                                <a id="btnChangePass" href="#">Change Password</a>
                             </li>
-                            <li class="breadcrumb-item active">
+                            @*<li class="breadcrumb-item active">
                                 <a href="#">Your Account</a>
-                            </li>
+                            </li>*@
                         </ol>
                     </nav>
                 </div>
@@ -45,6 +45,8 @@
                         <img src="https://demos.creative-tim.com/argon-dashboard/assets/img/theme/team-4.jpg" class="rounded-circle img-thumbnail" style="max-width:20%">
                     </div>
                 </div>*@
+            @*<button type="button" id="btnUpdatePass" class="btn btn-primary "> Change Password </button >
+            <hr />*@
             <div class="card-body">
                 <form>
                     <div class="row">
@@ -127,6 +129,56 @@
     <!-- ============================================================== -->
     <!-- End Container fluid  -->
     <!-- ============================================================== -->
+</div>
+
+<!--CHANGE PASS-->
+<div class="modal fade" id="editModalPass" tabindex="-1" data-bs-backdrop="static" data-bs-keyboard="false" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleInsertModalLabelHead">Change Password</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <form method="post" id="editFormPass" class="row needs-validation" novalidate>
+                    <div class="row">
+                        <div class="col-lg-6">
+                            <label for="passAdmin" class="form-label">Password</label>
+                            <input type="text" class="form-control" id="passAdmin" required>
+                            <div class="invalid-feedback">
+                                Required!
+                            </div>
+                        </div>
+                        <div class="col-lg-6">
+                            <label for="passAdminNew" class="form-label">New Password</label>
+                            <input type="text" class="form-control" id="passAdminNew" required>
+                            <div class="invalid-feedback">
+                                Required!
+                            </div>
+                        </div>
+                        @*<div class="col-md-6">
+                                <label for="statusE" class="form-label">Approval Action</label>
+                                <select name="university" id="statusE" class="form-select" required>
+                                    <option value="">Select Action</option>
+                                    <option value="2">Validated</option>
+                                    <option value="3">Rejected</option>
+                                </select>
+                                <div class="invalid-feedback">
+                                    Required!
+                                </div>
+                            </div>*@
+                    </div>
+                    <div class="modal-footer">
+                        @*<button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>*@
+                        @*<input type="submit" value="Submit" name="Submit" id="validated" class="btn btn-success" />*@
+                        <input type="submit" value="Save Changes" name="Save Changes" id="saveChanges" class="btn btn-primary" />
+                        @*<input type="submit" value="Validated" name="Validated" id="validated" onclick="valid()" class="btn btn-success" />*@
+                        @*<input type="submit" value="Validated" name="Validated" id="validated" class="btn btn-success" />*@
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
 </div>
 <!-- ============================================================== -->
 <!-- End Page wrapper  -->
