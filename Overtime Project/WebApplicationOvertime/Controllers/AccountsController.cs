@@ -36,7 +36,8 @@ namespace WebApplicationOvertime.Controllers
             if (token == null)
             {
                 //return View("/Views/Authenticate/login.cshtml");
-                return View("/Views/Authenticate/NewLogin2.cshtml");
+                //return View("/Views/Authenticate/NewLogin2.cshtml");
+                return View("/Views/Authenticate/LandingPage.cshtml");
             }
             ViewData["token"] = token;
 
@@ -54,7 +55,8 @@ namespace WebApplicationOvertime.Controllers
             if (token == null)
             {
                 //return View("/Views/Authenticate/login.cshtml");
-                return View("/Views/Authenticate/NewLogin2.cshtml");
+                //return View("/Views/Authenticate/NewLogin2.cshtml");
+                return View("/Views/Authenticate/LandingPage.cshtml");
             }
             ViewData["token"] = token;
 
@@ -72,7 +74,8 @@ namespace WebApplicationOvertime.Controllers
             if (token == null)
             {
                 //return View("/Views/Authenticate/login.cshtml");
-                return View("/Views/Authenticate/NewLogin2.cshtml");
+                //return View("/Views/Authenticate/NewLogin2.cshtml");
+                return View("/Views/Authenticate/LandingPage.cshtml");
             }
             ViewData["token"] = token;
 
@@ -90,7 +93,8 @@ namespace WebApplicationOvertime.Controllers
             if (token == null)
             {
                 //return View("/Views/Authenticate/login.cshtml");
-                return View("/Views/Authenticate/NewLogin2.cshtml");
+                //return View("/Views/Authenticate/NewLogin2.cshtml");
+                return View("/Views/Authenticate/LandingPage.cshtml");
             }
             ViewData["token"] = token;
 
@@ -109,7 +113,8 @@ namespace WebApplicationOvertime.Controllers
             if (token == null)
             {
                 //return View("/Views/Authenticate/login.cshtml");
-                return View("/Views/Authenticate/NewLogin2.cshtml");
+                //return View("/Views/Authenticate/NewLogin2.cshtml");
+                return View("/Views/Authenticate/LandingPage.cshtml");
             }
             ViewData["token"] = token;
 
@@ -128,7 +133,9 @@ namespace WebApplicationOvertime.Controllers
             if (token == null)
             {
                 //return View("/Views/Authenticate/login.cshtml");
-                return View("/Views/Authenticate/NewLogin2.cshtml");
+                //return View("/Views/Authenticate/NewLogin2.cshtml");
+                return View("/Views/Authenticate/LandingPage.cshtml");
+
             }
             ViewData["token"] = token;
 
@@ -152,7 +159,9 @@ namespace WebApplicationOvertime.Controllers
             if (token == null)
             {
                 //return View("/Views/Authenticate/login.cshtml");
-                return View("/Views/Authenticate/NewLogin2.cshtml");
+                //return View("/Views/Authenticate/NewLogin2.cshtml");
+                return View("/Views/Authenticate/LandingPage.cshtml");
+
             }
             ViewData["token"] = token;
 

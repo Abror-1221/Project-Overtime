@@ -19,7 +19,8 @@ namespace WebApplicationOvertime.Controllers
         {
             HttpContext.Session.Clear();
             // HttpContext.Session.Remove();
-            return View("/Views/Authenticate/NewLogin2.cshtml");//~/Views/Auth/Login.cshtml"
+            //return View("/Views/Authenticate/NewLogin2.cshtml");//~/Views/Auth/Login.cshtml"
+            return View("/Views/Authenticate/LandingPage.cshtml");
         }
         public IActionResult Index()
         {
