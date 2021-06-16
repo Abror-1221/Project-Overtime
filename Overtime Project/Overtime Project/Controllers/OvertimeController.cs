@@ -312,7 +312,23 @@ namespace Overtime_Project.Controllers
                     isBody += $"<p>Terdata request validasi lembur: </p>";
                     isBody += $"<p>Tanggal request validasi: <b>{reqOvertime.Date.ToString("dd-MM-yyyy")}</b></p>";
                     isBody += $"<p>Atas nama:<b>{myPerson.FirstName} {myPerson.LastName}</b> </p>";
-                    isBody += $"<p>Deskripsi lembur: <b>{reqOvertime.DescEmp}</b></p>";
+                    //var descAct = reqOvertimeVM.DescEmp.Split('#');
+                    var actIndex = 1;
+                    foreach (string item in descAct)
+                    {
+                        if (item != "Invalid date-Invalid date" && item != "@Invalid date-Invalid date")
+                        {
+
+                            //hour += (int)Math.Ceiling(Convert.ToDouble((DateTime.ParseExact(item.Split('@')[1].Split('-')[1], "HH:mm:ss", CultureInfo.InvariantCulture) - DateTime.ParseExact(item.Split('@')[1].Split('-')[0], "HH:mm:ss", CultureInfo.InvariantCulture)).TotalHours));
+                            isBody += $"<p>Deskripsi lembur {actIndex}: <b>{item.Split('@')[0]}</b> - {item.Split('@')[1]}</p>";
+                            actIndex++;
+                        }
+                        else
+                        {
+                            continue;
+                        }
+                    }
+                    //isBody += $"<p>Deskripsi lembur: <b>{reqOvertime.DescEmp.Split('@')[0]}</b></p>";
                     isBody += $"<p>Mohon untuk ditinjau kembali sebelum melakukan validasi!</p>";
                     isBody += $"<p>Terima kasih!</p>";
                     isBody += $"</td>";
@@ -397,7 +413,25 @@ namespace Overtime_Project.Controllers
                 isBody += $"<h1 style='font-size:24px;margin:0 0 20px 0;font-family:Arial,sans-serif;'>Overtime Validation {status.Name}</h1>";
                 isBody += $"<p style='margin:0 0 12px 0;font-size:16px;line-height:24px;font-family:Arial,sans-serif;'>Hello <b>{myPerson.FirstName}</b>!</b></p>";
                 isBody += $"<p>Request validasi lembur anda pada tanggal {overtime.Date.ToString("dd-MM-yyyy")} telah di tinjau oleh Head Department!</p>";
-                isBody += $"<p>Deskripsi lembur: {overtime.DescEmp}</p>";
+
+                var descAct = overtime.DescEmp.Split('#');
+                var actIndex = 1;
+                foreach (string item in descAct)
+                {
+                    if (item != "Invalid date-Invalid date" && item != "@Invalid date-Invalid date")
+                    {
+
+                        //hour += (int)Math.Ceiling(Convert.ToDouble((DateTime.ParseExact(item.Split('@')[1].Split('-')[1], "HH:mm:ss", CultureInfo.InvariantCulture) - DateTime.ParseExact(item.Split('@')[1].Split('-')[0], "HH:mm:ss", CultureInfo.InvariantCulture)).TotalHours));
+                        isBody += $"<p>Deskripsi lembur {actIndex}: <b>{item.Split('@')[0]}</b> - {item.Split('@')[1]}</p>";
+                        actIndex++;
+                    }
+                    else
+                    {
+                        continue;
+                    }
+                }
+
+                //isBody += $"<p>Deskripsi lembur: {overtime.DescEmp}</p>";
                 isBody += $"<p>Deskripsi validasi: {overtime.DescHead}</p>";
                 isBody += $"<p>Validation status : {status.Name}</p>";
                 isBody += $"<p>Untuk keterangan lebih lanjut silahkan hubungi Head Department pada email: {myHeadPerson.Email}</p>";
