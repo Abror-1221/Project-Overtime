@@ -134,21 +134,21 @@ $('#request_form').on("submit", function (event) {
     })
 });
 
-mobiscroll.setOptions({
-    theme: 'ios',
-    themeVariant: 'light'
-});
+//mobiscroll.setOptions({
+//    theme: 'ios',
+//    themeVariant: 'light'
+//});
 mobiscroll.datepicker('#demo-calendar', {
     controls: ['calendar'],
     select: 'range',
-    display: 'anchored',
-    touchUi: true
+    display: 'anchored'
+   // touchUi: true
 });
 mobiscroll.datepicker('#demo-time', {
     controls: ['time'],
     select: 'range',
     display: 'anchored',
-    touchUi: true
+   // touchUi: true
 });
 //Detail
 $("#employeeTable").on('click', '#btnDetailOvertimeEmployee', function () {
