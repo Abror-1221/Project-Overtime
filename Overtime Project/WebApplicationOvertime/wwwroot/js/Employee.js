@@ -141,12 +141,14 @@ mobiscroll.setOptions({
 mobiscroll.datepicker('#demo-calendar', {
     controls: ['calendar'],
     select: 'range',
-    display: 'anchored'
+    display: 'anchored',
+    touchUi: true
 });
 mobiscroll.datepicker('#demo-time', {
     controls: ['time'],
     select: 'range',
-    display: 'anchored'
+    display: 'anchored',
+    touchUi: true
 });
 //Detail
 $("#employeeTable").on('click', '#btnDetailOvertimeEmployee', function () {

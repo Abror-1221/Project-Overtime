@@ -13,10 +13,10 @@
         <h3>Overtime</h3>
     </div>
     <div>
-        @*<p>@nik</p> 
-       
-        <p> @id</p>
-        <p> @fname</p>*@
+        @*<p>@nik</p>
+
+            <p> @id</p>
+            <p> @fname</p>*@
     </div>
     <div class="card-body">
         <div class="row">
@@ -58,7 +58,7 @@
                         <label for="dayTypeDE" class="form-label">Day Type</label>
                         <input type="text" name="dayTypeDE" id="dayTypeDE" class="form-control" required readonly />
                     </div>
-                    
+
                     <div class="col-md-12">
                         <label>Activities 1</label>
                         @*<label for="overtimeTimeDE1" class="form-label">Time</label>*@
@@ -68,7 +68,7 @@
                         @*<label for="overtimeReportDE1" class="form-label">Overtime Report</label>*@
                         <input type="text" name="overtimeReportDE1" id="overtimeReportDE1" class="form-control" required readonly />
                     </div>
-                    
+
                     <div class="col-md-12">
                         <label>Activities 2</label>
                         @*<label for="overtimeTimeDE2" class="form-label">Time</label>*@
@@ -78,7 +78,7 @@
                         @*<label for="overtimeReportDE2" class="form-label">Overtime Report</label>*@
                         <input type="text" name="overtimeReportDE2" id="overtimeReportDE2" class="form-control" required readonly />
                     </div>
-                    
+
                     <div class="col-md-12">
                         <label>Activities 3</label>
                         @*<label for="overtimeTimeDE3" class="form-label">Time</label>*@
@@ -113,38 +113,38 @@
             <div class="modal-body">
                 <form class="row g-3 needs-validation" method="post" id="request_form" novalidate>
                     @*<div class="col-md-6">
-            <label for="date" class="form-label">Date Request</label>
-            <input type="date" class="form-control" id="date" required>
-            <div class="invalid-feedback">
-                Required!
-            </div>
-        </div>
-        <div class="col-md-6">
-            <label for="day" class="form-label">Day Type</label>
-            <select name="university" id="day" class="form-select" required>
-                <option value="">Select Day Type</option>
-                <option value="1">Weekend</option>
-                <option value="2">Weekday</option>
-                <option value="3">National holiday</option>
-            </select>
-            <div class="invalid-feedback">
-                Required!
-            </div>
-        </div>*@
+                            <label for="date" class="form-label">Date Request</label>
+                            <input type="date" class="form-control" id="date" required>
+                            <div class="invalid-feedback">
+                                Required!
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <label for="day" class="form-label">Day Type</label>
+                            <select name="university" id="day" class="form-select" required>
+                                <option value="">Select Day Type</option>
+                                <option value="1">Weekend</option>
+                                <option value="2">Weekday</option>
+                                <option value="3">National holiday</option>
+                            </select>
+                            <div class="invalid-feedback">
+                                Required!
+                            </div>
+                        </div>*@
                     @*<div class="col-md-12">
-            <label for="startTime" class="form-label">Start Time</label>
-            <input type="datetime-local" class="form-control" id="startTime" required>
-            <div class="invalid-feedback">
-                Required!
-            </div>
-        </div>
-        <div class="col-md-12">
-            <label for="endTime" class="form-label">End Time</label>
-            <input type="datetime-local" class="form-control" id="endTime" required>
-            <div class="invalid-feedback">
-                Required!
-            </div>
-        </div>*@
+                            <label for="startTime" class="form-label">Start Time</label>
+                            <input type="datetime-local" class="form-control" id="startTime" required>
+                            <div class="invalid-feedback">
+                                Required!
+                            </div>
+                        </div>
+                        <div class="col-md-12">
+                            <label for="endTime" class="form-label">End Time</label>
+                            <input type="datetime-local" class="form-control" id="endTime" required>
+                            <div class="invalid-feedback">
+                                Required!
+                            </div>
+                        </div>*@
                     <div class="col-md-12">
                         <label>
                             Date
@@ -232,7 +232,7 @@
                     </div>
                     <div class="col-md-6">
                         <label for="dayE" class="form-label">Day Type</label>
-                        <select name="university" id="dayE" class="form-select" required >
+                        <select name="university" id="dayE" class="form-select" required>
                             <option value="">Select Day Type</option>
                             <option value="1">Weekend</option>
                             <option value="2">Weekday</option>
@@ -276,5 +276,7 @@
 </div>
 
 @section Scripts{
+    <link href="css/mobiscroll.javascript.min.css" rel="stylesheet" />
+    <script src="js/mobiscroll.javascript.min.js"></script>
     <script src="~/js/Employee.js"></script>
 }
