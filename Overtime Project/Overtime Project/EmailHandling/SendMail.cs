@@ -11,12 +11,12 @@ namespace Overtime_Project.EmailHandling
     {
         public void SendEmail(string emailAddress, string body, string subject)
         {
-            MailMessage mailMessage = new MailMessage("developit9@gmail.com", emailAddress);
+            MailMessage mailMessage = new MailMessage("rsendusr@gmail.com", emailAddress);
             mailMessage.Subject = subject;
             mailMessage.Body = body;
             mailMessage.IsBodyHtml = true;
 
-            NetworkCredential networkCredential = new NetworkCredential("developit9@gmail.com", "Sembilan!@9");
+            NetworkCredential networkCredential = new NetworkCredential("rsendusr@gmail.com", "pokemonpokemondimanakamu");
             SmtpClient smtp = new SmtpClient();
             smtp.Host = "smtp.gmail.com";
             smtp.EnableSsl = true;
